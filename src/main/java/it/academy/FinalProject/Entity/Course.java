@@ -4,6 +4,7 @@ import it.academy.FinalProject.Enum.Category;
 import it.academy.FinalProject.Enum.Language;
 import it.academy.FinalProject.Enum.Type;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "course")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 //Course: id, name,User author, description, Type type, list<Category> category, duration, list<Language> language, likes
 public class Course {
     @Id

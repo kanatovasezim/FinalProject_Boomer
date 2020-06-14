@@ -32,4 +32,14 @@ public class CourseServiceImpl implements CourseService {
     public void delete(Long id) {
         courseRepo.deleteById(id);
     }
+    @Override
+    public Course findByName(String name){
+        return courseRepo.findByName(name);
+    }
+    @Override
+    public void deleteByName(String name){
+        if (courseRepo.existsById(courseRepo.findByName(name).getId())){
+            courseRepo.deleteById(courseRepo.findByName(name).getId());
+        }
+    }
 }

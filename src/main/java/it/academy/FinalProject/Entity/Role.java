@@ -1,5 +1,6 @@
 package it.academy.FinalProject.Entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +18,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "role_name", unique = true)
+    @Column(name = "name", unique = true)
+    @NotNull
     String roleName;
 
     @ManyToOne(cascade = CascadeType.MERGE)

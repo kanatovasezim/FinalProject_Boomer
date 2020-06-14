@@ -9,6 +9,6 @@ public interface UserService {
     User getById(Long id);
     User save(User user);
     void delete(Long id);
-    List<User> findByLogin(String login);
+    User findByLogin(String login);
     void deleteByLogin(String login);
 }

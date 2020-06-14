@@ -1,6 +1,7 @@
 package it.academy.FinalProject.Service;
 
 import it.academy.FinalProject.Entity.Course;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -9,4 +10,6 @@ public interface CourseService {
     Course getById(Long id);
     Course save(Course Course);
     void delete(Long id);
+    Course findByName(String name);
+    public void deleteByName(String name);
 }

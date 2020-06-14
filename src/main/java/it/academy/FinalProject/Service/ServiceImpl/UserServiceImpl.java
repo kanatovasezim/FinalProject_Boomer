@@ -32,14 +32,14 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userRepo.deleteById(id);
     }
-
     @Override
-    public List<User> findByLogin(String login) {
-        return null;
+    public User findByLogin(String login) {
+        return userRepo.findByLogin(login);
     }
-
     @Override
     public void deleteByLogin(String login) {
-
+        if (userRepo.existsById(userRepo.findByLogin(login).getId())){
+            userRepo.deleteById(userRepo.findByLogin(login).getId());
+        }
     }
 }

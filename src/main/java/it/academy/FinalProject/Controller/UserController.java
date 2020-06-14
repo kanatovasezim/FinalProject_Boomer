@@ -19,10 +19,10 @@ public class UserController {
         return userService.getAll();
     }
     @GetMapping("/{login}")
-    public List<User> getByLogin(@PathVariable("login") String login){
+    public User getByLogin(@PathVariable("login") String login){
         return userService.findByLogin(login);
     }
-    @DeleteMapping("/{login}")
+    @PostMapping("/{login}")
     public void delete(@PathVariable("login") String login){
         userService.deleteByLogin(login);
     }

@@ -1,5 +1,6 @@
 package it.academy.FinalProject.Entity;
 
+import com.sun.istack.NotNull;
 import it.academy.FinalProject.Enum.Category;
 import it.academy.FinalProject.Enum.Language;
 import it.academy.FinalProject.Enum.Type;
@@ -23,25 +24,40 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column
+    @NotNull
+    @Column(name = "name", unique = true)
     String name;
 
-    @Column
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     User author;
 
-    @Column
+    @NotNull
+    @Column(name = "description")
     String description;
 
-    @Column
+    @NotNull
+    @Column(name = "type")
+    @Enumerated(EnumType.ORDINAL)
     Type type;
 
-    @Column
+    @NotNull
+    @ElementCollection(targetClass = Category.class)
+    @JoinTable(name = "Category", joinColumns = @JoinColumn(name = "user_u.id"))
+    @Column(name = "categoryList")
+    @Enumerated(EnumType.STRING)
     List<Category> categoryList;
 
-    @Column
+    @NotNull
+    @Column(name = "duration")
     String duration;
 
-    @Column
+    @NotNull
+    @ElementCollection(targetClass = Language.class)
+    @JoinTable(name = "Language", joinColumns = @JoinColumn(name = "user_u.id"))
+    @Column(name = "language_List")
+    @Enumerated(EnumType.STRING)
     List<Language> languageList;
 
 }

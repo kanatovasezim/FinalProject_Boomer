@@ -1,10 +1,8 @@
 package it.academy.FinalProject.Entity;
-
-import it.academy.FinalProject.Enum.UserRole;
+import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -24,15 +22,19 @@ public class User {
     Long id;
 
     @Column(name = "login")
+    @NotNull
     String login;
 
     @Column(name = "password")
+    @NotNull
     String password;
 
     @Column(name = "date_Of_Birth")
+    @NotNull
     Date dateOfBirth;
 
     @Column(name = "email")
+    @NotNull
     String email;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -44,6 +46,7 @@ public class User {
     List<Course> courseGet;
 
     @Column(name = "balance")
+    @NotNull
     Long balance;
 
     @Column(name = "is_Active")
@@ -52,5 +55,7 @@ public class User {
     @Column(name = "created_Date")
     @CreatedDate
     Date createdDate;
+
+
 
 }

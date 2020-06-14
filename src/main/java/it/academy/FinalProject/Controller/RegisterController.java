@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/register")
 public class RegisterController {
     @Autowired
@@ -40,7 +40,7 @@ public class RegisterController {
         userRepo.save(user);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body("You have successfully registered: " + user.getLogin());
+                .body("Successfully registered: " + user.getLogin());
     }
 
 }

@@ -20,7 +20,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course getById(Long id) {
-        return courseRepo.findById(id).get();
+        return courseRepo.findById(id).orElse(new Course());
     }
 
     @Override

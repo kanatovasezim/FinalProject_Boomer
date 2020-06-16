@@ -1,17 +1,15 @@
 package it.academy.FinalProject.Controller;
-
-import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.User;
-import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Service.CourseService;
 import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired

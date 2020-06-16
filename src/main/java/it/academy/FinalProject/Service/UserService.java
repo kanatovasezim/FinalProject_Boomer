@@ -1,5 +1,6 @@
 package it.academy.FinalProject.Service;
 
+import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.User;
 
 import java.util.List;
@@ -11,4 +12,9 @@ public interface UserService {
     void delete(Long id);
     User findByLogin(String login);
     void deleteByLogin(String login);
+    void sendRequest(Course course, String login);
+    void offerCourse(Course course);
+    void finishCourse(Course course, String login);
+    void approveRequest(Course course, String owner, String client);
+
 }

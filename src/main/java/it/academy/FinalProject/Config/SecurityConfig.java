@@ -31,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("select login, password, is_Active from user_u where login = ?")
-                .authoritiesByUsernameQuery("select u.login, r.role_name from user_u u inner join roles r on u.id = r.user_id where u.login = ?");
+                .usersByUsernameQuery("select login, password, is_Active from s_user where login = ?")
+                .authoritiesByUsernameQuery("select u.login, r.name from s_user u inner join roles r on u.id = r.user_id where u.login = ?");
     }
 
     @Override
@@ -41,9 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasRole("ADMIN")
                 .antMatchers("/entity/**").hasRole("USER")
                 .antMatchers("/register").permitAll()
-                .antMatchers("/mark/**").hasRole("ADMIN")
-                .antMatchers("/review/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("ADMIN")
                 .and().httpBasic().and().csrf().disable();
     }
 }

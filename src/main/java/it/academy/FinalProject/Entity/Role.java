@@ -12,19 +12,19 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "roles")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "name", unique = true)
-    @NotNull
+    @Column(name = "name", unique = true, nullable = false)
     String roleName;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "employee_id")
-    Employee employee;
+    @JoinColumn(name = "user_id")
+    User user;
 
 
 }

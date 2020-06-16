@@ -2,8 +2,11 @@ package it.academy.FinalProject.Entity;
 import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +16,8 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user_u")
+@Table(name = "s_user")
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 //User: id, login, password, dateOfBirth, email, role, list<Course> courseOffered, list<Course> courseGet, balance, created_date
 public class User {
@@ -21,29 +25,20 @@ public class User {
     @GeneratedValue (strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "login")
-    @NotNull
+    @Column(name = "login", nullable = false)
     String login;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     @NotNull
     String password;
 
-    @Column(name = "date_Of_Birth")
+    @Column(name = "date_Of_Birth", nullable = false)
     @NotNull
     Date dateOfBirth;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     @NotNull
     String email;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Column(name = "course_Offer")
-    List<Course> courseOffer;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Column(name = "course_Get")
-    List<Course> courseGet;
 
     @Column(name = "balance")
     @NotNull
@@ -52,10 +47,16 @@ public class User {
     @Column(name = "is_Active")
     Boolean isActive;
 
-    @Column(name = "created_Date")
-    @CreatedDate
-    Date createdDate;
+    @Column(name = "created_Date", updatable = false, nullable = false)
+    @CreationTimestamp
+    LocalDateTime createdDate;
 
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="course_Got", joinColumns=@JoinColumn(name="s_user_id"), inverseJoinColumns=@JoinColumn(name="course_id"))
+    List<Course> courseGet;
 
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="requestedCourses", joinColumns=@JoinColumn(name="s_user_id"), inverseJoinColumns=@JoinColumn(name="course_id"))
+    List<Course> requestedCourses;
 
 }

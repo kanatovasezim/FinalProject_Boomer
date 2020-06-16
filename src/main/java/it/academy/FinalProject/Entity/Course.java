@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "course")
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 //Course: id, name,User author, description, Type type, list<Category> category, duration, list<Language> language, likes
 public class Course {
@@ -24,40 +25,51 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @NotNull
-    @Column(name = "name", unique = true)
+    @Column(name = "name", nullable = false)
     String name;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "author", nullable = false)
     User author;
 
     @NotNull
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     String description;
 
     @NotNull
-    @Column(name = "type")
-    @Enumerated(EnumType.ORDINAL)
-    Type type;
+    @Column(name = "cost", nullable = false)
+    Integer cost;
+
+
+//    @NotNull
+//    @Column(name = "type", nullable = false)
+//    @Enumerated(EnumType.STRING)
+//    Type type;
 
     @NotNull
     @ElementCollection(targetClass = Category.class)
-    @JoinTable(name = "Category", joinColumns = @JoinColumn(name = "user_u.id"))
-    @Column(name = "categoryList")
+    @JoinTable(name = "Category", joinColumns = @JoinColumn(name = "s_user.id"))
+    @Column(name = "categoryList", nullable = false)
     @Enumerated(EnumType.STRING)
     List<Category> categoryList;
 
     @NotNull
-    @Column(name = "duration")
+    @Column(name = "duration", nullable = false)
     String duration;
 
     @NotNull
+    @Column(name = "freePlaces", nullable = false)
+    Integer freePlaces;
+
+    @NotNull
     @ElementCollection(targetClass = Language.class)
-    @JoinTable(name = "Language", joinColumns = @JoinColumn(name = "user_u.id"))
-    @Column(name = "language_List")
+    @JoinTable(name = "Language", joinColumns = @JoinColumn(name = "s_user.id"))
+    @Column(name = "languageList", nullable = false)
     @Enumerated(EnumType.STRING)
     List<Language> languageList;
 
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="requests", joinColumns=@JoinColumn(name="course_id"), inverseJoinColumns=@JoinColumn(name="s_user_id"))
+    List<User> requests;
 }

@@ -1,7 +1,6 @@
 package it.academy.FinalProject.Controller;
 
 import it.academy.FinalProject.Entity.Course;
-import it.academy.FinalProject.Entity.User;
 import it.academy.FinalProject.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +12,7 @@ import java.util.List;
 public class CourseController {
     @Autowired
     CourseService courseService;
+
 
     @GetMapping("/all")
     public List<Course> getAllCourses(){

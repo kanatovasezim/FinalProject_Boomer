@@ -22,9 +22,7 @@ public class Role {
     @Column(name = "name", unique = true, nullable = false)
     String roleName;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id")
-    User user;
+
 
 
 }

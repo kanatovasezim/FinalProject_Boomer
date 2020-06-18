@@ -5,26 +5,42 @@ import it.academy.FinalProject.Repository.RoleRepo;
 import it.academy.FinalProject.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
     @Autowired
-    private UserRepo employeeRepo;
+    UserRepo employeeRepo;
     @Autowired
-    private RoleRepo roleRepo;
+    RoleRepo roleRepo;
     @Override
     public void run(String... args) throws Exception {
-        DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+        Role publisher = Role.builder()
+                .roleName("ROLE_PUBLISHER")
+                .build();
+        roleRepo.save(publisher);
+
+        Role user = Role.builder()
+                .roleName("ROLE_USER")
+                .build();
+        roleRepo.save(user);
+
+        Role admin = Role.builder()
+                .roleName("ROLE_ADMIN")
+                .build();
+        roleRepo.save(admin);
+
         User employee1 = User.builder()
                 .login("admin")
-                .dateOfBirth(df.parse("01-01-1997"))
+                .role(admin)
                 .email("admin@gmail.com")
                 .isActive(true)
                 .password(passwordEncoder.encode("456"))
@@ -33,26 +49,11 @@ public class Bootstrap implements CommandLineRunner {
 
         User employee2 = User.builder()
                 .login("publisher")
-                .dateOfBirth(df.parse("12-10-1999"))
+                .role(publisher)
                 .email("publisher@gmail.com")
                 .password(passwordEncoder.encode("123"))
                 .build();
         employeeRepo.save(employee2);
-
-
-        Role publisher = Role.builder()
-                .roleName("ROLE_PUBLISHER")
-                .user(employee2)
-                .build();
-
-        roleRepo.save(publisher);
-
-        Role admin = Role.builder()
-                .roleName("ROLE_ADMIN")
-                .user(employee1)
-                .build();
-
-        roleRepo.save(admin);
 
     }
 }

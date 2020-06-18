@@ -2,13 +2,18 @@ package it.academy.FinalProject.Service;
 
 import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.User;
+import it.academy.FinalProject.Model.LoginUser;
+import it.academy.FinalProject.Model.RegisterUser;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
     List<User> getAll();
     User getById(Long id);
     User save(User user);
+    User saveModel(RegisterUser user);
     void delete(Long id);
     User findByLogin(String login);
     void deleteByLogin(String login);
@@ -16,5 +21,7 @@ public interface UserService {
     void offerCourse(Course course);
     void finishCourse(Course course, String login);
     void approveRequest(Course course, String owner, String client);
+    User findByEmail(String login);
+
 
 }

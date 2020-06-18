@@ -3,10 +3,9 @@ import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,17 +24,17 @@ public class User {
     @GeneratedValue (strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "login", nullable = false)
+    @Column(name = "login", unique = true, nullable = false)
     String login;
 
     @Column(name = "password", nullable = false)
     @NotNull
     String password;
 
-    @Column(name = "date_Of_Birth", nullable = false)
-    @NotNull
-    Date dateOfBirth;
+//    @Column(name = "birthDate", nullable = false)
+//    Date birthDate;
 
+    @Email
     @Column(name = "email", nullable = false, unique = true)
     @NotNull
     String email;
@@ -51,7 +50,7 @@ public class User {
     @CreationTimestamp
     LocalDateTime createdDate;
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany( cascade=CascadeType.ALL)
     @JoinTable(name="course_Got", joinColumns=@JoinColumn(name="s_user_id"), inverseJoinColumns=@JoinColumn(name="course_id"))
     List<Course> courseGet;
 
@@ -59,4 +58,7 @@ public class User {
     @JoinTable(name="requestedCourses", joinColumns=@JoinColumn(name="s_user_id"), inverseJoinColumns=@JoinColumn(name="course_id"))
     List<Course> requestedCourses;
 
+    @ManyToOne()
+    @JoinColumn(name="role_id")
+    private Role role;
 }

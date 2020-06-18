@@ -1,19 +1,38 @@
 package it.academy.FinalProject.Model;
 
 
+import it.academy.FinalProject.Config.Constraint.FieldMatch;
 import lombok.*;
-
-import javax.persistence.Table;
-
+import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table( name = "register_user")
+@FieldMatch.List({
+        @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match")
+})
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class RegisterUser {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    @NotEmpty
     String login;
+    @NotEmpty
     String password;
+    @NotEmpty
+    String confirmPassword;
+    @NotEmpty
     String name;
-    boolean isActive;
+    @Email
+    @NotEmpty
+    String email;
+    @CreationTimestamp
+    LocalDateTime createdDate;
 }

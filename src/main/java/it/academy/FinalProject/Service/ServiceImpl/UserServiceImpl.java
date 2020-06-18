@@ -2,21 +2,35 @@ package it.academy.FinalProject.Service.ServiceImpl;
 
 import it.academy.FinalProject.Entity.Approval;
 import it.academy.FinalProject.Entity.Course;
+import it.academy.FinalProject.Entity.Role;
 import it.academy.FinalProject.Entity.User;
 import it.academy.FinalProject.Enum.ApprovalStatus;
+import it.academy.FinalProject.Model.LoginUser;
+import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.ApprovalRepo;
 import it.academy.FinalProject.Repository.CourseRepo;
+import it.academy.FinalProject.Repository.RoleRepo;
 import it.academy.FinalProject.Repository.UserRepo;
 import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    RoleRepo roleRepo;
     @Autowired
     CourseRepo courseRepo;
     @Autowired
@@ -25,6 +39,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userRepo.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        User user = userRepo.findByLogin(s);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getLogin(),
+                user.getPassword(),
+                mapRolesToAuthorities(user.getRole()));
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Role role) {
+        SimpleGrantedAuthority auth = new SimpleGrantedAuthority(role.getRoleName());
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(auth);
+        return authorities;
     }
 
     @Override
@@ -104,5 +136,26 @@ public class UserServiceImpl implements UserService {
             u.setBalance(userRepo.findByLogin(client).getBalance() - course.getCost());
             userRepo.save(u);
         }
+    }
+
+    @Override
+    public User findByEmail(String login) {
+        return userRepo.findByEmail(login);
+    }
+
+
+
+    @Override
+    public User saveModel(RegisterUser u) {
+        User user = new User();
+        user.setId(u.getId());
+        user.setPassword(u.getPassword());
+        user.setLogin(u.getLogin());
+        user.setIsActive(true);
+        user.setCreatedDate(u.getCreatedDate());
+        user.setRole(roleRepo.findByName("ROLE_USER"));
+        user.setBalance((long) 100);
+        user.setEmail(u.getEmail());
+        return userRepo.save(user);
     }
 }

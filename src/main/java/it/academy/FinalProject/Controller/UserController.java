@@ -27,6 +27,10 @@ public class UserController {
         model.addAttribute("allUsers", userService.getAll());
         return "User/userList";
     }
+    @GetMapping("/profilePage")
+    public String userIndex() {
+        return "User/profilePage";
+    }
 
     @GetMapping("/{login}")
     public User getByLogin(@PathVariable("login") String login) {

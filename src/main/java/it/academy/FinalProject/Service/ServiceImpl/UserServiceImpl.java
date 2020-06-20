@@ -38,7 +38,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        return userRepo.findAll();
+        List<User> u = userRepo.findAll();
+        for (User us: u) {
+            if (findCourses(us.getId()) != null){
+                us.setCourseGet((List<Course>) courseRepo.findById(findCourses(us.getId())).orElse(new Course()));
+            }
+        }
+        return u;
     }
 
     @Override
@@ -136,6 +142,11 @@ public class UserServiceImpl implements UserService {
             u.setBalance(userRepo.findByLogin(client).getBalance() - course.getCost());
             userRepo.save(u);
         }
+    }
+
+    @Override
+    public Long findCourses(Long id) {
+        return userRepo.findCourses(id);
     }
 
     @Override

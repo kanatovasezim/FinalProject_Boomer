@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping("{login}")
-    public String saveUser(@PathVariable("login") String login, @RequestBody User u){
+    public String updateUser(@PathVariable("login") String login, @RequestBody User u){
         if (userService.getAll().contains(userService.findByLogin(login))){
             User user = userService.findByLogin(login);
             String encodedPassword  = passwordEncoder.encode(u.getPassword());
@@ -58,9 +58,6 @@ public class UserController {
             userService.save(user);
         }
         return "redirect:/User/userList";
-//        else {
-//
-//        }
     }
 
     @PostMapping("/{login}/offerCourse/{id}")

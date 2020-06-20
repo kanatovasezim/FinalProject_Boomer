@@ -2,6 +2,7 @@ package it.academy.FinalProject.Model;
 
 
 import it.academy.FinalProject.Config.Constraint.FieldMatch;
+import it.academy.FinalProject.Entity.Course;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -33,6 +36,7 @@ public class RegisterUser {
     @Email
     @NotEmpty
     String email;
+    List<Course> courseList;
     @CreationTimestamp
     LocalDateTime createdDate;
 }

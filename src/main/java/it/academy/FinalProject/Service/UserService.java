@@ -16,6 +16,7 @@ public interface UserService extends UserDetailsService {
     User saveModel(RegisterUser user);
     void delete(Long id);
     User findByLogin(String login);
+    Long findCourses(Long id);
     void deleteByLogin(String login);
     void sendRequest(Course course, String login);
     void offerCourse(Course course);

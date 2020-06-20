@@ -30,7 +30,7 @@ public class Course {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "author", nullable = false)
+    @JoinColumn(name = "author")
     User author;
 
     @NotNull

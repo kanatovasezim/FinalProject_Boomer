@@ -13,11 +13,10 @@
     <thead class="thead-dark">
     <th>ID</th>
     <th>Login</th>
-<!--    <th>Birthday</th>-->
     <th>Email</th>
     <th>Balance</th>
     <th>CourseGot</th>
-    <th>CourseOffered</th>
+<!--    <th>CourseOffered</th>-->
     <th>Actions</th>
     </thead>
 
@@ -25,9 +24,9 @@
     <tr th:each="user : ${allUsers}">
         <td th:text="${user.id}"></td>
         <td th:text="${user.login}"></td>
-<!--        <td th:text="${user.birthDate}"></td>-->
         <td th:text="${user.email}"></td>
         <td th:text="${user.balance}"></td>
+        <td th:text="${user.courseGet}"></td>
         <td><a th:href="@{'/user/' + ${user.login}}"><i class="fa fa-edit"></i></a>
             <a th:href="@{'/user/delete/' + ${user.login}}"> <i class="fa fa-trash"></i> </a>
         </td>

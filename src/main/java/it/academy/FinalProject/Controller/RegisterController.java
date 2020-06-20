@@ -47,24 +47,7 @@ public class RegisterController {
             return "Registration/register";
         }
         userService.saveModel(u);
-        return "User/userList";
-    }
-
-    @PostMapping("/course")
-    public String  registerCourse(@RequestBody Course c){
-        Course course = Course.builder()
-                .description(c.getDescription())
-                .duration(c.getDuration())
-                .name(c.getName())
-                .cost(c.getCost())
-                .freePlaces(c.getFreePlaces())
-                .author(c.getAuthor())
-                .categoryList(c.getCategoryList())
-                .languageList(c.getLanguageList())
-                .id(c.getId())
-                .build();
-        courseRepo.save(course);
-        return "redirect:/Course/courseList";
+        return "redirect:/User/userList";
     }
 
 }

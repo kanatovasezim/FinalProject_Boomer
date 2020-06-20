@@ -21,6 +21,8 @@ public class Bootstrap implements CommandLineRunner {
     UserRepo employeeRepo;
     @Autowired
     RoleRepo roleRepo;
+    @Autowired
+    UserRepo userRepo;
     @Override
     public void run(String... args) throws Exception {
         Role publisher = Role.builder()
@@ -54,6 +56,14 @@ public class Bootstrap implements CommandLineRunner {
                 .password(passwordEncoder.encode("123"))
                 .build();
         employeeRepo.save(employee2);
+
+        User u = User.builder()
+                .login("Sezim")
+                .role(user)
+                .email("sezim@gmail.com")
+                .password(passwordEncoder.encode("123"))
+                .build();
+        userRepo.save(u);
 
     }
 }

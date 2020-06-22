@@ -29,6 +29,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers(
+                        "/registration**",
+                        "/js/**",
+                        "/css/**",
+                        "/vendor/**",
+                        "/img/**",
+                        "/webjars/**").permitAll()
                 .antMatchers("/register/**", "/course/**", "/welcome").permitAll()
                 .antMatchers("/user/profilePage").hasRole("USER")
                 .antMatchers("/user/**").hasRole("USER")
@@ -66,5 +73,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-
 }

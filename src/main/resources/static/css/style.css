@@ -71,6 +71,8 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
+
+
 /*--------------------------------------------------------------
 # Welcome
 --------------------------------------------------------------*/
@@ -891,7 +893,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: none;
 }
 
-#contact .php-email-form input::focus, #contact .php-email-form textarea::focus {
+#contact .php-email-form input:focus, #contact .php-email-form textarea:focus {
   background-color: #03C4EB;
 }
 

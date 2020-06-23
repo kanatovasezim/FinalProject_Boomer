@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
   overflow: visible;
-  background: #fff url("../../templates/Imperial/assets/img/preloader.svg") no-repeat center center;
+  background: #fff url("/img/blue.jpg") no-repeat center center;
 }
 
 /* Back to top button */
@@ -80,7 +80,7 @@ h1, h2, h3, h4, h5, h6 {
   display: table;
   width: 100%;
   height: 100vh;
-  background: url(../static/img/blue.jpg) top center;
+  background: url(img/blue.jpg) top center;
   background-size: cover;
 }
 
@@ -99,7 +99,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .hero-container {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(86, 157, 219, 0.98);
   display: table-cell;
   margin: 0;
   padding: 0;
@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 48px;
   text-transform: uppercase;
-  color: #fff;
+  color: #1f2b6c;
 }
 
 @media (max-width: 768px) {
@@ -123,7 +123,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero h2 {
-  color: #ccc;
+  color: #03C4EB;
   margin-bottom: 50px;
 }
 
@@ -187,7 +187,7 @@ h1, h2, h3, h4, h5, h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: #0d0d0d;
+  background: #1f2b6c;
   transition: all 0.5s;
   z-index: 997;
   padding: 15px 0;
@@ -218,7 +218,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .is-sticky #header {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(31, 43, 108, 0.85);
 }
 
 /*--------------------------------------------------------------
@@ -511,7 +511,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Services Section
 --------------------------------*/
 #services {
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("../../templates/Imperial/assets/img/services-bg.jpg") fixed center center;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("/img/sky.jpg") fixed center center;
   background-size: cover;
   padding: 80px 0 60px 0;
 }
@@ -561,7 +561,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Subscribe Section
 --------------------------------*/
 #subscribe {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../templates/Imperial/assets/img/subscribe-bg.jpg) fixed center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("static/img/sky.jpg") fixed center center;
   background-size: cover;
   padding: 80px 0;
 }
@@ -1062,7 +1062,7 @@ h1, h2, h3, h4, h5, h6 {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #111;
+  background: #1f2b6c;
   padding: 30px 0;
   color: #fff;
 }

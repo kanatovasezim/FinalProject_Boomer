@@ -1,16 +1,11 @@
 package it.academy.FinalProject.Service.ServiceImpl;
 
-import it.academy.FinalProject.Entity.Approval;
-import it.academy.FinalProject.Entity.Course;
-import it.academy.FinalProject.Entity.Role;
-import it.academy.FinalProject.Entity.User;
+import it.academy.FinalProject.Entity.*;
 import it.academy.FinalProject.Enum.ApprovalStatus;
 import it.academy.FinalProject.Model.LoginUser;
+import it.academy.FinalProject.Model.RegisterEmpl;
 import it.academy.FinalProject.Model.RegisterUser;
-import it.academy.FinalProject.Repository.ApprovalRepo;
-import it.academy.FinalProject.Repository.CourseRepo;
-import it.academy.FinalProject.Repository.RoleRepo;
-import it.academy.FinalProject.Repository.UserRepo;
+import it.academy.FinalProject.Repository.*;
 import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,6 +30,8 @@ public class UserServiceImpl implements UserService {
     CourseRepo courseRepo;
     @Autowired
     ApprovalRepo approvalRepo;
+    @Autowired
+    EmplRepo emplRepo;
 
     @Override
     public List<User> getAll() {
@@ -157,11 +154,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User saveModel(RegisterUser u) {
+    public User saveModelUser(RegisterUser u) {
         User user = new User();
         user.setId(u.getId());
         user.setPassword(u.getPassword());
         user.setLogin(u.getLogin());
+        user.setName(u.getName());
         user.setIsActive(true);
         user.setCreatedDate(u.getCreatedDate());
         user.setRole(roleRepo.findByName("ROLE_USER"));

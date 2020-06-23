@@ -37,12 +37,11 @@
         <div class="col-md-6 col-md-offset-3">
 
             <div th:if="${param.success}">
-                <div class="alert alert-info">You've successfully registered
-                    to "Boomer!</div>
+                <div class="alert alert-info">You have successfully registered employee</div>
             </div>
 
-            <h1>User registration</h1>
-            <form th:action="@{/user/register}" th:object="${user}" method="post">
+            <h1>Employee registration</h1>
+            <form th:action="@{/employee/register}" th:object="${employee}" method="post">
 
                 <p class="error-message" th:if="${#fields.hasGlobalErrors()}"
                    th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
@@ -64,14 +63,14 @@
                        th:each="error : ${#fields.errors('login')}"
                        th:text="${error}">Validation error</p>
                 </div>
-<!--                <div class="form-group"-->
-<!--                     th:classappend="${#fields.hasErrors('birthDate')}? 'has-error':''">-->
-<!--                    <label for="birthDate" class="control-label">Date of birth</label> <input-->
-<!--                        type="date" id="birthDate" class="form-control" th:field="*{birthDate}" />-->
-<!--&lt;!&ndash;                    <p class="error-message"&ndash;&gt;-->
-<!--&lt;!&ndash;                       th:each="error : ${#fields.errors('birthDate')}"&ndash;&gt;-->
-<!--                       th:text="${error}">Validation error</p>-->
-<!--                </div>-->
+                <!--                <div class="form-group"-->
+                <!--                     th:classappend="${#fields.hasErrors('birthDate')}? 'has-error':''">-->
+                <!--                    <label for="birthDate" class="control-label">Date of birth</label> <input-->
+                <!--                        type="date" id="birthDate" class="form-control" th:field="*{birthDate}" />-->
+                <!--&lt;!&ndash;                    <p class="error-message"&ndash;&gt;-->
+                <!--&lt;!&ndash;                       th:each="error : ${#fields.errors('birthDate')}"&ndash;&gt;-->
+                <!--                       th:text="${error}">Validation error</p>-->
+                <!--                </div>-->
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
                     <label for="email" class="control-label">E-mail</label> <input
@@ -101,10 +100,7 @@
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already registered? <a href="/" th:href="@{/login}">Login
-        here</a></span>
                 </div>
-
             </form>
         </div>
     </div>

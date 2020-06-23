@@ -26,7 +26,7 @@
                 <div class="alert alert-info">Successfully registered course!</div>
             </div>
 
-            <h1>Registration</h1>
+            <h1>Course registration</h1>
             <form th:action="@{/course/register}" th:object="${course}" method="post">
 
                 <p class="error-message" th:if="${#fields.hasGlobalErrors()}"
@@ -92,8 +92,6 @@
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already registered? <a href="/" th:href="@{/login}">Login
-        here</a></span>
                 </div>
 
             </form>

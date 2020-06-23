@@ -31,11 +31,11 @@ public class User {
     @NotNull
     String password;
 
-//    @Column(name = "birthDate", nullable = false)
-//    Date birthDate;
+    @Column(name = "name")
+    String name;
 
     @Email
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", unique = true)
     @NotNull
     String email;
 

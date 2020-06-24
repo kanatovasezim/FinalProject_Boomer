@@ -13,5 +13,4 @@ import java.util.List;
 public interface CourseRepo extends JpaRepository<Course, Long> {
     @Query( value = "select * from course c where c.name = :name", nativeQuery=true)
     Course findByName(@Param("name") String name);
-    List<Course> findCoursesByCourseStatus(CourseStatus courseStatus);
 }

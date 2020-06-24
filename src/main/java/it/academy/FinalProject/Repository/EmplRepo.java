@@ -2,7 +2,6 @@ package it.academy.FinalProject.Repository;
 
 import it.academy.FinalProject.Entity.Employee;
 import it.academy.FinalProject.Entity.Role;
-import it.academy.FinalProject.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -2,9 +2,7 @@ package it.academy.FinalProject.Entity;
 
 import com.sun.istack.NotNull;
 import it.academy.FinalProject.Enum.Category;
-import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Enum.Language;
-import it.academy.FinalProject.Enum.Type;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,7 +31,7 @@ public class Course {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "author")
+    @JoinColumn(name = "author", nullable = false)
     User author;
 
     @NotNull
@@ -47,7 +45,7 @@ public class Course {
     @NotNull
     @ElementCollection(targetClass = Category.class)
     @JoinTable(name = "Category", joinColumns = @JoinColumn(name = "s_user.id"))
-    @Column(name = "categoryList", nullable = false)
+    @Column(name = "categoryList")
     @Enumerated(EnumType.STRING)
     List<Category> categoryList;
 
@@ -62,7 +60,7 @@ public class Course {
     @NotNull
     @ElementCollection(targetClass = Language.class)
     @JoinTable(name = "Language", joinColumns = @JoinColumn(name = "s_user.id"))
-    @Column(name = "languageList", nullable = false)
+    @Column(name = "languageList")
     @Enumerated(EnumType.STRING)
     List<Language> languageList;
 

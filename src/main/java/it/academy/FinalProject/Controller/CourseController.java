@@ -55,7 +55,14 @@ public class CourseController {
     @GetMapping("/taking")
     public String getTakingCourses(Model model, Authentication authentication){
         model.addAttribute("takingCourses", courseService.getTakingCourses(authentication.getName()));
+        model.addAttribute("login", authentication.getName());
         return "Course/takingCourses";
+    }
+    @GetMapping("/requesting")
+    public String getRequestingCourses(Model model, Authentication authentication){
+        model.addAttribute("requestingCourses", courseService.getRequestingCourses(authentication.getName()));
+        model.addAttribute("login", authentication.getName());
+        return "Course/requestingCourses";
     }
 
     @GetMapping("/{name}")

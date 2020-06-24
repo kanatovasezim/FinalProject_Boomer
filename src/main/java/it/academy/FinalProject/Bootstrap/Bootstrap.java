@@ -1,7 +1,9 @@
 package it.academy.FinalProject.Bootstrap;
+import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.Employee;
 import it.academy.FinalProject.Entity.Role;
 import it.academy.FinalProject.Entity.User;
+import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Repository.RoleRepo;
 import it.academy.FinalProject.Repository.UserRepo;
 import it.academy.FinalProject.Service.EmployeeService;
@@ -26,6 +28,8 @@ public class Bootstrap implements CommandLineRunner {
     RoleRepo roleRepo;
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    CourseRepo courseRepo;
     @Override
     public void run(String... args) throws Exception {
         Role employee = Role.builder()
@@ -80,5 +84,14 @@ public class Bootstrap implements CommandLineRunner {
                 .build();
         userRepo.save(u);
 
+        Course c = Course.builder()
+                .freePlaces(5)
+                .duration("2")
+                .author(u)
+                .description("Cool")
+                .name("Guitar")
+                .cost(100)
+                .build();
+        courseRepo.save(c);
     }
 }

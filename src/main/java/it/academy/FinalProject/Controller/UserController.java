@@ -109,4 +109,10 @@ public class UserController {
         userService.sendRequest(courseService.getById(courseId), login);
         return "redirect:/user/profilePage";
     }
+
+    @PostMapping("/{login}/removeRequest/{id}")
+    public String removeRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login) {
+        userService.removeRequest(courseService.getById(courseId), login);
+        return "redirect:/user/profilePage";
+    }
 }

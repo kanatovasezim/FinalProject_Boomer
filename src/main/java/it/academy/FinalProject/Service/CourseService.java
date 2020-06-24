@@ -16,4 +16,5 @@ public interface CourseService {
     void deleteByName(String name);
     Course saveModel(RegisterCourse c);
     List<Course> getTakingCourses(String login);
+    List<Course> getRequestingCourses(String login);
 }

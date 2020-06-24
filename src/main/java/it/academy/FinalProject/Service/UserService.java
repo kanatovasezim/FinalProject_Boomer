@@ -22,6 +22,7 @@ public interface UserService extends UserDetailsService {
     Long findCourses(Long id);
     void deleteByLogin(String login);
     void sendRequest(Course course, String login);
+    void removeRequest(Course course, String login);
     void offerCourse(Course course);
     void finishCourse(Course course, String login);
     void approveRequest(Course course, String owner, String client);

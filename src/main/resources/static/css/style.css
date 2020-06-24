@@ -561,7 +561,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Subscribe Section
 --------------------------------*/
 #subscribe {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("static/img/sky.jpg") fixed center center;
+  background: linear-gradient(rgba(37, 97, 152, 0.6), rgba(72, 91, 255, 0.6)), url("static/img/sky.jpg") fixed center center;
   background-size: cover;
   padding: 80px 0;
 }

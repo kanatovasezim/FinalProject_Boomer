@@ -39,4 +39,5 @@ public class RegisterUser {
     List<Course> courseList;
     @CreationTimestamp
     LocalDateTime createdDate;
+    List<Course> requested;
 }

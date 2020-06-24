@@ -3,5 +3,8 @@ package it.academy.FinalProject.Enum;
 public enum Category {
     BUSINESS,
     LANGUAGE,
-    LESSON
+    LESSON,
+    MUSIC,
+    DESIGN,
+    OTHER
 }

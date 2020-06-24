@@ -6,6 +6,7 @@ import it.academy.FinalProject.Repository.UserRepo;
 import it.academy.FinalProject.Service.CourseService;
 import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,7 +48,7 @@ public class UserController {
             return "Registration/register";
         }
         userService.saveModelUser(u);
-        return "redirect:/User/userList";
+        return "redirect:/login";
     }
 
     @GetMapping("/all")
@@ -57,9 +58,13 @@ public class UserController {
     }
 
     @GetMapping("/profilePage")
-    public String userIndex() {
+    public String userIndex(Model model, Authentication authentication) {
+        model.addAttribute("allCourses", courseService.getAll());
+        model.addAttribute("login", authentication.getName());
         return "User/profilePage";
     }
+
+
 
     @GetMapping("/{login}")
     public User getByLogin(@PathVariable("login") String login) {
@@ -100,7 +105,9 @@ public class UserController {
     }
 
     @PostMapping("/{login}/sendRequest/{id}")
-    public void sendRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login) {
+    public String sendRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login) {
+        System.out.println("Request sent");
         userService.sendRequest(courseService.getById(courseId), login);
+        return "/User/userList";
     }
 }

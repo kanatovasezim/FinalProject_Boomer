@@ -74,6 +74,7 @@ public class Bootstrap implements CommandLineRunner {
                 .login("Sezim")
                 .name("Sezim")
                 .role(user)
+                .balance((long)500)
                 .email("sezim@gmail.com")
                 .password(passwordEncoder.encode("123"))
                 .build();

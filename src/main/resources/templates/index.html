@@ -18,11 +18,11 @@
     <!-- Favicons -->
     <link href="img/logo.png" rel="icon">
     <link href="img/logo.png" rel="apple-touch-icon">
-
+    <title>Boomer</title>
     <!-- Google Fonts -->
-<!--    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">-->
+    <!--    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">-->
 
-<!--    &lt;!&ndash; Vendor CSS Files &ndash;&gt;-->
+    <!--    &lt;!&ndash; Vendor CSS Files &ndash;&gt;-->
     <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" type="text/css" rel="stylesheet">
     <link th:href="@{/vendor/icofont/icofont.min.css}" type="text/css" rel="stylesheet">
     <link th:href="@{/vendor/font-awesome/css/font-awesome.min.css}" type="text/css" rel="stylesheet">
@@ -33,7 +33,6 @@
     <!-- Template Main CSS File -->
     <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
 
-    <title>Boomer</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -63,14 +62,13 @@
             <div class="hero-logo">
                 <img class="" src="/img/logo.png" height="400" width="400" alt="Logo">
             </div>
-
             <h1>Welcome to Boomer</h1>
             <h2>Everyone can learn <span class="typed"
                                          data-typed-items="business skills, languages, music and more"></span> for FREE
             </h2>
             <div class="actions">
-                <a href="Registration/register.html" class="btn-get-started">Register</a>
-                <a href="#services" class="btn-services">Log in</a>
+                <a th:href="@{/user}" class="btn-get-started">Register</a>
+                <a th:href="@{/Registration/login}" class="btn-services">Log in</a>
             </div>
         </div>
     </div>
@@ -84,7 +82,6 @@
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="active"><a href="index.html">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Courses</a></li>
@@ -142,35 +139,17 @@
 
             <div class="row">
                 <div class="col-md-4 service-item">
-                    <!--            <div class="service-icon"><i class="fa fa-desktop"></i></div>-->
-                    <!--            <h4 class="service-title"><a href="">Lorem Ipsum</a></h4>-->
-                    <!--            <p class="service-description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>-->
-                    <!--          </div>-->
-                    <!--          <div class="col-md-4 service-item">-->
                     <div class="service-icon"><i class="fa fa-bar-chart"></i></div>
                     <h4 class="service-title"><a href="">Statistics</a></h4>
                     <p class="service-description">Information is power only if you can take action with it. Then, and
                         only then, does it represent knowledge and, consequently, power.</p>
                 </div>
                 <div class="col-md-4 service-item">
-                    <!--            <div class="service-icon"><i class="fa fa-paper-plane"></i></div>-->
-                    <!--            <h4 class="service-title"><a href="">Sed ut perspiciatis</a></h4>-->
-                    <!--            <p class="service-description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>-->
-                    <!--          </div>-->
-                    <!--          <div class="col-md-4 service-item">-->
                     <div class="service-icon"><i class="fa fa-photo"></i></div>
                     <h4 class="service-title"><a href="">Advertisement</a></h4>
                     <p class="service-description">Looking for clients? Meet our platform with ... users</p>
                 </div>
                 <div class="col-md-4 service-item">
-                    <!--            <div class="service-icon"><i class="fa fa-road"></i></div>-->
-                    <!--            <h4 class="service-title"><a href="">Nemo Enim</a></h4>-->
-                    <!--            <p class="service-description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>-->
-                    <!--          </div>-->
-                    <!--          <div class="col-md-4 service-item">-->
-                    <!--            <div class="service-icon"><i class="fa fa-shopping-bag"></i></div>-->
-                    <!--            <h4 class="service-title"><a href="">Eiusmod Tempor</a></h4>-->
-                    <!--            <p class="service-description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>-->
                 </div>
             </div>
         </div>
@@ -181,7 +160,7 @@
         <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-8">
-                    <h3 class="subscribe-title">Reach us for Donation</h3>
+                    <h3 class="subscribe-title">Reach us for donation</h3>
                     <p class="subscribe-text">Through your donation you are helping a child to make his dream come
                         true</p>
                 </div>
@@ -207,9 +186,9 @@
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="portfolio-flters">
                         <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-app">App</li>
-                        <li data-filter=".filter-card">Card</li>
-                        <li data-filter=".filter-web">Web</li>
+                        <li data-filter=".filter-app">Business</li>
+                        <li data-filter=".filter-card">Music</li>
+                        <li data-filter=".filter-web">Media</li>
                     </ul>
                 </div>
             </div>
@@ -220,6 +199,7 @@
                     <img src="img/p1.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>Business Research</h4>
+                        <p>Business</p>
                         <a href="img/p1.jpg" data-gall="portfolioGallery"
                            class="venobox preview-link" title="App 1"><i class="fa fa-plus"></i></a>
                         <a href="Imperial/portfolio-details.html" class="details-link" title="More Details"><i
@@ -231,6 +211,7 @@
                     <img src="img/p2.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>Statistics</h4>
+                        <p>Business</p>
                         <a href="img/p2.jpg" data-gall="portfolioGallery"
                            class="venobox preview-link" title="Web 3"><i class="fa fa-plus"></i></a>
                         <a href="Imperial/portfolio-details.html" class="details-link" title="More Details"><i
@@ -242,6 +223,7 @@
                     <img src="img/p3.jpeg" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>Music</h4>
+                        <p>Music</p>
                         <a href="img/p3.jpeg" data-gall="portfolioGallery"
                            class="venobox preview-link" title="App 2"><i class="fa fa-plus"></i></a>
                         <a href="Imperial/portfolio-details.html" class="details-link" title="More Details"><i
@@ -253,6 +235,7 @@
                     <img src="img/p4.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>Music</h4>
+                        <p>Music</p>
                         <a href="img/p4.jpg" data-gall="portfolioGallery"
                            class="venobox preview-link" title="Card 2"><i class="fa fa-plus"></i></a>
                         <a href="Imperial/portfolio-details.html" class="details-link" title="More Details"><i
@@ -277,17 +260,15 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="profile">
-<!--                        <div class="pic"><img src="Imperial/assets/img/client-1.jpg" alt=""></div>-->
-                        <h4>Saul Goodman</h4>
-                        <span>Lawless Inc</span>
+                        <div class="pic"><img src="img/client-1.jpg" alt=""></div>
+                        <h4>User user</h4>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div class="quote">
-                        <b><img src="Imperial/assets/img/quote_sign_left.png" alt=""></b> Proin iaculis purus consequat
-                        sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget
-                        id, aliquam eget nibh et. Maecen aliquam, risus at semper. <small><img
-                            src="Imperial/assets/img/quote_sign_right.png" alt=""></small>
+                        <b><img src="img/quote_sign_left.png" alt=""></b> Awesome web for self-education. We are being
+                        taught by teaching others.<small><img
+                            src="img/quote_sign_right.png" alt=""></small>
                     </div>
                 </div>
             </div>
@@ -295,17 +276,15 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="quote">
-                        <b><img src="Imperial/assets/img/quote_sign_left.png" alt=""></b> Sed ut perspiciatis unde omnis
-                        iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                        quae ab illo inventore veritatis architecto beatae. <small><img
-                            src="Imperial/assets/img/quote_sign_right.png" alt=""></small>
+                        <b><img src="img/quote_sign_left.png" alt=""></b> It helps to make my dreams come true
+                        <small><img
+                                src="img/quote_sign_right.png" alt=""></small>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="profile">
-<!--                        <div class="pic"><img src="Imperial/assets/img/client-2.jpg" alt=""></div>-->
-                        <h4>Sara Wilsson</h4>
-                        <span>Odeo Inc</span>
+                        <div class="pic"><img src="img/client-2.jpg" alt=""></div>
+                        <h4>User user</h4>
                     </div>
                 </div>
             </div>
@@ -324,10 +303,10 @@
                 </div>
             </div>
 
-            <div class="row" >
+            <div class="row">
                 <div class="col-md-4" th:each="user : ${epml}">
-                    <div class="member" >
-                        <div class="pic"><img src="img/logo.png" alt=""></div>
+                    <div class="member">
+                        <div class="pic"><img src="img/logo.png" height="150" width="150" alt=""></div>
                         <h4 th:text="${user.name}"></h4>
                         <span th:text="${user.email}"></span>
                         <div class="social">
@@ -349,8 +328,8 @@
                 <div class="col-md-12">
                     <h3 class="section-title">Contact Us</h3>
                     <div class="section-title-divider"></div>
-<!--                    <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem-->
-<!--                        accusantium doloremque</p>-->
+                    <!--                    <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem-->
+                    <!--                        accusantium doloremque</p>-->
                 </div>
             </div>
 

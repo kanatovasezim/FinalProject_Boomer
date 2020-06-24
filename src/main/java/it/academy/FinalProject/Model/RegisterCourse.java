@@ -1,5 +1,6 @@
 package it.academy.FinalProject.Model;
 import it.academy.FinalProject.Entity.User;
+import it.academy.FinalProject.Enum.Category;
 import it.academy.FinalProject.Enum.Language;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,6 +23,7 @@ public class RegisterCourse {
     Long id;
     @NotEmpty
     String name;
+    @NotEmpty
     User author;
     @NotEmpty
     String description;
@@ -31,7 +33,7 @@ public class RegisterCourse {
     Integer freePlaces;
     @NotEmpty
     String duration;
-    String category;
+    List<Category> category;
     List<Language> languageList;
     List<User> requests;
 }

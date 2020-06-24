@@ -56,7 +56,7 @@ public class CourseServiceImpl implements CourseService {
                .cost(c.getCost())
                .description(c.getDescription())
                .freePlaces(c.getFreePlaces())
-//               .categoryList(c.getCategory())
+               .categoryList(c.getCategory())
                .requests(c.getRequests())
                .build();
        courseRepo.save(course);

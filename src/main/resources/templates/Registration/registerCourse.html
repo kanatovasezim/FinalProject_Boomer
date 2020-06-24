@@ -11,7 +11,9 @@
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
 
-    <title>Registration</title>
+    <link href="img/logo.png" rel="icon">
+    <link href="img/logo.png" rel="apple-touch-icon">
+    <title>Boomer</title>
 </head>
 <body>
 
@@ -57,14 +59,17 @@
                        th:each="error : ${#fields.errors('cost')}"
                        th:text="${error}">Validation error</p>
                 </div>
-                <!--                <div class="form-group"-->
-                <!--                     th:classappend="${#fields.hasErrors('author')}? 'has-error':''">-->
-                <!--                    <label for="author" class="control-label">Date of birth</label> <input-->
-                <!--                        id="author" class="form-control" th:field="*{author}"/>-->
-                <!--                    <p class="error-message"-->
-                <!--                       th:each="error : ${#fields.errors('author')}"-->
-                <!--                       th:text="${error}">Validation error</p>-->
-                <!--                </div>-->
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('category')}? 'has-error':''">
+                    <label for="category" class="control-label">Category</label>
+                    <select id="category" class="form-control" th:field="*{category}" multiple="multiple">
+                        <option th:each="category : ${T(it.academy.FinalProject.Enum.Category).values()}"
+                                th:value="${category}" th:text="${category}"></option>
+                    </select>
+                    <p class="error-message"
+                       th:each="error : ${#fields.errors('cost')}"
+                       th:text="${error}">Validation error</p>
+                </div>
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('duration')}? 'has-error':''">
                     <label for="duration" class="control-label">Duration</label> <input
@@ -74,6 +79,17 @@
                         error</p>
                 </div>
                 <div class="form-group"
+                     th:classappend="${#fields.hasErrors('languageList')}? 'has-error':''">
+                    <label for="languageList" class="control-label">Language</label>
+                    <select id="languageList" class="form-control" th:field="*{languageList}" multiple="multiple">
+                        <option th:each="language : ${T(it.academy.FinalProject.Enum.Language).values()}"
+                                th:value="${language}" th:text="${language}"></option>
+                    </select>
+                    <p class="error-message"
+                       th:each="error : ${#fields.errors('cost')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group"
                      th:classappend="${#fields.hasErrors('freePlaces')}? 'has-error':''">
                     <label for="freePlaces" class="control-label">Places</label> <input
                         id="freePlaces" class="form-control" th:field="*{freePlaces}"/>
@@ -81,14 +97,7 @@
                        th:each="error : ${#fields.errors('freePlaces')}"
                        th:text="${error}">Validation error</p>
                 </div>
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('category')}? 'has-error':''">
-                    <label for="category" class="control-label">Category
-                    </label> <input id="category" class="form-control" th:field="*{category}"/>
-                    <p class="error-message"
-                       th:each="error : ${#fields.errors('category')}"
-                       th:text="${error}">Validation error</p>
-                </div>
+
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Register</button>

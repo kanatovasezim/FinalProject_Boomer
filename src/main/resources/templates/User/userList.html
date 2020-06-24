@@ -16,6 +16,7 @@
     <th>Email</th>
     <th>Balance</th>
     <th>CourseGot</th>
+    <th>Requests</th>
 <!--    <th>CourseOffered</th>-->
     <th>Actions</th>
     </thead>
@@ -27,6 +28,7 @@
         <td th:text="${user.email}"></td>
         <td th:text="${user.balance}"></td>
         <td th:text="${user.courseGet}"></td>
+        <td th:text="${user.requestedCourses}"></td>
         <td><a th:href="@{'/user/' + ${user.login}}"><i class="fa fa-edit"></i></a>
             <a th:href="@{'/user/delete/' + ${user.login}}"> <i class="fa fa-trash"></i> </a>
         </td>

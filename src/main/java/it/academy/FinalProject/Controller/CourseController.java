@@ -5,7 +5,9 @@ import it.academy.FinalProject.Model.RegisterCourse;
 import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Service.CourseService;
+import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,8 @@ public class CourseController {
     CourseService courseService;
     @Autowired
     CourseRepo courseRepo;
+    @Autowired
+    UserService userService;
 
     @ModelAttribute("course")
     public RegisterCourse newUser() {
@@ -32,13 +36,13 @@ public class CourseController {
         return "Registration/registerCourse";
     }
     @PostMapping("/register")
-    public String registerCourse(@ModelAttribute("course") @Valid RegisterCourse u, BindingResult result) {
+    public String registerCourse(@ModelAttribute("course") @Valid RegisterCourse u, BindingResult result, Authentication authentication) {
         if (result.hasErrors()) {
-            return "Registration/register";
+            return "Registration/registerCourse";
         }
+        u.setAuthor(userService.findByLogin(authentication.getName()));
         courseService.saveModel(u);
-        System.out.println(courseService.saveModel(u));
-        return "redirect:/Course/courseList";
+        return "redirect:/user/profilePage";
     }
 
 

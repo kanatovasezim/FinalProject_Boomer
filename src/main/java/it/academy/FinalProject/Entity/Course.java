@@ -6,8 +6,10 @@ import it.academy.FinalProject.Enum.Language;
 import it.academy.FinalProject.Enum.Type;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -72,4 +74,8 @@ public class Course {
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="requests", joinColumns=@JoinColumn(name="course_id"), inverseJoinColumns=@JoinColumn(name="s_user_id"))
     List<User> requests;
+
+    @Column(name = "created_Date", updatable = false, nullable = false)
+    @CreationTimestamp
+    LocalDateTime createdDate;
 }

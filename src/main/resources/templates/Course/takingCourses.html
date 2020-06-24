@@ -33,9 +33,7 @@
             padding: 8px;
         }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2
-        }
+        tr:nth-child(even){background-color: #f2f2f2}
 
         th {
             background-color: #2f57a7;
@@ -49,55 +47,43 @@
         <a class="py-2" href="#" aria-label="Product">
             <img class="" th:src="@{/img/logo.png}" width="30" height="30" alt="Boomer">
         </a>
-        <a class="py-2 d-none d-md-inline-block" href="#allCourses">All Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/taking">Taking Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/requesting">Requesting Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/offering">Offering Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/completed">Completed Courses</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">All Courses</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">Taking Courses</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">Offering Courses</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">Completed Courses</a>
     </div>
 </nav>
 
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">Boomer</h1>
-        <p class="lead font-weight-normal">Life truly is a boomerang. What you give, you get.
-        </p>
-        <a class="btn btn-outline-secondary" th:href="@{/course}">Offer course</a>
-    </div>
-</div>
-<section id="allCourses">
-    <table class="table table-striped table-hover table-bordered">
-        <thead class="thead-dark" th:if="${allCourses}">
-        <th>Name</th>
-        <th>Description</th>
-        <th>Cost</th>
-        <th>Duration</th>
-        <th>Places Available</th>
-        <th>Author</th>
-        <th>Category</th>
-        <th>Language</th>
-        <th>Actions</th>
-        </thead>
-        <tbody>
-        <tr th:each="course : ${allCourses}">
-            <td th:text="${course.name}"></td>
-            <td th:text="${course.description}"></td>
-            <td th:text="${course.cost}"></td>
-            <td th:text="${course.duration}"></td>
-            <td th:text="${course.freePlaces}"></td>
-            <td th:text="${course.author.name}"></td>
-            <td th:text="${course.categoryList}"></td>
-            <td th:text="${course.languageList}"></td>
-            <td>
-                <form th:action="@{'/user/' + ${login} + '/sendRequest/' + ${course.id}}" th:method="post"
-                      onsubmit="return validateForm()">
-                    <button type="submit" name="action" value="save">Send Request</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</section>
+<table class="table table-striped table-hover table-bordered">
+    <thead class="thead-dark">
+    <th>Name</th>
+    <th>Description</th>
+    <th>Cost</th>
+    <th>Duration</th>
+    <th>Places Available</th>
+    <th>Author</th>
+    <th>Category</th>
+    <th>Language</th>
+    <th>Actions</th>
+    </thead>
+
+    <tbody>
+    <tr th:each="course : ${allCourses}">
+        <td th:text="${course.name}"></td>
+        <td th:text="${course.description}"></td>
+        <td th:text="${course.cost}"></td>
+        <td th:text="${course.duration}"></td>
+        <td th:text="${course.freePlaces}"></td>
+        <td th:text="${course.author.name}"></td>
+        <td th:text="${course.categoryList}"></td>
+        <td th:text="${course.languageList}"></td>
+        <td>    <form th:action="@{'/user/' + ${login} + '/sendRequest/' + ${course.id}}" th:method="post" onsubmit="return validateForm()">
+            <button type="submit" name="action" value="save">Send Request</button>
+        </form></td>
+    </tr>
+
+    </tbody>
+</table>
 <footer class="container py-5">
     <div class="row">
         <div class="col-12 col-md">

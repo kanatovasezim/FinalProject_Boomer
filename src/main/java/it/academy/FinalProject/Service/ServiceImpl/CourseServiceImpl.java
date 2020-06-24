@@ -2,9 +2,11 @@ package it.academy.FinalProject.Service.ServiceImpl;
 
 import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.User;
+import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Model.RegisterCourse;
 import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.CourseRepo;
+import it.academy.FinalProject.Repository.UserRepo;
 import it.academy.FinalProject.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,16 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseRepo courseRepo;
-
+    @Autowired
+    private UserRepo userRepo;
     @Override
     public List<Course> getAll() {
         return courseRepo.findAll();
+    }
+
+    @Override
+    public List<Course> getTakingCourses(String login) {
+        return userRepo.findByLogin(login).getCourseGet();
     }
 
     @Override

@@ -2,6 +2,7 @@ package it.academy.FinalProject.Service.ServiceImpl;
 
 import it.academy.FinalProject.Entity.*;
 import it.academy.FinalProject.Enum.ApprovalStatus;
+import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Model.LoginUser;
 import it.academy.FinalProject.Model.RegisterEmpl;
 import it.academy.FinalProject.Model.RegisterUser;
@@ -115,6 +116,7 @@ public class UserServiceImpl implements UserService {
         if (course.getFreePlaces()!=0 && !user.getRequestedCourses().contains(course)
         && user.getBalance() >= course.getCost()){
             user.getRequestedCourses().add(course);
+            course.setCourseStatus(CourseStatus.REQUESTED);
             course.getRequests().add(user);
             userRepo.save(user);
             courseRepo.save(course);
@@ -127,6 +129,9 @@ public class UserServiceImpl implements UserService {
             userRepo.findByLogin(client).getCourseGet().add(course);
             userRepo.save(userRepo.findByLogin(client));
             course.setFreePlaces(course.getFreePlaces()-1);
+            if (course.getFreePlaces() <=0){
+                course.setCourseStatus(CourseStatus.UNAVAILABLE);
+            }
             course.getRequests().remove(userRepo.findByLogin(client));
             courseRepo.save(course);
             Approval a = Approval.builder()

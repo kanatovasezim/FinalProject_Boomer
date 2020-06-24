@@ -106,8 +106,7 @@ public class UserController {
 
     @PostMapping("/{login}/sendRequest/{id}")
     public String sendRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login) {
-        System.out.println("Request sent");
         userService.sendRequest(courseService.getById(courseId), login);
-        return "/User/userList";
+        return "redirect:/user/profilePage";
     }
 }

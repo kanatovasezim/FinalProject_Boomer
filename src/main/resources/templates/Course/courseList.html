@@ -2,8 +2,11 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Course list</title>
 </head>
@@ -11,35 +14,32 @@
 
 <table class="table table-striped table-hover table-bordered">
     <thead class="thead-dark">
-    <th>ID</th>
     <th>Name</th>
     <th>Description</th>
     <th>Cost</th>
-<!--    <th>Category</th>-->
     <th>Duration</th>
     <th>Places Available</th>
+    <th>Author</th>
+    <th>Category</th>
+    <th>Language</th>
     <th>Actions</th>
     </thead>
 
     <tbody>
     <tr th:each="course : ${allCourses}">
-        <td th:text="${course.id}"></td>
         <td th:text="${course.name}"></td>
         <td th:text="${course.description}"></td>
         <td th:text="${course.cost}"></td>
-<!--        <td th:text="${course.category}"></td>-->
         <td th:text="${course.duration}"></td>
         <td th:text="${course.freePlaces}"></td>
-        <td><a th:href="@{'/course/' + ${course.id}}"><i class="fa fa-edit"></i></a>
-            <a th:href="@{'/course/delete/' + ${course.id}}"> <i class="fa fa-trash"></i> </a>
-        </td>
+        <td th:text="${course.author.name}"></td>
+        <td th:text="${course.categoryList}"></td>
+        <td th:text="${course.languageList}"></td>
+        <td><a th:href="@{'/user/' + ${login} + '/sendRequest/' + ${course.id}}"><i class="fa fa-plus-circle"></i></a></td>
     </tr>
 
     </tbody>
     </tbody>
-
-
 </table>
-
 </body>
 </html>

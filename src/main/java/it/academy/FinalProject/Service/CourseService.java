@@ -1,6 +1,7 @@
 package it.academy.FinalProject.Service;
 
 import it.academy.FinalProject.Entity.Course;
+import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Model.RegisterCourse;
 import org.springframework.data.repository.query.Param;
 
@@ -14,4 +15,5 @@ public interface CourseService {
     Course findByName(String name);
     void deleteByName(String name);
     Course saveModel(RegisterCourse c);
+    List<Course> getTakingCourses(String login);
 }

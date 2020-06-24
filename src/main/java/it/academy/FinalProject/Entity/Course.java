@@ -2,6 +2,7 @@ package it.academy.FinalProject.Entity;
 
 import com.sun.istack.NotNull;
 import it.academy.FinalProject.Enum.Category;
+import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Enum.Language;
 import it.academy.FinalProject.Enum.Type;
 import lombok.*;
@@ -42,12 +43,6 @@ public class Course {
     @NotNull
     @Column(name = "cost", nullable = false)
     Integer cost;
-
-
-//    @NotNull
-//    @Column(name = "type", nullable = false)
-//    @Enumerated(EnumType.STRING)
-//    Type type;
 
     @NotNull
     @ElementCollection(targetClass = Category.class)

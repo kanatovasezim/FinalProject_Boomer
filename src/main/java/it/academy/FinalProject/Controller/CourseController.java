@@ -1,6 +1,7 @@
 package it.academy.FinalProject.Controller;
 
 import it.academy.FinalProject.Entity.Course;
+import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Model.RegisterCourse;
 import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.CourseRepo;
@@ -50,6 +51,11 @@ public class CourseController {
     public String getAllCourses(Model model){
         model.addAttribute("allCourses", courseService.getAll());
         return "Course/courseList";
+    }
+    @GetMapping("/taking")
+    public String getTakingCourses(Model model, Authentication authentication){
+        model.addAttribute("takingCourses", courseService.getTakingCourses(authentication.getName()));
+        return "Course/takingCourses";
     }
 
     @GetMapping("/{name}")

@@ -61,36 +61,18 @@
 
 <table class="table table-striped table-hover table-bordered">
     <thead class="thead-dark">
-    <th>Name</th>
-    <th>Description</th>
-    <th>Cost</th>
-    <th>Duration</th>
-    <th>Places Available</th>
-    <th>Author</th>
-    <th>Category</th>
-    <th>Language</th>
-    <th>Action</th>
+    <th>Course</th>
+    <th>Users</th>
     </thead>
 
     <tbody>
-    <tr th:each="course : ${takingCourses}">
-        <td th:text="${course.name}"></td>
-        <td th:text="${course.description}"></td>
-        <td th:text="${course.cost}"></td>
-        <td th:text="${course.duration}"></td>
-        <td th:text="${course.freePlaces}"></td>
-        <td th:text="${course.author.name}"></td>
-        <td th:text="${course.category}"></td>
-        <td th:text="${course.languageList}"></td>
-        <td>
-            <form th:action="@{'/user/' + ${login} + '/clientApproveCourse/' + ${course.id} + '/' + ${course.author.name}}" th:method="post"
-                  onsubmit="return validateForm()">
-                <button type="submit" name="action" value="save">Approve</button>
-            </form>
-            <form th:action="@{'/user/' + ${login} + '/finishCourse/' + ${course.id}}" th:method="post"
-                  onsubmit="return validateForm()">
-                <button type="submit" name="action" value="save">Complete Course</button>
-            </form>
+    <tr th:each="u : ${requestingUsers}">
+        <td th:text="${u.course.name}"></td>
+        <td th:each=" uc: ${u.users}">
+            <p th:text="${uc.login}"></p>
+            <p><form th:action="@{'/user/' + ${login} + '/approveRequest/' + ${u.course.id} + '/' + ${uc.login}}" th:method="post" onsubmit="return validateForm()">
+            <button type="submit" name="action" value="save">Approve Request</button>
+        </form></p>
         </td>
     </tr>
 

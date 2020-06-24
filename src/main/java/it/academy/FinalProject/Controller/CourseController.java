@@ -1,9 +1,7 @@
 package it.academy.FinalProject.Controller;
 
 import it.academy.FinalProject.Entity.Course;
-import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Model.RegisterCourse;
-import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Service.CourseService;
 import it.academy.FinalProject.Service.UserService;
@@ -58,13 +56,31 @@ public class CourseController {
         model.addAttribute("login", authentication.getName());
         return "Course/takingCourses";
     }
+    @GetMapping("/requested")
+    public String getRequestedCourses(Model model, Authentication authentication){
+        model.addAttribute("requestedCourses", courseService.getRequestedCourses(authentication.getName()));
+        model.addAttribute("login", authentication.getName());
+        return "Course/requestedCourses";
+    }
     @GetMapping("/requesting")
-    public String getRequestingCourses(Model model, Authentication authentication){
-        model.addAttribute("requestingCourses", courseService.getRequestingCourses(authentication.getName()));
+    public String getRequestingUsers(Model model, Authentication authentication){
+        List<Course> courseList = courseService.getOfferingCourses(authentication.getName());
+        model.addAttribute("requestingUsers", courseService.getRequestingUsers(courseList));
         model.addAttribute("login", authentication.getName());
         return "Course/requestingCourses";
     }
-
+    @GetMapping("/offering")
+    public String getOfferingCourses(Model model, Authentication authentication){
+        model.addAttribute("offeringCourses", courseService.getOfferingCourses(authentication.getName()));
+        model.addAttribute("login", authentication.getName());
+        return "Course/offeringCourses";
+    }
+    @GetMapping("/completed")
+    public String getCompletedCourses(Model model, Authentication authentication){
+        model.addAttribute("completedCourses", courseService.getCompletedCourses(authentication.getName()));
+        model.addAttribute("login", authentication.getName());
+        return "Course/completedCourses";
+    }
     @GetMapping("/{name}")
     public Course getByName(@PathVariable("name") String name){
         return  courseService.findByName(name);

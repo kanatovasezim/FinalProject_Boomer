@@ -33,7 +33,7 @@
         <td th:text="${course.duration}"></td>
         <td th:text="${course.freePlaces}"></td>
         <td th:text="${course.author.name}"></td>
-        <td th:text="${course.categoryList}"></td>
+        <td th:text="${course.category}"></td>
         <td th:text="${course.languageList}"></td>
         <td><a th:href="@{'/user/' + ${login} + '/sendRequest/' + ${course.id}}"><i class="fa fa-plus-circle"></i></a></td>
     </tr>

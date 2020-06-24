@@ -45,9 +45,9 @@ public class Course {
     @NotNull
     @ElementCollection(targetClass = Category.class)
     @JoinTable(name = "Category", joinColumns = @JoinColumn(name = "s_user.id"))
-    @Column(name = "categoryList")
+    @Column(name = "category")
     @Enumerated(EnumType.STRING)
-    List<Category> categoryList;
+    List<Category> category;
 
     @NotNull
     @Column(name = "duration", nullable = false)

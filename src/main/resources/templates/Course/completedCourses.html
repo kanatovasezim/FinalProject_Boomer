@@ -48,13 +48,11 @@
         <a class="py-2" href="#" aria-label="Product">
             <img class="" th:src="@{/img/logo.png}" width="30" height="30" alt="Boomer">
         </a>
-        <a class="py-2 d-none d-md-inline-block" href="#allCourses">All Courses</a>
+        <a class="py-2 d-none d-md-inline-block" href="/user/profilePage">All Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/taking">Taking Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/requested">Requested Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/requesting">Requesting Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/offering">Offering Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/completed">Completed Courses</a>
-        <a href="#" th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 
     </div>
 </nav>
@@ -69,11 +67,10 @@
     <th>Author</th>
     <th>Category</th>
     <th>Language</th>
-    <th>Action</th>
     </thead>
 
     <tbody>
-    <tr th:each="course : ${takingCourses}">
+    <tr th:each="course : ${completedCourses}">
         <td th:text="${course.name}"></td>
         <td th:text="${course.description}"></td>
         <td th:text="${course.cost}"></td>
@@ -82,16 +79,6 @@
         <td th:text="${course.author.name}"></td>
         <td th:text="${course.category}"></td>
         <td th:text="${course.languageList}"></td>
-        <td>
-            <form th:action="@{'/user/' + ${login} + '/clientApproveCourse/' + ${course.id} + '/' + ${course.author.name}}" th:method="post"
-                  onsubmit="return validateForm()">
-                <button type="submit" name="action" value="save">Approve</button>
-            </form>
-            <form th:action="@{'/user/' + ${login} + '/finishCourse/' + ${course.id}}" th:method="post"
-                  onsubmit="return validateForm()">
-                <button type="submit" name="action" value="save">Complete Course</button>
-            </form>
-        </td>
     </tr>
 
     </tbody>
@@ -158,12 +145,6 @@
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script>
-    function validateForm() {
-        alert("Request sent successfully");
-        return true;
-    }
-</script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
 </body>
 </html>

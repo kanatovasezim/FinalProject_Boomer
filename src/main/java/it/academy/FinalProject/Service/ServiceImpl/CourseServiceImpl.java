@@ -4,6 +4,7 @@ import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.CourseUserStatus;
 import it.academy.FinalProject.Entity.User;
 import it.academy.FinalProject.Enum.CourseStatus;
+import it.academy.FinalProject.Model.CourseUsers;
 import it.academy.FinalProject.Model.RegisterCourse;
 import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.CourseRepo;
@@ -13,6 +14,7 @@ import it.academy.FinalProject.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,7 @@ public class CourseServiceImpl implements CourseService {
     private UserRepo userRepo;
     @Autowired
     private CourseUserStatusRepo statusRepo;
+
     @Override
     public List<Course> getAll() {
         return courseRepo.findAll();
@@ -35,18 +38,51 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getRequestingCourses(String login) {
-        System.out.println(login);
-        System.out.println(statusRepo.findAllByCourseStatusAndUser("REQUESTED", userRepo.findByLogin(login).getId()));
-        System.out.println(statusRepo.findAllByCourseStatusAndUser("REQUESTED", userRepo.findByLogin(login).getId()).stream().map(CourseUserStatus::getCourse)
-                .collect(Collectors.toList()));
-        return statusRepo.findAllByCourseStatusAndUser("REQUESTED", userRepo.findByLogin(login).getId()).stream().map(CourseUserStatus::getCourse)
-                .collect(Collectors.toList());
+    public List<Course> getRequestedCourses(String login) {
+        List<Long> list = statusRepo.findAllByCourseStatusAndUser("REQUESTED", userRepo.findByLogin(login).getId());
+        List<Course> courseList = new ArrayList<>();
+        for (Long l : list) {
+            Course c = courseRepo.findById(l).get();
+            courseList.add(c);
+        }
+        return courseList;
     }
 
     @Override
-    public Course getById(Long id) {
-        return courseRepo.findById(id).orElse(new Course());
+    public List<CourseUsers> getRequestingUsers(List<Course> courses) {
+        List<Long> ids = courses.stream().map(Course::getId).collect(Collectors.toList());
+        List<CourseUsers> courseUsersList = new ArrayList<>();
+        List<User> usersList = new ArrayList<>();
+        for (Long u : ids) {
+            List<Long> list = statusRepo.findAllByCourseStatusAndUser("REQUESTED", u);
+            for (Long l : list) {
+                usersList.add(userRepo.findById(l).get());
+            }
+            for (Course l : courses) {
+                CourseUsers cu = CourseUsers.builder()
+                        .course(l)
+                        .users(usersList)
+                        .build();
+                courseUsersList.add(cu);
+            }
+        }
+        return courseUsersList;
+    }
+
+    @Override
+    public List<Course> getOfferingCourses(String login) {
+        return courseRepo.findOfferingCourses(userRepo.findByLogin(login).getId());
+    }
+
+    @Override
+    public List<Course> getCompletedCourses(String login) {
+        List<Long> list = statusRepo.findAllByCourseStatusAndUser("COMPLETED", userRepo.findByLogin(login).getId());
+        List<Course> courseList = new ArrayList<>();
+        for (Long l : list) {
+            Course c = courseRepo.findById(l).get();
+            courseList.add(c);
+        }
+        return courseList;
     }
 
     @Override
@@ -55,34 +91,42 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public Course getById(Long id) {
+        return courseRepo.findById(id).orElse(new Course());
+    }
+
+    @Override
     public void delete(Long id) {
         courseRepo.deleteById(id);
     }
+
     @Override
-    public Course findByName(String name){
+    public Course findByName(String name) {
         return courseRepo.findByName(name);
     }
+
     @Override
-    public void deleteByName(String name){
-        if (courseRepo.existsById(courseRepo.findByName(name).getId())){
+    public void deleteByName(String name) {
+        if (courseRepo.existsById(courseRepo.findByName(name).getId())) {
             courseRepo.deleteById(courseRepo.findByName(name).getId());
         }
     }
+
     @Override
     public Course saveModel(RegisterCourse c) {
-       Course course = Course.builder()
-               .id(c.getId())
-               .name(c.getName())
-               .author(c.getAuthor())
-               .languageList(c.getLanguageList())
-               .duration(c.getDuration())
-               .cost(c.getCost())
-               .description(c.getDescription())
-               .freePlaces(c.getFreePlaces())
-               .categoryList(c.getCategory())
-               .requests(c.getRequests())
-               .build();
-       courseRepo.save(course);
+        Course course = Course.builder()
+                .id(c.getId())
+                .name(c.getName())
+                .author(c.getAuthor())
+                .languageList(c.getLanguageList())
+                .duration(c.getDuration())
+                .cost(c.getCost())
+                .description(c.getDescription())
+                .freePlaces(c.getFreePlaces())
+                .category(c.getCategory())
+                .requests(c.getRequests())
+                .build();
+        courseRepo.save(course);
         return course;
     }
 }

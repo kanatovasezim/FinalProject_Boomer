@@ -53,6 +53,7 @@
         </a>
         <a class="py-2 d-none d-md-inline-block" href="#allCourses">All Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/taking">Taking Courses</a>
+        <a class="py-2 d-none d-md-inline-block" href="/course/requested">Requested Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/requesting">Requesting Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/offering">Offering Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/completed">Completed Courses</a>
@@ -89,7 +90,7 @@
             <td th:text="${course.duration}"></td>
             <td th:text="${course.freePlaces}"></td>
             <td th:text="${course.author.name}"></td>
-            <td th:text="${course.categoryList}"></td>
+            <td th:text="${course.category}"></td>
             <td th:text="${course.languageList}"></td>
             <td>
                 <form th:action="@{'/user/' + ${login} + '/sendRequest/' + ${course.id}}" th:method="post"

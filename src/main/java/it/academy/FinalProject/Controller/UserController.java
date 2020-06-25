@@ -40,6 +40,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") @Valid RegisterUser u, BindingResult result) {
+        System.out.println("Here");
         u.setPassword(passwordEncoder.encode(u.getPassword()));
         if (userRepo.findByLogin(u.getLogin()) != null) {
             result.rejectValue("login", null, "Login already exists");
@@ -100,8 +101,9 @@ public class UserController {
     }
 
     @PostMapping("/{login}/approveRequest/{id}/{client}")
-    public void approveRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login, @PathVariable("client") String client) {
+    public String approveRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login, @PathVariable("client") String client) {
         userService.approveRequest(courseService.getById(courseId), login, client);
+        return "redirect:/user/profilePage";
     }
 
     @PostMapping("/{login}/sendRequest/{id}")

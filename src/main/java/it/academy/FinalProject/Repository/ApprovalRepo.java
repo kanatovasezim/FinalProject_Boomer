@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ApprovalRepo extends JpaRepository<Approval, Long> {
-    @Query( value = "select * from approval a where a.client.login = :client and a.approvals.id =:course", nativeQuery=true)
-    Approval findApprovalByClientAndCourse(@Param("client") String client, @Param("course") Long id);
+    @Query( value = "select * from approval a where a.client = :client and a.course = :course", nativeQuery=true)
+    Approval findApprovalByClientAndCourse(@Param("client") Long clientId, @Param("course") Long courseId);
 }

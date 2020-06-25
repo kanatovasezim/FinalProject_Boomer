@@ -45,10 +45,11 @@
 <body>
 <nav class="site-header sticky-top py-1">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a th:text="${login}"></a>
         <a class="py-2" href="#" aria-label="Product">
             <img class="" th:src="@{/img/logo.png}" width="30" height="30" alt="Boomer">
         </a>
-        <a class="py-2 d-none d-md-inline-block" href="#allCourses">All Courses</a>
+        <a class="py-2 d-none d-md-inline-block" href="/user/profilePage">All Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/taking">Taking Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/requested">Requested Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/requesting">Requesting Courses</a>
@@ -83,7 +84,7 @@
         <td th:text="${course.category}"></td>
         <td th:text="${course.languageList}"></td>
         <td>
-            <form th:action="@{'/user/' + ${login} + '/clientApproveCourse/' + ${course.id} + '/' + ${course.author.name}}" th:method="post"
+            <form th:action="@{ '/approve/' +${login} + '/clientApproveCourse/' + ${course.id} }" th:method="post"
                   onsubmit="return validateForm()">
                 <button type="submit" name="action" value="save">Approve</button>
             </form>

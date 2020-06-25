@@ -17,4 +17,16 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/admin")
+    public String admin(Model model) {
+        model.addAttribute("admin", employeeService.getAll());
+        return "Admin/adminProfilePage";
+    }
+
+    @GetMapping("/statistics")
+    public String statistics(Model model) {
+        model.addAttribute("statistics", employeeService.getAll());
+        return "Statistics/overall";
+    }
+
 }

@@ -45,11 +45,13 @@
 <body>
 <nav class="site-header sticky-top py-1">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a th:text="${login}"></a>
         <a class="py-2" href="#" aria-label="Product">
             <img class="" th:src="@{/img/logo.png}" width="30" height="30" alt="Boomer">
         </a>
         <a class="py-2 d-none d-md-inline-block" href="/user/profilePage">All Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/taking">Taking Courses</a>
+        <a class="py-2 d-none d-md-inline-block" href="/course/requested">Requested Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/requesting">Requesting Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/offering">Offering Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/completed">Completed Courses</a>
@@ -60,26 +62,19 @@
 
 <table class="table table-striped table-hover table-bordered">
     <thead class="thead-dark">
-    <th>Name</th>
-    <th>Description</th>
-    <th>Cost</th>
-    <th>Duration</th>
-    <th>Places Available</th>
-    <th>Author</th>
-    <th>Category</th>
-    <th>Language</th>
+    <th>Course</th>
+    <th>User</th>
+    <th>Actions</th>
     </thead>
 
     <tbody>
-    <tr th:each="course : ${offeringCourses}">
-        <td th:text="${course.name}"></td>
-        <td th:text="${course.description}"></td>
-        <td th:text="${course.cost}"></td>
-        <td th:text="${course.duration}"></td>
-        <td th:text="${course.freePlaces}"></td>
-        <td th:text="${course.author.name}"></td>
-        <td th:text="${course.category}"></td>
-        <td th:text="${course.languageList}"></td>
+    <tr th:each="u : ${offeringCourseUser}">
+        <td th:text="${u.course.name}"></td>
+        <td th:text="${u.users.name}"></td>
+        <td><form th:action="@{ '/approve/ownerApproveCourse/' + ${u.course.id} + '/' + ${u.users.login}}" th:method="post"
+                  onsubmit="return validateForm()">
+            <button type="submit" name="action" value="save">Approve</button>
+        </form></td>
     </tr>
 
     </tbody>

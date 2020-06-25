@@ -1,6 +1,7 @@
 package it.academy.FinalProject.Controller;
 
 import it.academy.FinalProject.Entity.Course;
+import it.academy.FinalProject.Model.CourseUsers;
 import it.academy.FinalProject.Model.RegisterCourse;
 import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Service.CourseService;
@@ -59,19 +60,20 @@ public class CourseController {
     @GetMapping("/requested")
     public String getRequestedCourses(Model model, Authentication authentication){
         model.addAttribute("requestedCourses", courseService.getRequestedCourses(authentication.getName()));
+        model.addAttribute("requestedCourses", courseService.getRequestedCourses(authentication.getName()));
         model.addAttribute("login", authentication.getName());
         return "Course/requestedCourses";
     }
     @GetMapping("/requesting")
     public String getRequestingUsers(Model model, Authentication authentication){
-        List<Course> courseList = courseService.getOfferingCourses(authentication.getName());
-        model.addAttribute("requestingUsers", courseService.getRequestingUsers(courseList));
+        List<Course> courseList = courseRepo.findOfferingCourses(userService.findByLogin(authentication.getName()).getId());
+        model.addAttribute("requestingCourseUser", courseService.getRequestingUsers(courseList));
         model.addAttribute("login", authentication.getName());
         return "Course/requestingCourses";
     }
     @GetMapping("/offering")
     public String getOfferingCourses(Model model, Authentication authentication){
-        model.addAttribute("offeringCourses", courseService.getOfferingCourses(authentication.getName()));
+        model.addAttribute("offeringCourseUser", courseService.getOfferingCourses(authentication.getName()));
         model.addAttribute("login", authentication.getName());
         return "Course/offeringCourses";
     }

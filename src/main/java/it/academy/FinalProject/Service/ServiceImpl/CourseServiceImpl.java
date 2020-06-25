@@ -11,6 +11,7 @@ import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Repository.CourseUserStatusRepo;
 import it.academy.FinalProject.Repository.UserRepo;
 import it.academy.FinalProject.Service.CourseService;
+import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepo courseRepo;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private UserService userService;
     @Autowired
     private CourseUserStatusRepo statusRepo;
 
@@ -51,27 +54,39 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseUsers> getRequestingUsers(List<Course> courses) {
         List<Long> ids = courses.stream().map(Course::getId).collect(Collectors.toList());
-        List<CourseUsers> courseUsersList = new ArrayList<>();
-        List<User> usersList = new ArrayList<>();
+        System.err.println("Course ID"+ ids);
+        List<CourseUsers> courseUsersList;
         for (Long u : ids) {
-            List<Long> list = statusRepo.findAllByCourseStatusAndUser("REQUESTED", u);
-            for (Long l : list) {
-                usersList.add(userRepo.findById(l).get());
+            List<CourseUserStatus> list = statusRepo.findAllByCourseStatusAndCourse("REQUESTED", u);
+            System.err.println("Requested UserID list"+ list);
+            for (CourseUserStatus l : list) {
+                courseUsersList = new ArrayList<>();
+                 CourseUsers cu = CourseUsers.builder()
+                         .course(l.getCourse())
+                         .users(l.getUser())
+                         .build();
+                 courseUsersList.add(cu);
+                 return courseUsersList;
             }
-            for (Course l : courses) {
+        }
+        return null;
+    }
+
+    @Override
+    public List<CourseUsers> getOfferingCourses(String login) {
+        List<Course> courseList = courseRepo.findOfferingCourses(userRepo.findByLogin(login).getId());
+        List<CourseUsers> courseUsersList = new ArrayList<>();
+        for (Course c: courseList ) {
+            List<Long> users= courseRepo.findUsersByCourse(c.getId());
+            for (Long u: users) {
                 CourseUsers cu = CourseUsers.builder()
-                        .course(l)
-                        .users(usersList)
+                        .course(c)
+                        .users(userService.getById(u))
                         .build();
                 courseUsersList.add(cu);
             }
         }
         return courseUsersList;
-    }
-
-    @Override
-    public List<Course> getOfferingCourses(String login) {
-        return courseRepo.findOfferingCourses(userRepo.findByLogin(login).getId());
     }
 
     @Override

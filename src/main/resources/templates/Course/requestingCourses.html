@@ -34,7 +34,9 @@
             padding: 8px;
         }
 
-        tr:nth-child(even){background-color: #f2f2f2}
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
 
         th {
             background-color: #2f57a7;
@@ -45,10 +47,11 @@
 <body>
 <nav class="site-header sticky-top py-1">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a th:text="${login}"></a>
         <a class="py-2" href="#" aria-label="Product">
             <img class="" th:src="@{/img/logo.png}" width="30" height="30" alt="Boomer">
         </a>
-        <a class="py-2 d-none d-md-inline-block" href="#allCourses">All Courses</a>
+        <a class="py-2 d-none d-md-inline-block" href="/user/profilePage">All Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/taking">Taking Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/requested">Requested Courses</a>
         <a class="py-2 d-none d-md-inline-block" href="/course/requesting">Requesting Courses</a>
@@ -63,19 +66,20 @@
     <thead class="thead-dark">
     <th>Course</th>
     <th>Users</th>
+    <th>Actions</th>
     </thead>
 
     <tbody>
-    <tr th:each="u : ${requestingUsers}">
+    <tr th:each="u : ${requestingCourseUser}">
         <td th:text="${u.course.name}"></td>
-        <td th:each=" uc: ${u.users}">
-            <p th:text="${uc.login}"></p>
-            <p><form th:action="@{'/user/' + ${login} + '/approveRequest/' + ${u.course.id} + '/' + ${uc.login}}" th:method="post" onsubmit="return validateForm()">
-            <button type="submit" name="action" value="save">Approve Request</button>
-        </form></p>
+        <td th:text="${u.users.name}"></td>
+        <td>
+            <form th:action="@{'/user/' + ${login} + '/approveRequest/' + ${u.course.id} + '/' + ${u.users.login}}"
+                  th:method="post" onsubmit="return validateForm()">
+                <button type="submit" name="action" value="save">Approve Request</button>
+            </form>
         </td>
     </tr>
-
     </tbody>
 </table>
 <footer class="container py-5">

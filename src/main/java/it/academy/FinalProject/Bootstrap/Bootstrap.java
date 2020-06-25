@@ -3,6 +3,7 @@ import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.Employee;
 import it.academy.FinalProject.Entity.Role;
 import it.academy.FinalProject.Entity.User;
+import it.academy.FinalProject.Model.RegisterEmpl;
 import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Repository.RoleRepo;
 import it.academy.FinalProject.Repository.UserRepo;
@@ -10,13 +11,9 @@ import it.academy.FinalProject.Service.EmployeeService;
 import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
@@ -65,14 +62,14 @@ public class Bootstrap implements CommandLineRunner {
                 .build();
         employeeService.save(employee2);
 
-        Employee employee3 = Employee.builder()
-                .login("empl3")
+        RegisterEmpl employee3 = RegisterEmpl.builder()
+                .login("admin")
                 .email("qwer@gmail.com")
                 .name("Melek")
                 .password(passwordEncoder.encode("123"))
-                .role(employee)
+                .role(admin)
                 .build();
-        employeeService.save(employee3);
+        employeeService.saveModelEmpl(employee3);
 
         User u = User.builder()
                 .login("Sezim")

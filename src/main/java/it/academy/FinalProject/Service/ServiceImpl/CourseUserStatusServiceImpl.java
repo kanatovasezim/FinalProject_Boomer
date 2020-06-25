@@ -17,7 +17,7 @@ public class CourseUserStatusServiceImpl implements CourseUserStatusService {
 
     @Override
     public CourseUserStatus findCourseUserStatusByCourseAndUser(Course course, User user) {
-        return repo.findByCourseAndUser(course,user);
+        return repo.findByCourseAndUser(user.getId(), course.getId());
     }
 
     @Override

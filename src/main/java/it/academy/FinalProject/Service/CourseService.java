@@ -20,6 +20,6 @@ public interface CourseService {
     List<Course> getTakingCourses(String login);
     List<Course> getRequestedCourses(String login);
     List<CourseUsers> getRequestingUsers(List<Course> courses);
-    List<Course> getOfferingCourses(String login);
+    List<CourseUsers> getOfferingCourses(String login);
     List<Course> getCompletedCourses(String login);
 }

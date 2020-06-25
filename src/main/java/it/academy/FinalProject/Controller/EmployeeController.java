@@ -36,6 +36,13 @@ public class EmployeeController {
         return "Registration/registerEmpl";
     }
 
+    @GetMapping("/all")
+    public String getAllUsers(Model model) {
+        model.addAttribute("allEmployee", employeeService.getAll());
+        return "Employee/allEmployee";
+    }
+
+
     @PostMapping("/register")
     public String registerEmployee(@ModelAttribute("employee") @Valid RegisterEmpl e, BindingResult result) {
         e.setPassword(passwordEncoder.encode(e.getPassword()));

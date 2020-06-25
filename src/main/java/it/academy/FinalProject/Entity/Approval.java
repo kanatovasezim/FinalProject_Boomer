@@ -34,7 +34,7 @@ public class Approval {
     User client;
 
     @ManyToOne
-    @JoinColumn(name = "approvals")
+    @JoinColumn(name = "course")
     Course course;
 
     @Column(name = "approvalStatus")

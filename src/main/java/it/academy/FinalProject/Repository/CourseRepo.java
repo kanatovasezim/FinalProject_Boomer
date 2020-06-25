@@ -15,4 +15,6 @@ public interface CourseRepo extends JpaRepository<Course, Long> {
     Course findByName(@Param("name") String name);
     @Query( value = "select * from course c where c.author = :id", nativeQuery=true)
     List<Course> findOfferingCourses(@Param("id") Long id);
+    @Query( value = "select c.s_user_id from course_got c where c.course_id = :id", nativeQuery=true)
+    List<Long> findUsersByCourse(@Param("id") Long id);
 }

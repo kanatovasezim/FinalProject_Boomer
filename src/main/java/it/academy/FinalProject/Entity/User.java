@@ -12,10 +12,10 @@ import java.util.List;
 @Builder
 @Setter
 @Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "s_user")
-@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 //User: id, login, password, dateOfBirth, email, role, list<Course> courseOffered, list<Course> courseGet, balance, created_date
 public class User {

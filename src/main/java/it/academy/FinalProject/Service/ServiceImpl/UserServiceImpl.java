@@ -99,11 +99,11 @@ public class UserServiceImpl implements UserService {
     public void finishCourse(Course course, String login) {
         User u = userRepo.findByLogin(login);
         User owner = course.getAuthor();
-        Approval a = approvalRepo.findApprovalByClientAndCourse(login,course.getId());
+        Approval a = approvalRepo.findApprovalByClientAndCourse(u.getId(),course.getId());
         if (a.getClientApproval() && a.getOwnerApproval()){
         owner.setBalance(owner.getBalance()+a.getDepositCost());
             a.setApprovalStatus(ApprovalStatus.APPROVED);
-            CourseUserStatus c = courseUserStatusRepo.findByCourseAndUser(course, userRepo.findByLogin(login));
+            CourseUserStatus c = courseUserStatusRepo.findByCourseAndUser( userRepo.findByLogin(login).getId(), course.getId());
             c.setCourseStatus(CourseStatus.COMPLETED);
             courseUserStatusRepo.save(c);
             userRepo.save(owner);
@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void removeRequest(Course course, String login) {
         User user = userRepo.findByLogin(login);
-        CourseUserStatus c = courseUserStatusRepo.findByCourseAndUser(course, user);
+        CourseUserStatus c = courseUserStatusRepo.findByCourseAndUser(user.getId(), course.getId());
         c.setCourseStatus(CourseStatus.AVAILABLE);
         courseUserStatusRepo.save(c);
     }
@@ -146,8 +146,11 @@ public class UserServiceImpl implements UserService {
         if (userRepo.findByLogin(owner).getId().equals(course.getAuthor().getId()) && userRepo.findByLogin(client).getBalance() >= course.getCost()){
             userRepo.findByLogin(client).getCourseGet().add(course);
             userRepo.save(userRepo.findByLogin(client));
-            CourseUserStatus c = courseUserStatusRepo.findByCourseAndUser(course, userRepo.findByLogin(client));
-           c.setCourseStatus(CourseStatus.ENROLLED);
+            System.err.println("Course:" + course);
+            CourseUserStatus c = courseUserStatusRepo.findByCourseAndUser(userRepo.findByLogin(client).getId(), course.getId());
+            System.err.println("Client:" + userRepo.findByLogin(client));
+            System.err.println("CourseUser" + c);
+            c.setCourseStatus(CourseStatus.ENROLLED);
            courseUserStatusRepo.save(c);
             course.setFreePlaces(course.getFreePlaces()-1);
             course.getRequests().remove(userRepo.findByLogin(client));
@@ -155,8 +158,11 @@ public class UserServiceImpl implements UserService {
             Approval a = Approval.builder()
                     .course(course)
                     .client(userRepo.findByLogin(client))
+                    .clientApproval(false)
+                    .ownerApproval(false)
                     .depositCost(course.getCost())
                     .build();
+            System.err.println("App " + a);
             approvalRepo.save(a);
             User u = userRepo.findByLogin(client);
             u.setBalance(userRepo.findByLogin(client).getBalance() - course.getCost());

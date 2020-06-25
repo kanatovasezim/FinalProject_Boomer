@@ -14,5 +14,5 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CourseUsers {
     Course course;
-    List<User> users;
+    User users;
 }

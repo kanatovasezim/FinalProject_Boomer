@@ -15,10 +15,10 @@ import java.util.List;
 @Builder
 @Setter
 @Getter
+@ToString(exclude = "requests")
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "course")
-@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 //Course: id, name,User author, description, Type type, list<Category> category, duration, list<Language> language, likes
 public class Course {

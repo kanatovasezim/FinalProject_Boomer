@@ -1,12 +1,15 @@
 package it.academy.FinalProject.Service.ServiceImpl;
 
+import it.academy.FinalProject.Entity.Approval;
 import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.CourseUserStatus;
 import it.academy.FinalProject.Entity.User;
+import it.academy.FinalProject.Enum.ApprovalStatus;
 import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Model.CourseUsers;
 import it.academy.FinalProject.Model.RegisterCourse;
 import it.academy.FinalProject.Model.RegisterUser;
+import it.academy.FinalProject.Repository.ApprovalRepo;
 import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Repository.CourseUserStatusRepo;
 import it.academy.FinalProject.Repository.UserRepo;
@@ -29,6 +32,8 @@ public class CourseServiceImpl implements CourseService {
     private UserService userService;
     @Autowired
     private CourseUserStatusRepo statusRepo;
+    @Autowired
+    private ApprovalRepo approvalRepo;
 
     @Override
     public List<Course> getAll() {
@@ -54,19 +59,19 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseUsers> getRequestingUsers(List<Course> courses) {
         List<Long> ids = courses.stream().map(Course::getId).collect(Collectors.toList());
-        System.err.println("Course ID"+ ids);
+        System.err.println("Course ID" + ids);
         List<CourseUsers> courseUsersList;
         for (Long u : ids) {
             List<CourseUserStatus> list = statusRepo.findAllByCourseStatusAndCourse("REQUESTED", u);
-            System.err.println("Requested UserID list"+ list);
+            System.err.println("Requested UserID list" + list);
             for (CourseUserStatus l : list) {
                 courseUsersList = new ArrayList<>();
-                 CourseUsers cu = CourseUsers.builder()
-                         .course(l.getCourse())
-                         .users(l.getUser())
-                         .build();
-                 courseUsersList.add(cu);
-                 return courseUsersList;
+                CourseUsers cu = CourseUsers.builder()
+                        .course(l.getCourse())
+                        .users(l.getUser())
+                        .build();
+                courseUsersList.add(cu);
+                return courseUsersList;
             }
         }
         return null;
@@ -76,9 +81,9 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseUsers> getOfferingCourses(String login) {
         List<Course> courseList = courseRepo.findOfferingCourses(userRepo.findByLogin(login).getId());
         List<CourseUsers> courseUsersList = new ArrayList<>();
-        for (Course c: courseList ) {
-            List<Long> users= courseRepo.findUsersByCourse(c.getId());
-            for (Long u: users) {
+        for (Course c : courseList) {
+            List<Long> users = courseRepo.findUsersByCourse(c.getId());
+            for (Long u : users) {
                 CourseUsers cu = CourseUsers.builder()
                         .course(c)
                         .users(userService.getById(u))
@@ -98,6 +103,14 @@ public class CourseServiceImpl implements CourseService {
             courseList.add(c);
         }
         return courseList;
+    }
+
+    @Override
+    public void checkComplete(Long courseId, Long clientId) {
+        Approval a = approvalRepo.findApprovalByClientAndCourse(clientId, courseId);
+        if (a.getClientApproval() && a.getOwnerApproval()){
+            a.setApprovalStatus(ApprovalStatus.APPROVED);
+        }
     }
 
     @Override

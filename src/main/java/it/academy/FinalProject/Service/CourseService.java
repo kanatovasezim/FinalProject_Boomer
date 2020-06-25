@@ -22,4 +22,5 @@ public interface CourseService {
     List<CourseUsers> getRequestingUsers(List<Course> courses);
     List<CourseUsers> getOfferingCourses(String login);
     List<Course> getCompletedCourses(String login);
+    void checkComplete(Long courseId, Long clientId);
 }

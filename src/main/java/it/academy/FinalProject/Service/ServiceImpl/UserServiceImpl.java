@@ -107,6 +107,9 @@ public class UserServiceImpl implements UserService {
             c.setCourseStatus(CourseStatus.COMPLETED);
             courseUserStatusRepo.save(c);
             userRepo.save(owner);
+            CourseUserStatus cu = courseUserStatusRepo.findByCourseAndUser(course.getId(),u.getId());
+            cu.setCourseStatus(CourseStatus.COMPLETED);
+            courseUserStatusRepo.save(cu);
         } else {
             u.setBalance(u.getBalance() + a.getDepositCost());
             a.setApprovalStatus(ApprovalStatus.REJECTED);
@@ -146,10 +149,7 @@ public class UserServiceImpl implements UserService {
         if (userRepo.findByLogin(owner).getId().equals(course.getAuthor().getId()) && userRepo.findByLogin(client).getBalance() >= course.getCost()){
             userRepo.findByLogin(client).getCourseGet().add(course);
             userRepo.save(userRepo.findByLogin(client));
-            System.err.println("Course:" + course);
             CourseUserStatus c = courseUserStatusRepo.findByCourseAndUser(userRepo.findByLogin(client).getId(), course.getId());
-            System.err.println("Client:" + userRepo.findByLogin(client));
-            System.err.println("CourseUser" + c);
             c.setCourseStatus(CourseStatus.ENROLLED);
            courseUserStatusRepo.save(c);
             course.setFreePlaces(course.getFreePlaces()-1);
@@ -162,7 +162,6 @@ public class UserServiceImpl implements UserService {
                     .ownerApproval(false)
                     .depositCost(course.getCost())
                     .build();
-            System.err.println("App " + a);
             approvalRepo.save(a);
             User u = userRepo.findByLogin(client);
             u.setBalance(userRepo.findByLogin(client).getBalance() - course.getCost());

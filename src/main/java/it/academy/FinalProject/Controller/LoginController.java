@@ -16,8 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController {
     @GetMapping
     @RequestMapping("/login")
-    public String loginUser(Model model){
-        return  "Registration/login";
+    public String loginUser(HttpServletRequest httpServletRequest, Model model){
+        if(httpServletRequest.isUserInRole("ADMIN")) {
+            return "Admin/adminProfilePage";
+        } else if(httpServletRequest.isUserInRole("USER")) {
+            return "User/profilePage";
+        } else if(httpServletRequest.isUserInRole("EMPLOYEE")){
+            return "Employee/employeeProfilePage";
+        } else {
+            return "Registration/login";
+        }
     }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)

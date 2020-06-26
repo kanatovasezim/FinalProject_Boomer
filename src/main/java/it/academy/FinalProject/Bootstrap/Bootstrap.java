@@ -62,14 +62,15 @@ public class Bootstrap implements CommandLineRunner {
                 .build();
         employeeService.save(employee2);
 
-        RegisterEmpl employee3 = RegisterEmpl.builder()
-                .login("admin")
-                .email("qwer@gmail.com")
-                .name("Melek")
+        User adm = User.builder()
+                .login("Admin")
                 .password(passwordEncoder.encode("123"))
+                .isActive(true)
+                .name("Admin")
                 .role(admin)
+                .email("admin@gmail.com")
                 .build();
-        employeeService.saveModelEmpl(employee3);
+        userRepo.save(adm);
 
         User u = User.builder()
                 .login("Sezim")

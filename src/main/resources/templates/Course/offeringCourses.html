@@ -77,8 +77,22 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li>
-                        <a th:text="${login}"></a>
+                    <li class="active has-sub">
+                        <h5 class="js-arrow"  th:text="${user.name}" href="#">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        </h5>
+                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <li>
+                                <a href="#" th:text="${user.email}"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                                <a href="#" th:text="${user.balance}"><i class="fa fa-gift" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i>Update profile</a>
+                            </li>
+                            <li>
+                                <a href="#" th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#allCourses">
@@ -104,7 +118,6 @@
                         <a href="/course/completed">
                             <i class="fas fa-map-marker-alt"></i>Completed Courses</a>
                     </li>
-                    <li><a href="#" th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
                 </ul>
             </nav>
         </div>

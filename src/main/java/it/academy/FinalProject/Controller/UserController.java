@@ -1,5 +1,4 @@
 package it.academy.FinalProject.Controller;
-
 import it.academy.FinalProject.Entity.User;
 import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.UserRepo;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 
@@ -61,7 +59,7 @@ public class UserController {
     @GetMapping("/profilePage")
     public String userIndex(Model model, Authentication authentication) {
         model.addAttribute("allCourses", courseService.getAll());
-        model.addAttribute("login", authentication.getName());
+        model.addAttribute("user", userService.findByLogin(authentication.getName()));
         return "User/profilePage";
     }
 
@@ -124,7 +122,7 @@ public class UserController {
         return "redirect:/user/profilePage";
     }
 
-    @GetMapping("/allUsers")
+    @GetMapping("/allLoggedUsers")
     public void getLoggedUsers(){
         userService.getLoggedInUsers();
     }

@@ -61,22 +61,27 @@
 </nav>
 
 <table class="table table-striped table-hover table-bordered">
-    <thead class="thead-dark">
-    <th>Course</th>
-    <th>User</th>
-    <th>Actions</th>
+    <thead class="thead-dark" th:if="${offeringCourseUser}">
+    <th>Name</th>
+    <th>Description</th>
+    <th>Cost</th>
+    <th>Duration</th>
+    <th>Places Available</th>
+    <th>Author</th>
+    <th>Category</th>
+    <th>Language</th>
     </thead>
-
     <tbody>
-    <tr th:each="u : ${offeringCourseUser}">
-        <td th:text="${u.course.name}"></td>
-        <td th:text="${u.users.name}"></td>
-        <td><form th:action="@{ '/approve/ownerApproveCourse/' + ${u.course.id} + '/' + ${u.users.login}}" th:method="post"
-                  onsubmit="return validateForm()">
-            <button type="submit" name="action" value="save">Approve</button>
-        </form></td>
+    <tr th:each="course : ${offeringCourseUser}">
+        <td th:text="${course.name}"></td>
+        <td th:text="${course.description}"></td>
+        <td th:text="${course.cost}"></td>
+        <td th:text="${course.duration}"></td>
+        <td th:text="${course.freePlaces}"></td>
+        <td th:text="${course.author.name}"></td>
+        <td th:text="${course.category}"></td>
+        <td th:text="${course.languageList}"></td>
     </tr>
-
     </tbody>
 </table>
 <footer class="container py-5">
@@ -84,40 +89,19 @@
         <div class="col-12 col-md">
         </div>
         <div class="col-6 col-md">
-            <h5>Features</h5>
+            <h5>Opportunities</h5>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Cool stuff</a></li>
-                <li><a class="text-muted" href="#">Random feature</a></li>
-                <li><a class="text-muted" href="#">Team feature</a></li>
-                <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                <li><a class="text-muted" href="#">Another one</a></li>
-                <li><a class="text-muted" href="#">Last time</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md">
-            <h5>Resources</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Resource</a></li>
-                <li><a class="text-muted" href="#">Resource name</a></li>
-                <li><a class="text-muted" href="#">Another resource</a></li>
-                <li><a class="text-muted" href="#">Final resource</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md">
-            <h5>Resources</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Business</a></li>
-                <li><a class="text-muted" href="#">Education</a></li>
-                <li><a class="text-muted" href="#">Government</a></li>
-                <li><a class="text-muted" href="#">Gaming</a></li>
+                <li><a class="text-muted" href="#">All</a></li>
+                <li><a class="text-muted" href="#">Free courses</a></li>
+                <li><a class="text-muted" href="#">Internships</a></li>
+                <li><a class="text-muted" href="#">Courses</a></li>
             </ul>
         </div>
         <div class="col-6 col-md">
             <h5>About</h5>
             <ul class="list-unstyled text-small">
                 <li><a class="text-muted" href="#">Team</a></li>
-                <li><a class="text-muted" href="#">Locations</a></li>
-                <li><a class="text-muted" href="#">Privacy</a></li>
+                <li><a class="text-muted" href="#">Services</a></li>
                 <li><a class="text-muted" href="#">Terms</a></li>
             </ul>
         </div>

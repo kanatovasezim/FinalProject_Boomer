@@ -106,14 +106,6 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void checkComplete(Long courseId, Long clientId) {
-        Approval a = approvalRepo.findApprovalByClientAndCourse(clientId, courseId);
-        if (a.getClientApproval() && a.getOwnerApproval()){
-            a.setApprovalStatus(ApprovalStatus.APPROVED);
-        }
-    }
-
-    @Override
     public Course save(Course course) {
         return courseRepo.save(course);
     }

@@ -27,4 +27,6 @@ public interface UserService extends UserDetailsService {
     void finishCourse(Course course, String login);
     void approveRequest(Course course, String owner, String client);
     User findByEmail(String login);
+    Boolean checkIfComplete(Long courseId, Long userId);
+    void getLoggedInUsers();
 }

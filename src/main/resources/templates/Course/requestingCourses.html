@@ -19,10 +19,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" th:href="@{/css/font-face.css}" rel="stylesheet" media="all">
+    <link type="text/css" th:href="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
+    <link type="text/css" th:href="@{/vendor/font-awesome-5/css/fontawesome-all.min.css}" rel="stylesheet" media="all">
+    <link type="text/css" th:href="@{/vendor/mdi-font/css/material-design-iconic-font.min.css}" rel="stylesheet"
+          media="all">
+
+    <!-- Bootstrap CSS-->
+    <link type="text/css" th:href="@{/vendor/bootstrap-4.1/bootstrap.min.css}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link type="text/css" th:href="@{/vendor/animsition/animsition.min.css}" rel="stylesheet" media="all">
+    <link type="text/css" th:href="@{/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css}"
+          rel="stylesheet" media="all">
+    <link type="text/css" th:href="@{/vendor/wow/animate.css}" rel="stylesheet" media="all">
+    <link type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}" rel="stylesheet" media="all">
+    <link type="text/css" th:href="@{/vendor/slick/slick.css}" rel="stylesheet" media="all">
+    <link type="text/css" th:href="@{/vendor/select2/select2.min.css}" rel="stylesheet" media="all">
+    <link type="text/css" th:href="@{/vendor/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link type="text/css" th:href="@{/css/theme.css}" rel="stylesheet" media="all">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/product.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/product.css}">
     <style>
         table {
             border-collapse: collapse;
@@ -44,67 +66,96 @@
         }
     </style>
 </head>
-<body>
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a th:text="${login}"></a>
-        <a class="py-2" href="#" aria-label="Product">
-            <img class="" th:src="@{/img/logo.png}" width="30" height="30" alt="Boomer">
-        </a>
-        <a class="py-2 d-none d-md-inline-block" href="/user/profilePage">All Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/taking">Taking Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/requested">Requested Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/requesting">Requesting Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/offering">Offering Courses</a>
-        <a class="py-2 d-none d-md-inline-block" href="/course/completed">Completed Courses</a>
-        <a href="#" th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+<body class="animsition">
+<div class="page-wrapper">
+    <aside class="menu-sidebar d-none d-lg-block">
+        <div class="logo">
+            <a href="#">
+                <img th:src="@{/img/logo.png}" height="50" width="50" alt="Boomer"/> Boomer
+            </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+            <nav class="navbar-sidebar">
+                <ul class="list-unstyled navbar__list">
+                    <li>
+                        <a th:text="${login}"></a>
+                    </li>
+                    <li>
+                        <a href="#allCourses">
+                            <i class="fas fa-chart-bar"></i>All Courses</a>
+                    </li>
+                    <li>
+                        <a href="/course/taking">
+                            <i class="fas fa-table"></i>Taking Courses</a>
+                    </li>
+                    <li>
+                        <a href="/course/requested">
+                            <i class="far fa-check-square"></i>Requested Courses</a>
+                    </li>
+                    <li>
+                        <a href="/course/requesting">
+                            <i class="fas fa-calendar-alt"></i>Requesting Courses</a>
+                    </li>
+                    <li>
+                        <a href="/course/offering">
+                            <i class="fas fa-map-marker-alt"></i>Offering Courses</a>
+                    </li>
+                    <li>
+                        <a href="/course/completed">
+                            <i class="fas fa-map-marker-alt"></i>Completed Courses</a>
+                    </li>
+                    <li><a href="#" th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <div class="page-container">
 
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="thead-dark">
+            <th>Course</th>
+            <th>Users</th>
+            <th>Actions</th>
+            </thead>
+
+            <tbody>
+            <tr th:each="u : ${requestingCourseUser}">
+                <td th:text="${u.course.name}"></td>
+                <td th:text="${u.users.name}"></td>
+                <td>
+                    <form th:action="@{'/user/' + ${login} + '/approveRequest/' + ${u.course.id} + '/' + ${u.users.login}}"
+                          th:method="post" onsubmit="return validateForm()">
+                        <button type="submit" name="action" value="save">Approve Request</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <footer class="container py-5">
+            <div class="row">
+                <div class="col-12 col-md">
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Opportunities</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">All</a></li>
+                        <li><a class="text-muted" href="#">Free courses</a></li>
+                        <li><a class="text-muted" href="#">Internships</a></li>
+                        <li><a class="text-muted" href="#">Courses</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>About</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="#">Team</a></li>
+                        <li><a class="text-muted" href="#">Services</a></li>
+                        <li><a class="text-muted" href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
     </div>
-</nav>
-
-<table class="table table-striped table-hover table-bordered">
-    <thead class="thead-dark">
-    <th>Course</th>
-    <th>Users</th>
-    <th>Actions</th>
-    </thead>
-
-    <tbody>
-    <tr th:each="u : ${requestingCourseUser}">
-        <td th:text="${u.course.name}"></td>
-        <td th:text="${u.users.name}"></td>
-        <td>
-            <form th:action="@{'/user/' + ${login} + '/approveRequest/' + ${u.course.id} + '/' + ${u.users.login}}"
-                  th:method="post" onsubmit="return validateForm()">
-                <button type="submit" name="action" value="save">Approve Request</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<footer class="container py-5">
-    <div class="row">
-        <div class="col-12 col-md">
-        </div>
-        <div class="col-6 col-md">
-            <h5>Opportunities</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">All</a></li>
-                <li><a class="text-muted" href="#">Free courses</a></li>
-                <li><a class="text-muted" href="#">Internships</a></li>
-                <li><a class="text-muted" href="#">Courses</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md">
-            <h5>About</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Team</a></li>
-                <li><a class="text-muted" href="#">Services</a></li>
-                <li><a class="text-muted" href="#">Terms</a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
@@ -122,6 +173,26 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
+<!-- Jquery JS-->
+<script type="text/javascript" th:src="@{/vendor/jquery-3.2.1.min.js}"></script>
+<!-- Bootstrap JS-->
+<script type="text/javascript" th:src="@{/vendor/bootstrap-4.1/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/bootstrap-4.1/bootstrap.min.js}"></script>
+<!-- Vendor JS       -->
+<script type="text/javascript" th:src="@{/vendor/slick/slick.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/wow/wow.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/animsition/animsition.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/counter-up/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/counter-up/jquery.counterup.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/circle-progress/circle-progress.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/perfect-scrollbar/perfect-scrollbar.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/chartjs/Chart.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/select2/select2.min.js}">
+</script>
+
+<!-- Main JS-->
+<script type="text/javascript" th:src="@{/js/main1.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script>
     function validateForm() {

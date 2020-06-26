@@ -123,4 +123,10 @@ public class UserController {
         userService.finishCourse(courseService.getById(courseId), login);
         return "redirect:/user/profilePage";
     }
+
+    @GetMapping("/allUsers")
+    public void getLoggedUsers(){
+        userService.getLoggedInUsers();
+    }
+
 }

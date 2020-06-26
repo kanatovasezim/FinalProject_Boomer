@@ -1,14 +1,8 @@
 package it.academy.FinalProject.Service.ServiceImpl;
-
-import it.academy.FinalProject.Entity.Approval;
 import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.CourseUserStatus;
-import it.academy.FinalProject.Entity.User;
-import it.academy.FinalProject.Enum.ApprovalStatus;
-import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Model.CourseUsers;
 import it.academy.FinalProject.Model.RegisterCourse;
-import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.ApprovalRepo;
 import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Repository.CourseUserStatusRepo;
@@ -59,22 +53,18 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseUsers> getRequestingUsers(List<Course> courses) {
         List<Long> ids = courses.stream().map(Course::getId).collect(Collectors.toList());
-        System.err.println("Course ID" + ids);
-        List<CourseUsers> courseUsersList;
+        List<CourseUsers> courseUsersList = new ArrayList<>();
         for (Long u : ids) {
             List<CourseUserStatus> list = statusRepo.findAllByCourseStatusAndCourse("REQUESTED", u);
-            System.err.println("Requested UserID list" + list);
             for (CourseUserStatus l : list) {
-                courseUsersList = new ArrayList<>();
                 CourseUsers cu = CourseUsers.builder()
                         .course(l.getCourse())
                         .users(l.getUser())
                         .build();
                 courseUsersList.add(cu);
-                return courseUsersList;
             }
         }
-        return null;
+        return courseUsersList;
     }
 
     @Override

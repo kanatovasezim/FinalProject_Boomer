@@ -8,9 +8,13 @@ import it.academy.FinalProject.Model.RegisterEmpl;
 import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.*;
 import it.academy.FinalProject.Service.UserService;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,10 +23,14 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserServiceImpl implements UserService {
+    @Autowired
+    SessionRegistry sessionRegistry;
     @Autowired
     UserRepo userRepo;
     @Autowired
@@ -107,7 +115,7 @@ public class UserServiceImpl implements UserService {
             c.setCourseStatus(CourseStatus.COMPLETED);
             courseUserStatusRepo.save(c);
             userRepo.save(owner);
-            CourseUserStatus cu = courseUserStatusRepo.findByCourseAndUser(course.getId(),u.getId());
+            CourseUserStatus cu = courseUserStatusRepo.findByCourseAndUser(u.getId(), course.getId());
             cu.setCourseStatus(CourseStatus.COMPLETED);
             courseUserStatusRepo.save(cu);
         } else {
@@ -179,7 +187,11 @@ public class UserServiceImpl implements UserService {
         return userRepo.findByEmail(login);
     }
 
-
+    @Override
+    public Boolean checkIfComplete(Long course, Long user) {
+        Approval a = approvalRepo.findApprovalByClientAndCourse(user, course);
+        return a.getOwnerApproval() && a.getClientApproval();
+    }
 
     @Override
     public User saveModelUser(RegisterUser u) {
@@ -194,5 +206,15 @@ public class UserServiceImpl implements UserService {
         user.setBalance((long) 100);
         user.setEmail(u.getEmail());
         return userRepo.save(user);
+    }
+
+    @Override
+    public void getLoggedInUsers() {
+        List<UserDetails> allPrincipals = sessionRegistry.getAllPrincipals()
+                .stream()
+                .filter(principal -> principal instanceof UserDetails)
+                .map(UserDetails.class::cast)
+                .collect(Collectors.toList());
+        System.out.println(allPrincipals);
     }
 }

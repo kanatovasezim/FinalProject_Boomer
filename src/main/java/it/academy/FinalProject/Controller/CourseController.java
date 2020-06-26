@@ -73,7 +73,7 @@ public class CourseController {
     }
     @GetMapping("/offering")
     public String getOfferingCourses(Model model, Authentication authentication){
-        model.addAttribute("offeringCourseUser", courseRepo.findOfferingCourses(userService.findByLogin(authentication.getName()).getId()));
+        model.addAttribute("offeringCourseUser", courseService.getOfferingCourses(userService.findByLogin(authentication.getName()).getLogin()));
         model.addAttribute("login", authentication.getName());
         return "Course/offeringCourses";
     }

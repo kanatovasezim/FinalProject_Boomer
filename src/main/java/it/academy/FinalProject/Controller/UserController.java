@@ -32,13 +32,12 @@ public class UserController {
     }
 
     @GetMapping
-    public String showRegistrationForm(Model model) {
+    public String showRegistrationForm() {
         return "Registration/register";
     }
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") @Valid RegisterUser u, BindingResult result) {
-        System.out.println("Here");
         u.setPassword(passwordEncoder.encode(u.getPassword()));
         if (userRepo.findByLogin(u.getLogin()) != null) {
             result.rejectValue("login", null, "Login already exists");

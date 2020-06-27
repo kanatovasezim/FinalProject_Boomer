@@ -3,6 +3,7 @@ package it.academy.FinalProject.Model;
 
 import it.academy.FinalProject.Config.Constraint.FieldMatch;
 import it.academy.FinalProject.Entity.Course;
+import it.academy.FinalProject.Enum.Gender;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
@@ -36,6 +37,8 @@ public class RegisterUser {
     @Email
     @NotEmpty
     String email;
+    @Enumerated(EnumType.STRING)
+    Gender gender;
     List<Course> courseList;
     @CreationTimestamp
     LocalDateTime createdDate;

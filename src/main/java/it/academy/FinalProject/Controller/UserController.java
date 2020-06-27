@@ -53,7 +53,7 @@ public class UserController {
     @GetMapping("/all")
     public String getAllUsers(Model model) {
         model.addAttribute("allUsers", userService.getAll());
-        return "User/userList";
+        return "User/user";
     }
 
     @GetMapping("/profilePage")
@@ -122,9 +122,6 @@ public class UserController {
         return "redirect:/user/profilePage";
     }
 
-    @GetMapping("/allLoggedUsers")
-    public void getLoggedUsers(){
-        userService.getLoggedInUsers();
-    }
+
 
 }

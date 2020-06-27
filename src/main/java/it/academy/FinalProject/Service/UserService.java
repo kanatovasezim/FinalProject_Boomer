@@ -28,5 +28,8 @@ public interface UserService extends UserDetailsService {
     void approveRequest(Course course, String owner, String client);
     User findByEmail(String login);
     Boolean checkIfComplete(Long courseId, Long userId);
-    void getLoggedInUsers();
+    Integer getLoggedInUsers();
+    Integer getLoggedInEmployees();
+    Integer getFemaleUserCount();
+    Integer getMaleUserCount();
 }

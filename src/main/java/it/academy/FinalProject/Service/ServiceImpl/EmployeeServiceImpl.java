@@ -53,12 +53,15 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .createdDate(empl.getCreatedDate())
                 .password(empl.getPassword())
                 .build();
+        System.err.println(empl);
+        System.out.println(employee);
         User u = User.builder()
                 .login(empl.getLogin())
                 .password(empl.getPassword())
                 .isActive(true)
                 .build();
         userRepo.save(u);
+        System.err.println(u);
         return emplRepo.save(employee);
     }
 }

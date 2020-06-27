@@ -25,6 +25,10 @@ public class MainController {
     public String admin(Model model,  Authentication authentication) {
         model.addAttribute("Employee", employeeService.getAll());
         model.addAttribute("admin", userService.findByLogin(authentication.getName()));
+        model.addAttribute("userCount", userService.getLoggedInUsers());
+        model.addAttribute("employeeCount", userService.getLoggedInEmployees());
+        model.addAttribute("F", userService.getFemaleUserCount());
+        model.addAttribute("M", userService.getMaleUserCount());
         return "Admin/adminProfilePage";
     }
 

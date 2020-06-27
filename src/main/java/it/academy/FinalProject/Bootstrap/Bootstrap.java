@@ -3,6 +3,7 @@ import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.Employee;
 import it.academy.FinalProject.Entity.Role;
 import it.academy.FinalProject.Entity.User;
+import it.academy.FinalProject.Enum.Gender;
 import it.academy.FinalProject.Model.RegisterEmpl;
 import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Repository.RoleRepo;
@@ -44,29 +45,21 @@ public class Bootstrap implements CommandLineRunner {
                 .build();
         roleRepo.save(admin);
 
-        Employee employee1 = Employee.builder()
+        RegisterEmpl employee1 = RegisterEmpl.builder()
                 .login("empl1")
                 .email("qwerty@gmail.com")
                 .name("Sezim")
                 .password(passwordEncoder.encode("123"))
                 .role(employee)
                 .build();
-        employeeService.save(employee1);
-
-        Employee employee2 = Employee.builder()
-                .login("empl2")
-                .email("qwert@gmail.com")
-                .name("Amantur")
-                .password(passwordEncoder.encode("123"))
-                .role(employee)
-                .build();
-        employeeService.save(employee2);
+        employeeService.saveModelEmpl(employee1);
 
         User adm = User.builder()
                 .login("Admin")
                 .password(passwordEncoder.encode("123"))
                 .isActive(true)
                 .name("Admin")
+                .gender(Gender.MALE)
                 .role(admin)
                 .email("admin@gmail.com")
                 .build();
@@ -76,6 +69,7 @@ public class Bootstrap implements CommandLineRunner {
                 .login("Sezim")
                 .name("Sezim")
                 .role(user)
+                .gender(Gender.FEMALE)
                 .balance((long)500)
                 .email("sezim@gmail.com")
                 .password(passwordEncoder.encode("123"))

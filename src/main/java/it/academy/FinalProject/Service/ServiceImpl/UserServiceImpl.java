@@ -201,6 +201,7 @@ public class UserServiceImpl implements UserService {
         user.setLogin(u.getLogin());
         user.setName(u.getName());
         user.setIsActive(true);
+        user.setGender(u.getGender());
         user.setCreatedDate(u.getCreatedDate());
         user.setRole(roleRepo.findByName("ROLE_USER"));
         user.setBalance((long) 100);
@@ -209,12 +210,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void getLoggedInUsers() {
+    public Integer getLoggedInUsers() {
         List<UserDetails> allPrincipals = sessionRegistry.getAllPrincipals()
                 .stream()
                 .filter(principal -> principal instanceof UserDetails)
                 .map(UserDetails.class::cast)
                 .collect(Collectors.toList());
-        System.out.println(allPrincipals);
+        return allPrincipals.size()-1;
+    }
+
+    @Override
+    public Integer getLoggedInEmployees() {
+        Integer count = 0;
+        List<UserDetails> allPrincipals = sessionRegistry.getAllPrincipals()
+                .stream()
+                .filter(principal -> principal instanceof UserDetails)
+                .map(UserDetails.class::cast)
+                .collect(Collectors.toList());
+        for (UserDetails u: allPrincipals ) {
+            count = emplRepo.findAll().contains(emplRepo.findByLogin(u.getUsername())) ? count+1 : count;
+        }
+        return count;
+    }
+
+    @Override
+    public Integer getFemaleUserCount() {
+        System.out.println(userRepo.findByGender("FEMALE"));
+        return userRepo.findByGender("FEMALE");
+    }
+
+    @Override
+    public Integer getMaleUserCount() {
+        System.out.println(userRepo.findByGender("MALE"));
+        return userRepo.findByGender("MALE");
     }
 }

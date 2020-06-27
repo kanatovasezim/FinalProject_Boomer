@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface EmplRepo extends JpaRepository<Employee, Long> {
     List<Employee> findAllByRole(Role role);
+    Employee findByLogin(String login);
 }

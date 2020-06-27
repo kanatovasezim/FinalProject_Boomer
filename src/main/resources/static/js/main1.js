@@ -340,8 +340,8 @@
         data: {
           datasets: [
             {
-              label: "My First dataset",
-              data: [60, 40],
+              label: "Gender dataset",
+              data: [m, f],
               backgroundColor: [
                 '#00b5e9',
                 '#fa4251'
@@ -360,8 +360,8 @@
             }
           ],
           labels: [
-            'Products',
-            'Services'
+            'Male',
+            'Female'
           ]
         },
         options: {

@@ -1,7 +1,6 @@
 package it.academy.FinalProject.Controller;
 
 import it.academy.FinalProject.Model.RegisterEmpl;
-import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.UserRepo;
 import it.academy.FinalProject.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class EmployeeController {
     @GetMapping("/all")
     public String getAllUsers(Model model) {
         model.addAttribute("allEmployee", employeeService.getAll());
-        return "Employee/allEmployee";
+        return "Employee/employee";
     }
 
 

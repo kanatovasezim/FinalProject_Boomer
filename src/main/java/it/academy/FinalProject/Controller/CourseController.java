@@ -45,7 +45,6 @@ public class CourseController {
         return "redirect:/user/profilePage";
     }
 
-
     @GetMapping("/all")
     public String getAllCourses(Model model){
         model.addAttribute("allCourses", courseService.getAll());

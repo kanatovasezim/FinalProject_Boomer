@@ -23,7 +23,7 @@ public class MainController {
 
     @GetMapping("/admin")
     public String admin(Model model,  Authentication authentication) {
-        model.addAttribute("Employee", employeeService.getAll());
+        model.addAttribute("employee", employeeService.getAll());
         model.addAttribute("admin", userService.findByLogin(authentication.getName()));
         model.addAttribute("userCount", userService.getLoggedInUsers());
         model.addAttribute("employeeCount", userService.getLoggedInEmployees());

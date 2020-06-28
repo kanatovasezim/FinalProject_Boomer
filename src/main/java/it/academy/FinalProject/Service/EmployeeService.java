@@ -9,4 +9,5 @@ public interface EmployeeService {
     List<Employee> getAll();
     void delete(Long id);
     Employee saveModelEmpl(RegisterEmpl empl);
+    Employee findByLogin(String login);
 }

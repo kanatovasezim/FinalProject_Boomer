@@ -19,10 +19,15 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name", unique = true, nullable = false)
-    String roleName;
+    it.academy.FinalProject.Enum.Role roleName;
 
+    public String getRoleName(){
+        return ""+roleName;
+    }
 
-
-
+    public String getRole(){
+        return roleName != null ? roleName.getName() : null;
+    }
 }

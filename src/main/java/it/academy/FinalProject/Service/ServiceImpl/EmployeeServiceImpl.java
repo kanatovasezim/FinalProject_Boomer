@@ -1,6 +1,7 @@
 package it.academy.FinalProject.Service.ServiceImpl;
 
 import it.academy.FinalProject.Entity.Employee;
+import it.academy.FinalProject.Entity.Role;
 import it.academy.FinalProject.Entity.User;
 import it.academy.FinalProject.Model.RegisterEmpl;
 import it.academy.FinalProject.Repository.EmplRepo;
@@ -39,6 +40,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Employee findByLogin(String login) {
+        return emplRepo.findByLogin(login);
+    }
+
+    @Override
     public void delete(Long id) {
         emplRepo.deleteById(id);
     }
@@ -49,7 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .email(empl.getEmail())
                 .login(empl.getLogin())
                 .name(empl.getName())
-                .role(roleRepo.findByName("ROLE_EMPLOYEE"))
+                .role(roleRepo.findByName(empl.getRole().getName()))
                 .createdDate(empl.getCreatedDate())
                 .password(empl.getPassword())
                 .build();

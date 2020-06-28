@@ -235,13 +235,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer getFemaleUserCount() {
-        System.out.println(userRepo.findByGender("FEMALE"));
         return userRepo.findByGender("FEMALE");
     }
 
     @Override
     public Integer getMaleUserCount() {
-        System.out.println(userRepo.findByGender("MALE"));
         return userRepo.findByGender("MALE");
     }
 }

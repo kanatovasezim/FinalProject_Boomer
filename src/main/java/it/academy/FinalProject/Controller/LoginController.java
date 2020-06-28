@@ -16,11 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController {
     @GetMapping
     @RequestMapping("/login")
-    public String loginUser(HttpServletRequest httpServletRequest, Model model){
+    public String loginUser(){
+        return "Registration/login";
+    }
+
+    @GetMapping
+    @RequestMapping("/redirect")
+    public String redirect(HttpServletRequest httpServletRequest, Model model){
         if(httpServletRequest.isUserInRole("ADMIN")) {
-            return "Admin/adminProfilePage";
+            return "redirect:/admin";
         } else if(httpServletRequest.isUserInRole("USER")) {
-            return "User/profilePage";
+            return "redirect:/user/profilePage";
         } else if(httpServletRequest.isUserInRole("EMPLOYEE")){
             return "Employee/employeeProfilePage";
         } else {

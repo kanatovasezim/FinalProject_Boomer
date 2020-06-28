@@ -31,17 +31,17 @@ public class Bootstrap implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Role employee = Role.builder()
-                .roleName("ROLE_EMPLOYEE")
+                .roleName(it.academy.FinalProject.Enum.Role.ROLE_ANALYTIC)
                 .build();
         roleRepo.save(employee);
 
         Role user = Role.builder()
-                .roleName("ROLE_USER")
+                .roleName(it.academy.FinalProject.Enum.Role.ROLE_USER)
                 .build();
         roleRepo.save(user);
 
         Role admin = Role.builder()
-                .roleName("ROLE_ADMIN")
+                .roleName(it.academy.FinalProject.Enum.Role.ROLE_ADMIN)
                 .build();
         roleRepo.save(admin);
 

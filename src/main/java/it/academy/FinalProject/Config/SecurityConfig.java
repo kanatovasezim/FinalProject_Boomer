@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("login")
-                .defaultSuccessUrl("/user/profilePage", true)
+                .defaultSuccessUrl("/redirect", true)
                 .permitAll()
                 .and()
 

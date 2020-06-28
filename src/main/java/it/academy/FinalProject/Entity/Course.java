@@ -6,6 +6,8 @@ import it.academy.FinalProject.Enum.Language;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,6 +33,7 @@ public class Course {
 
     @NotNull
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "author", nullable = false)
     User author;
 
@@ -65,6 +68,7 @@ public class Course {
     List<Language> languageList;
 
     @ManyToMany(cascade=CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name="requests", joinColumns=@JoinColumn(name="course_id"), inverseJoinColumns=@JoinColumn(name="s_user_id"))
     List<User> requests;
 

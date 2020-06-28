@@ -152,7 +152,7 @@
                                         <td th:text="${e.email}"></td>
                                         <td th:text="${e.role.role}"></td>
                                         <td th:text="${e.createdDate}"></td>
-                                        <td><a th:href="@{'/employee/' + ${e.login}}"><i class="fa fa-edit"></i></a>
+                                        <td><a th:href="@{'/employee/edit/' + ${e.login}}"><i class="fa fa-edit"></i></a>
                                             <a th:href="@{'/employee/delete/' + ${e.login}}"> <i class="fa fa-trash"></i> </a>
                                         </td>
                                     </tr>

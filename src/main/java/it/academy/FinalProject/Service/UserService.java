@@ -32,4 +32,6 @@ public interface UserService extends UserDetailsService {
     Integer getLoggedInEmployees();
     Integer getFemaleUserCount();
     Integer getMaleUserCount();
+    List<User> findAllByRole(String role);
+
 }

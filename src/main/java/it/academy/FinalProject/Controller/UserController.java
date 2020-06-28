@@ -50,8 +50,9 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public String getAllUsers(Model model) {
-        model.addAttribute("allUsers", userService.getAll());
+    public String getAllUsers(Model model, Authentication authentication) {
+        model.addAttribute("allUsers", userService.findAllByRole("ROLE_USER"));
+        model.addAttribute("admin", userService.findByLogin(authentication.getName()));
         return "User/user";
     }
 
@@ -69,13 +70,13 @@ public class UserController {
         return userService.findByLogin(login);
     }
 
-    @PostMapping("/delete/{login}")
+    @GetMapping("/delete/{login}")
     public String delete(@PathVariable("login") String login) {
         userService.deleteByLogin(login);
-        return "User/userList";
+        return "redirect:/user/all";
     }
 
-    @PostMapping("{login}")
+    @PostMapping("/update/{login}")
     public String updateUser(@PathVariable("login") String login, @RequestBody User u){
         if (userService.getAll().contains(userService.findByLogin(login))){
             User user = userService.findByLogin(login);

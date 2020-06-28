@@ -46,21 +46,14 @@ public class EmployeeController {
     @GetMapping("/edit/{login}")
     public String editEmployee(Model model, @PathVariable(value = "login") String login){
         model.addAttribute("empl", login == null ? new RegisterEmpl() : employeeService.findByLogin(login));
+        model.addAttribute("e", login == null ? new RegisterEmpl() : employeeService.findByLogin(login));
         return "Employee/updateEmployee";
     }
     @PostMapping("/update/{login}")
-    public String updateEmployee(@ModelAttribute("employee") @Valid RegisterEmpl e, BindingResult result) {
-        e.setPassword(passwordEncoder.encode(e.getPassword()));
-        if (userRepo.findByLogin(e.getLogin()) != null) {
-            result.rejectValue("login", null, "Login already exists");
-        }
-        if (result.hasErrors()) {
-            return "Registration/registerEmpl";
-        }
-        employeeService.saveModelEmpl(e);
+    public String updateEmployee(@ModelAttribute("employee") @Valid RegisterEmpl e, @PathVariable("login") String login) {
+        employeeService.updateEmpl(e, userRepo.findByLogin(login).getId());
         return "redirect:/employee/all";
     }
-
 
     @PostMapping("/register")
     public String registerEmployee(@ModelAttribute("employee") @Valid RegisterEmpl e, BindingResult result) {
@@ -72,7 +65,7 @@ public class EmployeeController {
             return "Registration/registerEmpl";
         }
         employeeService.saveModelEmpl(e);
-        return "redirect:/Employee/employee";
+        return "redirect:/employee/all";
     }
     @GetMapping("/delete/{login}")
     public String delete(@PathVariable("login") String login) {

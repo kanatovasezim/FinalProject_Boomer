@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -34,7 +34,7 @@
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('name')}? 'has-error':''">
                     <label for="name" class="control-label">Name</label> <input
-                        id="name" class="form-control" th:field="*{name}" th:value="${empl.name}"/>
+                        id="name" class="form-control" th:field="*{name}"/>
                     <p class="error-message"
                        th:each="error: ${#fields.errors('name')}"
                        th:text="${error}">Validation error</p>
@@ -42,7 +42,7 @@
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('login')}? 'has-error':''">
                     <label for="login" class="control-label">Login</label> <input
-                        id="login" class="form-control" th:field="*{login}" th:value="${empl.login}"/>
+                        id="login" class="form-control" th:field="*{login}"/>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('login')}"
                        th:text="${error}">Validation error</p>
@@ -50,9 +50,9 @@
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('gender')}? 'has-error':''">
                     <label for="gender" class="control-label">Gender</label>
-                    <select id="gender" class="form-control" th:field="*{gender}" th:value="${empl.gender}">
+                    <select id="gender" class="form-control" th:field="*{gender}" >
                         <option th:each="gender : ${T(it.academy.FinalProject.Enum.Gender).values()}"
-                                th:value="${gender}" th:text="${gender}"></option>
+                                th:value="*{gender}" th:text="${gender}"></option>
                     </select>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('gender')}"
@@ -61,7 +61,7 @@
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
                     <label for="email" class="control-label">E-mail</label> <input
-                        id="email" class="form-control" th:field="*{email}" th:value="${empl.email}"/>
+                        id="email" class="form-control"  th:field="*{email}"/>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation
                         error</p>
@@ -69,9 +69,9 @@
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('role')}? 'has-error':''">
                     <label for="role" class="control-label">Role</label>
-                    <select id="role" class="form-control" th:field="*{role}" th:value="${empl.role}">
+                    <select id="role" class="form-control" >
                         <option th:each="role : ${T(it.academy.FinalProject.Enum.Role).values()}"
-                                th:value="${role}" th:text="${role}"></option>
+                                th:value="*{role}" th:text="${role.name}"></option>
                     </select>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('role')}"
@@ -80,8 +80,7 @@
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
                     <label for="password" class="control-label">Password</label> <input
-                        id="password" class="form-control" type="password"
-                        th:field="*{password}" th:value="${empl.password}"/>
+                        id="password" class="form-control" th:field="*{password}" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('password')}"
                        th:text="${error}">Validation error</p>

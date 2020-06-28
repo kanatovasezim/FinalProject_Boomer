@@ -3,17 +3,15 @@ package it.academy.FinalProject.Service.ServiceImpl;
 import it.academy.FinalProject.Entity.*;
 import it.academy.FinalProject.Enum.ApprovalStatus;
 import it.academy.FinalProject.Enum.CourseStatus;
-import it.academy.FinalProject.Model.LoginUser;
-import it.academy.FinalProject.Model.RegisterEmpl;
 import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.*;
+import it.academy.FinalProject.Service.RoleService;
 import it.academy.FinalProject.Service.UserService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,6 +33,8 @@ public class UserServiceImpl implements UserService {
     UserRepo userRepo;
     @Autowired
     RoleRepo roleRepo;
+    @Autowired
+    RoleService roleService;
     @Autowired
     CourseRepo courseRepo;
     @Autowired
@@ -96,6 +96,11 @@ public class UserServiceImpl implements UserService {
         if (userRepo.existsById(userRepo.findByLogin(login).getId())){
             userRepo.deleteById(userRepo.findByLogin(login).getId());
         }
+    }
+
+    @Override
+    public List<User> findAllByRole(String role) {
+        return userRepo.findAllByRole(roleService.findByName(role).getId());
     }
 
     @Override
@@ -232,6 +237,7 @@ public class UserServiceImpl implements UserService {
         }
         return count;
     }
+
 
     @Override
     public Integer getFemaleUserCount() {

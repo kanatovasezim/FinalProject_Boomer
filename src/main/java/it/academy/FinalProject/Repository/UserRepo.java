@@ -17,4 +17,6 @@ public interface UserRepo extends JpaRepository<User, Long> {
     User findByEmail(@Param("email") String email);
     @Query( value = "select COUNT(*) from s_user u where u.gender = :gender", nativeQuery=true)
     Integer findByGender(@Param("gender") String gender);
+    @Query( value = "select * from s_user u where u.role_id = :role", nativeQuery=true)
+    List<User> findAllByRole(@Param("role") Long roleId);
 }

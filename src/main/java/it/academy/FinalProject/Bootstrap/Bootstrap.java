@@ -45,12 +45,18 @@ public class Bootstrap implements CommandLineRunner {
                 .build();
         roleRepo.save(admin);
 
+        Role publisher = Role.builder()
+                .roleName(it.academy.FinalProject.Enum.Role.ROLE_PUBLISHER)
+                .build();
+        roleRepo.save(publisher);
+
         RegisterEmpl employee1 = RegisterEmpl.builder()
                 .login("empl1")
                 .email("qwerty@gmail.com")
                 .name("Sezim")
+                .gender(Gender.FEMALE)
                 .password(passwordEncoder.encode("123"))
-                .role(employee)
+                .role(employee.getRoleName())
                 .build();
         employeeService.saveModelEmpl(employee1);
 

@@ -5,6 +5,9 @@ import it.academy.FinalProject.Enum.Gender;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
@@ -55,11 +58,13 @@ public class User {
     @CreationTimestamp
     LocalDateTime createdDate;
 
-    @ManyToMany( cascade=CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name="course_Got", joinColumns=@JoinColumn(name="s_user_id"), inverseJoinColumns=@JoinColumn(name="course_id"))
     List<Course> courseGet;
 
     @ManyToMany(cascade=CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name="requestedCourses", joinColumns=@JoinColumn(name="s_user_id"), inverseJoinColumns=@JoinColumn(name="course_id"))
     List<Course> requestedCourses;
 

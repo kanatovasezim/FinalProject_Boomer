@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class RegisterEmpl {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +30,7 @@ public class RegisterEmpl {
     @Enumerated(EnumType.STRING)
     Gender gender;
     @Enumerated(EnumType.STRING)
-    Role role;
+    String role;
     @CreationTimestamp
     LocalDateTime createdDate;
 }

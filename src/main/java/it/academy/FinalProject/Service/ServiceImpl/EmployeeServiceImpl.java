@@ -23,6 +23,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     private RoleRepo roleRepo;
 
     @Override
+    public Employee updateEmpl(RegisterEmpl empl, Long id) {
+        return null;
+    }
+
+    @Override
     public Employee save(Employee employee) {
         User u = User.builder()
                 .login(employee.getLogin())

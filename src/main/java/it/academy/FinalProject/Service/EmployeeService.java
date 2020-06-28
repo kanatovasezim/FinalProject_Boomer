@@ -1,6 +1,5 @@
 package it.academy.FinalProject.Service;
 import it.academy.FinalProject.Entity.Employee;
-import it.academy.FinalProject.Entity.User;
 import it.academy.FinalProject.Model.RegisterEmpl;
 import java.util.List;
 

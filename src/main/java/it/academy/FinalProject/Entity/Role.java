@@ -27,7 +27,4 @@ public class Role {
         return ""+roleName;
     }
 
-    public String getRole(){
-        return roleName != null ? roleName.getName() : null;
-    }
 }

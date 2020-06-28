@@ -1,6 +1,6 @@
 package it.academy.FinalProject.Model;
+import it.academy.FinalProject.Entity.Role;
 import it.academy.FinalProject.Enum.Gender;
-import it.academy.FinalProject.Enum.Role;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;

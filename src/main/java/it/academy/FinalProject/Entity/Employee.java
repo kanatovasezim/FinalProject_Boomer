@@ -38,6 +38,10 @@ public class Employee {
     @Column(name = "name", nullable = false)
     String name;
 
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    Gender gender;
+
     @Email
     @Column(name = "email", nullable = false, unique = true)
     @NotNull

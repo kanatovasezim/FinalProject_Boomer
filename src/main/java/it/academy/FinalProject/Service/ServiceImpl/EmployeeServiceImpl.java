@@ -8,9 +8,7 @@ import it.academy.FinalProject.Repository.EmplRepo;
 import it.academy.FinalProject.Repository.RoleRepo;
 import it.academy.FinalProject.Repository.UserRepo;
 import it.academy.FinalProject.Service.EmployeeService;
-import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,10 +21,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private UserRepo userRepo;
     @Autowired
     private RoleRepo roleRepo;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public Employee save(Employee employee) {
@@ -46,38 +40,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee updateEmpl(RegisterEmpl empl, Long id) {
-        Employee e = emplRepo.findById(id).orElse(new Employee());
-        User u = userService.findByLogin(empl.getLogin());
-        System.err.println(e);
-        System.out.println(empl);
-        if (empl.getLogin() != null){
-            e.setLogin(empl.getLogin());
-            u.setLogin(empl.getLogin());
-        }
-        if (empl.getRole() != null){
-            e.setRole(roleRepo.findByName(empl.getRole()));
-        }
-        if (empl.getPassword() != null){
-            e.setPassword(passwordEncoder.encode(empl.getPassword()));
-            u.setPassword(passwordEncoder.encode(empl.getPassword()));
-        }
-        if (empl.getEmail() != null){
-            e.setEmail(empl.getEmail());
-        }
-        if (empl.getGender() != null){
-            e.setGender(empl.getGender());
-        }
-        if (empl.getName() != null){
-            e.setName(empl.getName());
-        }
-        save(e);
-        userRepo.save(u);
-        System.out.println(e);
-        return e;
-    }
-
-    @Override
     public Employee findByLogin(String login) {
         return emplRepo.findByLogin(login);
     }
@@ -93,7 +55,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .email(empl.getEmail())
                 .login(empl.getLogin())
                 .name(empl.getName())
-                .password(empl.getPassword())
                 .gender(empl.getGender())
                 .role(roleRepo.findByName(empl.getRole()))
                 .createdDate(empl.getCreatedDate())
@@ -101,6 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .build();
         User u = User.builder()
                 .login(empl.getLogin())
+                .role(roleRepo.findByName(empl.getRole()))
                 .password(empl.getPassword())
                 .isActive(true)
                 .build();

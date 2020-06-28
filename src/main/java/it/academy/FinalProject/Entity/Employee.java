@@ -1,6 +1,8 @@
 package it.academy.FinalProject.Entity;
 
 import com.sun.istack.NotNull;
+import it.academy.FinalProject.Enum.CourseStatus;
+import it.academy.FinalProject.Enum.Gender;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,6 +34,10 @@ public class Employee {
 
     @Column(name = "name", nullable = false)
     String name;
+
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    Gender gender;
 
     @Email
     @Column(name = "email", nullable = false, unique = true)

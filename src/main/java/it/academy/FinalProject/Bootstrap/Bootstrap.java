@@ -49,8 +49,9 @@ public class Bootstrap implements CommandLineRunner {
                 .login("empl1")
                 .email("qwerty@gmail.com")
                 .name("Sezim")
+                .gender(Gender.FEMALE)
                 .password(passwordEncoder.encode("123"))
-                .role(employee)
+                .role(employee.getRoleName())
                 .build();
         employeeService.saveModelEmpl(employee1);
 

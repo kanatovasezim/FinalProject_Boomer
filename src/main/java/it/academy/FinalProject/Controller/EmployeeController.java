@@ -61,7 +61,6 @@ public class EmployeeController {
         return "redirect:/employee/all";
     }
 
-
     @PostMapping("/register")
     public String registerEmployee(@ModelAttribute("employee") @Valid RegisterEmpl e, BindingResult result) {
         e.setPassword(passwordEncoder.encode(e.getPassword()));
@@ -72,7 +71,7 @@ public class EmployeeController {
             return "Registration/registerEmpl";
         }
         employeeService.saveModelEmpl(e);
-        return "redirect:/Employee/employee";
+        return "redirect:/employee/all";
     }
     @GetMapping("/delete/{login}")
     public String delete(@PathVariable("login") String login) {

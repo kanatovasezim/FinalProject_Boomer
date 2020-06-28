@@ -55,19 +55,18 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .email(empl.getEmail())
                 .login(empl.getLogin())
                 .name(empl.getName())
-                .role(roleRepo.findByName(empl.getRole().getName()))
+                .gender(empl.getGender())
+                .role(roleRepo.findByName(empl.getRole()))
                 .createdDate(empl.getCreatedDate())
                 .password(empl.getPassword())
                 .build();
-        System.err.println(empl);
-        System.out.println(employee);
         User u = User.builder()
                 .login(empl.getLogin())
+                .role(roleRepo.findByName(empl.getRole()))
                 .password(empl.getPassword())
                 .isActive(true)
                 .build();
         userRepo.save(u);
-        System.err.println(u);
         return emplRepo.save(employee);
     }
 }

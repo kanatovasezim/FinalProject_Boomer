@@ -69,7 +69,7 @@
 <div class="page-wrapper">
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
-            <a href="#">
+            <a th:href="@{/user/profile}">
                 <img th:src="@{/img/logo.png}" height="50" width="50" alt="Boomer"/> Boomer
             </a>
         </div>
@@ -94,28 +94,28 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/user/profile">
-                            <i class="fas fa-chart-bar"></i>All Courses</a>
+                        <a href="/user/allCourses">
+                            All Courses</a>
                     </li>
                     <li>
                         <a href="/course/taking">
-                            <i class="fas fa-table"></i>Taking Courses</a>
+                            Taking Courses</a>
                     </li>
                     <li>
                         <a href="/course/requested">
-                            <i class="far fa-check-square"></i>Requested Courses</a>
+                            Requested Courses</a>
                     </li>
                     <li>
                         <a href="/course/requesting">
-                            <i class="fas fa-calendar-alt"></i>Requesting Courses</a>
+                            Requesting Courses</a>
                     </li>
                     <li>
                         <a href="/course/offering">
-                            <i class="fas fa-map-marker-alt"></i>Offering Courses</a>
+                            Offering Courses</a>
                     </li>
                     <li>
                         <a href="/course/completed">
-                            <i class="fas fa-map-marker-alt"></i>Completed Courses</a>
+                            Completed Courses</a>
                     </li>
                 </ul>
             </nav>

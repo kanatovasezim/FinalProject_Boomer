@@ -57,10 +57,15 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String userIndex(Model model, Authentication authentication) {
+    public String showNotificationPage(Model model, Authentication authentication) {
+        model.addAttribute("user", userService.findByLogin(authentication.getName()));
+        return "User/notifications";
+    }
+    @GetMapping("/allCourses")
+    public String showAllCourses(Model model, Authentication authentication) {
         model.addAttribute("allCourses", courseService.getAll());
         model.addAttribute("user", userService.findByLogin(authentication.getName()));
-        return "User/profilePage";
+        return "Course/allCourses";
     }
 
     @GetMapping("/{login}")

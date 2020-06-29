@@ -5,6 +5,7 @@ import it.academy.FinalProject.Enum.ApprovalStatus;
 import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.*;
+import it.academy.FinalProject.Service.EmployeeService;
 import it.academy.FinalProject.Service.RoleService;
 import it.academy.FinalProject.Service.UserService;
 import lombok.AccessLevel;
@@ -18,9 +19,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +47,9 @@ public class UserServiceImpl implements UserService {
     CourseUserStatusRepo courseUserStatusRepo;
     @Autowired
     EmplRepo emplRepo;
+    @Autowired
+    EmployeeService employeeService;
+
 
     @Override
     public List<User> getAll() {
@@ -244,5 +251,53 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer getMaleUserCount() {
         return userRepo.findByGender("MALE");
+    }
+
+    @Override
+    public List<String> getDayOfWeek() {
+        String[] dayOfWeekList = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
+        List<String> arrayList = new ArrayList<>(Arrays.asList(dayOfWeekList));
+        LinkedList<String> dowList = new LinkedList<>();
+        LocalDate d = LocalDate.now();
+        String dow = String.valueOf(d.getDayOfWeek());
+        int x = arrayList.indexOf(dow);
+        for (int i = 1; i <= 7; i++) {
+            if (x < 0) {
+                x = 6;
+            }
+            dowList.addFirst(arrayList.get(x));
+            x--;
+        }
+        return dowList;
+    }
+
+    @Override
+    public List<Integer> getUserCountByDOW() {
+        Date toDate = new Date();
+        LinkedList<Integer> listOfCount = new LinkedList<>();
+        for (int i = 1; i <= 7; i++) {
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -i);
+            Date fromDate = cal.getTime();
+            Integer size = userRepo.findAllByCreatedDateLessThanEqualAndCreatedDateGreaterThanEqual(toDate, fromDate).size();
+            if (size > 0) {
+                size = size- employeeService.getAll().size() - 1;
+                System.err.println("entered");
+            }
+            listOfCount.addFirst(size);
+            System.err.println(listOfCount);
+            toDate = fromDate;
+        }
+        return listOfCount;
+    }
+
+    @Override
+    public Integer getUserTotalCountByWeek() {
+        List<Integer> integerList = getUserCountByDOW();
+        int sum = 0;
+        for (Integer i : integerList) {
+            sum += i;
+        }
+        return sum;
     }
 }

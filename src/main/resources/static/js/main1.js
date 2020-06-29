@@ -11,11 +11,11 @@
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: [dow[0], dow[1], dow[2], dow[3], dow[4], dow[5], dow[6]],
           type: 'line',
           datasets: [{
-            data: [78, 81, 80, 45, 34, 12, 40],
-            label: 'Dataset',
+            data: [userCount[0], userCount[1], userCount[2], userCount[3],userCount[4], userCount[5], userCount[6]],
+            label: 'Count',
             backgroundColor: 'rgba(255,255,255,.1)',
             borderColor: 'rgba(255,255,255,.55)',
           },]
@@ -77,10 +77,10 @@
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: [dow[0], dow[1], dow[2], dow[3], dow[4], dow[5], dow[6]],
           type: 'line',
           datasets: [{
-            data: [1, 18, 9, 17, 34, 22],
+            data: [4, userCount[1], userCount[2], userCount[3],userCount[4], userCount[5], userCount[6]],
             label: 'Dataset',
             backgroundColor: 'transparent',
             borderColor: 'rgba(255,255,255,.55)',
@@ -218,11 +218,11 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          labels: [month[0],month[1],month[2],month[3],month[4],month[5],month[6],month[7],month[8],month[9],month[10],month[11],],
           datasets: [
             {
-              label: "My First dataset",
-              data: [78, 81, 80, 65, 58, 75, 60, 75, 65, 60, 60, 75],
+              label: "Donation dataset",
+              data: [donCount[0],donCount[1],donCount[2],donCount[3],donCount[4],donCount[5],donCount[6],donCount[7],donCount[8],donCount[9],donCount[10],donCount[11]],
               borderColor: "transparent",
               borderWidth: "0",
               backgroundColor: "rgba(255,255,255,.3)"
@@ -249,8 +249,8 @@
     }
 
     // Recent Report
-    const brandProduct = 'rgba(0,181,233,0.8)'
-    const brandService = 'rgba(0,173,95,0.8)'
+    // const brandProduct = 'rgba(0,181,233,0.8)'
+    // const brandService = 'rgba(0,173,95,0.8)'
 
     var elements = 10
     var data1 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 115]
@@ -395,10 +395,10 @@
   try {
 
     // Recent Report 2
-    const bd_brandProduct2 = 'rgba(0,181,233,0.9)'
-    const bd_brandService2 = 'rgba(0,173,95,0.9)'
-    const brandProduct2 = 'rgba(0,181,233,0.2)'
-    const brandService2 = 'rgba(0,173,95,0.2)'
+    // const bd_brandProduct2 = 'rgba(0,181,233,0.9)'
+    // const bd_brandService2 = 'rgba(0,173,95,0.9)'
+    // const brandProduct2 = 'rgba(0,181,233,0.2)'
+    // const brandService2 = 'rgba(0,173,95,0.2)'
 
     var data3 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 115]
     var data4 = [102, 70, 80, 100, 56, 53, 80, 75, 65, 90]
@@ -489,10 +489,10 @@
   try {
 
     // Recent Report 3
-    const bd_brandProduct3 = 'rgba(0,181,233,0.9)';
-    const bd_brandService3 = 'rgba(0,173,95,0.9)';
-    const brandProduct3 = 'transparent';
-    const brandService3 = 'transparent';
+    // const bd_brandProduct3 = 'rgba(0,181,233,0.9)';
+    // const bd_brandService3 = 'rgba(0,173,95,0.9)';
+    // const brandProduct3 = 'transparent';
+    // const brandService3 = 'transparent';
 
     var data5 = [52, 60, 55, 50, 65, 80, 57, 115];
     var data6 = [102, 70, 80, 100, 56, 53, 80, 90];
@@ -1478,12 +1478,12 @@
   try {
     var jscr1 = $('.js-scrollbar1');
     if(jscr1[0]) {
-      const ps1 = new PerfectScrollbar('.js-scrollbar1');      
+      // const ps1 = new PerfectScrollbar('.js-scrollbar1');
     }
 
     var jscr2 = $('.js-scrollbar2');
     if (jscr2[0]) {
-      const ps2 = new PerfectScrollbar('.js-scrollbar2');
+      // const ps2 = new PerfectScrollbar('.js-scrollbar2');
 
     }
 

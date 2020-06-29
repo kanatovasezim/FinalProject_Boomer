@@ -103,6 +103,10 @@
                             <i class="fas fa-table"></i>Users</a>
                     </li>
                     <li>
+                        <a href="/donation/all">
+                            <i class="fas fa-table"></i>Donations</a>
+                    </li>
+                    <li>
                         <a href="/mail/employee">
                             <i class="far fa-check-square"></i>Mail employee</a>
                     </li>
@@ -110,6 +114,7 @@
                         <a href="/mail/user">
                             <i class="far fa-check-square"></i>Mail user</a>
                     </li>
+
                 </ul>
             </nav>
         </div>
@@ -136,28 +141,28 @@
                                         </div>
                                         <div class="text">
                                             <h2 th:text="${userCount}"></h2>
-                                            <div th:switch="${userCount}">
-                                                <span th:case="0">no user online</span>
-                                                <span th:case="1">user online</span>
-                                                <span th:case="*">users online</span>
-                                            </div>
+                                        </div><br>
+                                        <div class="text" th:switch="${userCount}">
+                                            <span th:case="0">no online user</span>
+                                            <span th:case="1">user online</span>
+                                            <span th:case="*">users online</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="overview-item overview-item--c1">
-                            <div class="overview__inner">
-                                <div class="overview-box clearfix">
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-account-o"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h2 th:text="${employeeCount}"></h2>
-                                        <div th:switch="${employeeCount}">
-                                            <span th:case="0">no empl online</span>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c1">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-account-o"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2 th:text="${employeeCount}"></h2>
+                                        </div>
+                                        <div class="text" th:switch="${employeeCount}">
+                                            <span th:case="0">no online employee</span>
                                             <span th:case="1">employee online</span>
                                             <span th:case="*">employees online</span>
                                         </div>
@@ -165,29 +170,107 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="au-card chart-percent-card">
-                            <div class="au-card-inner">
-                                <h3 class="title-2 tm-b-5">Gender distribution</h3>
-                                <div class="row no-gutters">
-                                    <div class="col-xl-6">
-                                        <div class="chart-note-wrap">
-                                            <div class="chart-note mr-0 d-block">
-                                                <span class="dot dot--blue"></span>
-                                                <span>Male</span>
-                                                <span th:text="${M}"></span>
-                                            </div>
-                                            <div class="chart-note mr-0 d-block">
-                                                <span class="dot dot--red"></span>
-                                                <span>Female</span>
-                                                <span th:text="${F}"></span>
-                                            </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c1">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-account-o"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2 th:text="${totalUserCount}"></h2>
+                                        </div>
+                                        <div class="text">
+                                            <span>total users count</span>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6">
-                                        <div class="percent-chart">
-                                            <canvas id="percent-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c1">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-account-o"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2 th:text="${totalEmployeeCount}"></h2>
+                                        </div>
+                                        <div class="text">
+                                        <span>total employees count</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c2">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-chart"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2 th:text="${totalUserCountWeek}"></h2>
+                                        </div>
+                                        <div class="text" th:switch="${totalUserCountWeek}">
+                                            <span th:case="0">no registered user this week</span>
+                                            <span th:case="1">registered user this week</span>
+                                            <span th:case="*">registered users this week</span>
+                                        </div>
+                                    </div>
+                                    <div class="overview-chart">
+                                        <canvas id="widgetChart1"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c4">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-money"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2 th:text="${totalDonationCount}"></h2>
+                                        </div>
+                                        <div class="text" th:switch="${totalDonationCount}">
+                                            <span th:case="0">no donation in total</span>
+                                            <span th:case="1">donation in total</span>
+                                            <span th:case="*">donations in total</span>
+                                        </div>
+                                    </div>
+                                    <div class="overview-chart">
+                                        <canvas id="widgetChart4"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="au-card chart-percent-card">
+                                <div class="au-card-inner">
+                                    <h3 class="title-2 tm-b-5">Gender distribution</h3>
+                                    <div class="row no-gutters">
+                                        <div class="col-xl-6">
+                                            <div class="chart-note-wrap">
+                                                <div class="chart-note mr-0 d-block">
+                                                    <span class="dot dot--blue"></span>
+                                                    <span>Male</span>
+                                                    <span th:text="${M}"></span>
+                                                </div>
+                                                <div class="chart-note mr-0 d-block">
+                                                    <span class="dot dot--red"></span>
+                                                    <span>Female</span>
+                                                    <span th:text="${F}"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="percent-chart">
+                                                <canvas id="percent-chart"></canvas>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -195,57 +278,33 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="row">-->
-<!--                    <div class="col-lg-9">-->
-<!--                        <h2 class="title-1 m-b-25">Logger</h2>-->
-<!--                        <div class="table-responsive table&#45;&#45;no-card m-b-40">-->
-<!--                            <table class="table table-borderless table-striped table-earning">-->
-<!--                                <thead>-->
-<!--                                <tr>-->
-<!--                                    <th>Date</th>-->
-<!--                                    <th>User</th>-->
-<!--                                    <th>Action</th>-->
-<!--                                </tr>-->
-<!--                                </thead>-->
-<!--                                <tbody>-->
-<!--                                <tr>-->
-<!--                                    <td>2018-09-29 05:57</td>-->
-<!--                                    <td>Sezim</td>-->
-<!--                                    <td>enrolled to course - Guitar</td>-->
-<!--                                </tr>-->
-<!--                                </tbody>-->
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
-</div>
-<!-- END MAIN CONTENT-->
-<footer class="container py-5">
-    <div class="row">
-        <div class="col-12 col-md">
+    <!-- END MAIN CONTENT-->
+    <footer class="container py-5">
+        <div class="row">
+            <div class="col-12 col-md">
+            </div>
+            <div class="col-6 col-md">
+                <h5>Opportunities</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">All</a></li>
+                    <li><a class="text-muted" href="#">Free courses</a></li>
+                    <li><a class="text-muted" href="#">Internships</a></li>
+                    <li><a class="text-muted" href="#">Courses</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Team</a></li>
+                    <li><a class="text-muted" href="#">Services</a></li>
+                    <li><a class="text-muted" href="#">Terms</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="col-6 col-md">
-            <h5>Opportunities</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">All</a></li>
-                <li><a class="text-muted" href="#">Free courses</a></li>
-                <li><a class="text-muted" href="#">Internships</a></li>
-                <li><a class="text-muted" href="#">Courses</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md">
-            <h5>About</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Team</a></li>
-                <li><a class="text-muted" href="#">Services</a></li>
-                <li><a class="text-muted" href="#">Terms</a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
+    </footer>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -285,6 +344,14 @@
 <script>
     var f = [[${F}]];
     var m = [[${M}]];
+</script>
+<script th:inline="javascript">
+    var dow = [[${dayOfWeek}]];
+    var userCount = [[${userCountDOW}]];
+</script>
+<script th:inline="javascript">
+    var month = [[${monthsList}]];
+    var donCount = [[${donationCount}]];
 </script>
 <!-- Main JS-->
 <script type="text/javascript" th:src="@{/js/main1.js}"></script>

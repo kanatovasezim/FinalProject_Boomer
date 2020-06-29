@@ -9,4 +9,7 @@ public interface DonationService {
     Donation getById(Long id);
     Donation save(Donation donation);
     void delete(Long id);
+    List<Integer> getDonationCountByMonth();
+    List<String> getAllMonth();
+    Integer getDonationTotalCount();
 }

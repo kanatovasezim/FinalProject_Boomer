@@ -1,16 +1,14 @@
 package it.academy.FinalProject.Entity;
 import com.sun.istack.NotNull;
-import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Enum.Gender;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -54,9 +52,9 @@ public class User {
     @Column(name = "is_Active")
     Boolean isActive;
 
-    @Column(name = "created_Date", updatable = false, nullable = false)
+    @Column(name = "created_Date", updatable = false)
     @CreationTimestamp
-    LocalDateTime createdDate;
+    Date createdDate;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)

@@ -10,6 +10,7 @@ import it.academy.FinalProject.Model.RegisterUser;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
@@ -33,5 +34,7 @@ public interface UserService extends UserDetailsService {
     Integer getFemaleUserCount();
     Integer getMaleUserCount();
     List<User> findAllByRole(String role);
-
+    List<String> getDayOfWeek();
+    List<Integer> getUserCountByDOW();
+    Integer getUserTotalCountByWeek();
 }

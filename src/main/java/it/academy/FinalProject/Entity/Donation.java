@@ -3,8 +3,10 @@ package it.academy.FinalProject.Entity;
 import it.academy.FinalProject.Enum.DonationStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Builder
@@ -41,4 +43,8 @@ public class Donation {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     DonationStatus donationStatus;
+
+    @Column(name = "created_Date", updatable = false)
+    @CreationTimestamp
+    Date createdDate;
 }

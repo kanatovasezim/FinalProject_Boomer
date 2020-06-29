@@ -126,11 +126,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="overview-wrap">
-                                <h2 class="title-1">Employee</h2>
-                                <a th:href="@{/employee/registerByAdmin}">
-                                <button class="au-btn au-btn-icon au-btn--blue">
-                                    <i class="zmdi zmdi-plus"></i>Add employee
-                                </button></a>
+                                <h2 class="title-1">Donations</h2>
                             </div>
                         </div>
                     </div>
@@ -141,24 +137,24 @@
                                     <thead class="thead-dark">
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Login</th>
                                     <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Created Date</th>
-                                    <th>Actions</th>
+                                    <th>Phone Number</th>
+                                    <th>Amount(soms)</th>
+                                    <th>Anonymity</th>
+                                    <th>Comment</th>
+                                    <th>Status</th>
                                     </thead>
 
                                     <tbody>
-                                    <tr th:each="e : ${allEmployee}">
-                                        <td th:text="${e.id}"></td>
-                                        <td th:text="${e.name}"></td>
-                                        <td th:text="${e.login}"></td>
-                                        <td th:text="${e.email}"></td>
-                                        <td th:text="${e.role.normalRoleName}"></td>
-                                        <td th:text="${e.createdDate}"></td>
-                                        <td><a th:href="@{'/employee/edit/' + ${e.login}}"><i class="fa fa-edit"></i></a>
-                                            <a th:href="@{'/employee/delete/' + ${e.login}}"> <i class="fa fa-trash"></i> </a>
-                                        </td>
+                                    <tr th:each="d : ${allDonations}">
+                                        <td th:text="${d.id}"></td>
+                                        <td th:text="${d.name}"></td>
+                                        <td th:text="${d.email}"></td>
+                                        <td th:text="${d.phoneNumber}"></td>
+                                        <td th:text="${d.amount}"></td>
+                                        <td th:text="${d.anonymity}"></td>
+                                        <td th:text="${d.comment}"></td>
+                                        <td th:text="${d.status}"></td>
                                     </tr>
 
                                     </tbody>

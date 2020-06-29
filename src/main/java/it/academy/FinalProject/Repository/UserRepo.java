@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -19,4 +20,5 @@ public interface UserRepo extends JpaRepository<User, Long> {
     Integer findByGender(@Param("gender") String gender);
     @Query( value = "select * from s_user u where u.role_id = :role", nativeQuery=true)
     List<User> findAllByRole(@Param("role") Long roleId);
+    List<User> findAllByCreatedDateLessThanEqualAndCreatedDateGreaterThanEqual( Date toDate, Date fromDate);
 }

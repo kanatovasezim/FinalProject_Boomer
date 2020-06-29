@@ -7,10 +7,14 @@ import it.academy.FinalProject.Enum.Gender;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -41,6 +45,6 @@ public class RegisterUser {
     Gender gender;
     List<Course> courseList;
     @CreationTimestamp
-    LocalDateTime createdDate;
+    Date createdDate;
     List<Course> requested;
 }

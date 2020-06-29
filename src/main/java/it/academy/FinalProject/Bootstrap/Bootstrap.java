@@ -15,6 +15,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
+import java.util.Date;
+
 
 @Component
 public class Bootstrap implements CommandLineRunner {
@@ -70,6 +73,7 @@ public class Bootstrap implements CommandLineRunner {
                 .email("admin@gmail.com")
                 .build();
         userRepo.save(adm);
+
 
         User u = User.builder()
                 .login("Sezim")

@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="15">
     <link href="img/logo.png" rel="icon">
     <link href="img/logo.png" rel="apple-touch-icon">
     <title>Boomer</title>
@@ -78,95 +77,116 @@
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
                     <li class="active has-sub">
-                        <h5 class="js-arrow"  th:text="${user.name}" href="#">
+                        <h5 class="js-arrow" th:text="${admin.name}" href="#">
                             <i class="fa fa-user-circle" aria-hidden="true"></i>
                         </h5>
                         <ul class="list-unstyled navbar__sub-list js-sub-list">
                             <li>
-                                <a href="#" th:text="${user.email}"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
-                                <a href="#" th:text="${user.balance}"><i class="fa fa-gift" aria-hidden="true"></i></a>
+                                <a href="#" th:text="${admin.email}"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i>Update profile</a>
                             </li>
                             <li>
-                                <a href="#" th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</a>
+                                <a href="#" th:href="@{/logout}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log
+                                    out</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/user/profile">
-                            <i class="fas fa-chart-bar"></i>All Courses</a>
+                        <a href="/employee/all">
+                            <i class="fas fa-table"></i>Employees</a>
                     </li>
                     <li>
-                        <a href="/course/taking">
-                            <i class="fas fa-table"></i>Taking Courses</a>
+                        <a href="/user/all">
+                            <i class="fas fa-table"></i>Users</a>
                     </li>
                     <li>
-                        <a href="/course/requested">
-                            <i class="far fa-check-square"></i>Requested Courses</a>
+                        <a href="/mail/employee">
+                            <i class="far fa-check-square"></i>Mail employee</a>
                     </li>
                     <li>
-                        <a href="/course/requesting">
-                            <i class="fas fa-calendar-alt"></i>Requesting Courses</a>
-                    </li>
-                    <li>
-                        <a href="/course/offering">
-                            <i class="fas fa-map-marker-alt"></i>Offering Courses</a>
-                    </li>
-                    <li>
-                        <a href="/course/completed">
-                            <i class="fas fa-map-marker-alt"></i>Completed Courses</a>
+                        <a href="/mail/user">
+                            <i class="far fa-check-square"></i>Mail user</a>
                     </li>
                 </ul>
             </nav>
         </div>
     </aside>
     <div class="page-container">
-        <table class="table table-striped table-hover table-bordered">
-            <thead class="thead-dark" th:if="${offeringCourseUser}">
-            <th>Course</th>
-            <th>User</th>
-            <th>Action</th>
-            </thead>
-            <tbody>
-            <tr th:each="u: ${offeringCourseUser}">
-                <td th:text="${u.course.name}"></td>
-                <td th:text="${u.users.name}"></td>
-                <td>
-                    <form th:action="@{ '/approve/ownerApproveCourse/' + ${u.course.id} + '/' +${u.users.login}}"
-                          th:method="post"
-                          onsubmit="return validateForm()">
-                        <button type="submit" name="action" value="save">Approve</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <footer class="container py-5">
-            <div class="row">
-                <div class="col-12 col-md">
-                </div>
-                <div class="col-6 col-md">
-                    <h5>Opportunities</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">All</a></li>
-                        <li><a class="text-muted" href="#">Free courses</a></li>
-                        <li><a class="text-muted" href="#">Internships</a></li>
-                        <li><a class="text-muted" href="#">Courses</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>About</h5>
-                    <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Team</a></li>
-                        <li><a class="text-muted" href="#">Services</a></li>
-                        <li><a class="text-muted" href="#">Terms</a></li>
-                    </ul>
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="overview-wrap">
+                                <h2 class="title-1">Send Mail to User</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <form  th:action="@{/mail/sendMailUser}" th:object="${mail}" method="post">
+                            <div class="form-group"
+                                 th:classappend="${#fields.hasErrors('to')}? 'has-error':''">
+                                <label for="to" class="control-label">Recipient</label>
+                                <select id="to" class="form-control" th:field="*{to}" multiple="multiple">
+                                    <option th:each="e : ${userList}"
+                                            th:value="${e.email}" th:text="${e.name}"></option></select>
+                                <p class="error-message"
+                                   th:each="error: ${#fields.errors('to')}"
+                                   th:text="${error}">Validation error</p>
+                            </div>
+                            <div class="form-group"
+                                 th:classappend="${#fields.hasErrors('subject')}? 'has-error':''">
+                                <label for="subject" class="control-label">Subject</label> <input
+                                    id="subject" class="form-control" th:field="*{subject}"/>
+                                <p class="error-message"
+                                   th:each="error : ${#fields.errors('subject')}"
+                                   th:text="${error}">Validation error</p>
+                            </div>
+                            <div class="form-group"
+                                 th:classappend="${#fields.hasErrors('message')}? 'has-error':''">
+                                <label for="message" class="control-label">Message</label> <textarea
+                                    id="message" class="form-control" th:field="*{message}"/>
+                                <p class="error-message"
+                                   th:each="error : ${#fields.errors('message')}"
+                                   th:text="${error}">Validation error</p>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">Send</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
-        </footer>
+        </div>
     </div>
+    <!-- END MAIN CONTENT-->
+    <footer class="container py-5">
+        <div class="row">
+            <div class="col-12 col-md">
+            </div>
+            <div class="col-6 col-md">
+                <h5>Opportunities</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">All</a></li>
+                    <li><a class="text-muted" href="#">Free courses</a></li>
+                    <li><a class="text-muted" href="#">Internships</a></li>
+                    <li><a class="text-muted" href="#">Courses</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Team</a></li>
+                    <li><a class="text-muted" href="#">Services</a></li>
+                    <li><a class="text-muted" href="#">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -200,17 +220,10 @@
 <script type="text/javascript" th:src="@{/vendor/circle-progress/circle-progress.min.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/perfect-scrollbar/perfect-scrollbar.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/chartjs/Chart.bundle.min.js}"></script>
-<script type="text/javascript" th:src="@{/vendor/select2/select2.min.js}">
-</script>
-<script>
-    function validateForm() {
-        alert("Approved successfully");
-        return true;
-    }
-</script>
-<!-- Main JS-->
+<script type="text/javascript" th:src="@{/vendor/select2/select2.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main1.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+</div>
 </body>
 </html>

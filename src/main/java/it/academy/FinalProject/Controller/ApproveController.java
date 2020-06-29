@@ -16,12 +16,12 @@ public class ApproveController {
     @PostMapping("/ownerApproveCourse/{id}/{client}")
     public String approveCourseByOwner(@PathVariable("id") Long id, @PathVariable("client") String client) {
         approvalService.approveCourseByOwner( id, client);
-        return "/user/profilePage";
+        return "redirect:/user/profile";
     }
 
     @PostMapping("/{login}/clientApproveCourse/{id}")
     public String approveCourseByClient(@PathVariable("login") String client, @PathVariable("id") Long id) {
         approvalService.approveCourseByClient(client, id);
-        return "/user/profilePage";
+        return "redirect:/user/profile";
     }
 }

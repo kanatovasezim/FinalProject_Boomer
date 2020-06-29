@@ -31,6 +31,11 @@ public class EmployeeController {
         return new RegisterEmpl();
     }
 
+    @GetMapping("/registerByAdmin")
+    public String showRegistration() {
+        return "Employee/registerByAdmin";
+    }
+
     @GetMapping
     public String showRegistrationForm(Model model) {
         return "Registration/registerEmpl";
@@ -57,6 +62,19 @@ public class EmployeeController {
 
     @PostMapping("/register")
     public String registerEmployee(@ModelAttribute("employee") @Valid RegisterEmpl e, BindingResult result) {
+        e.setPassword(passwordEncoder.encode(e.getPassword()));
+        if (userRepo.findByLogin(e.getLogin()) != null) {
+            result.rejectValue("login", null, "Login already exists");
+        }
+        if (result.hasErrors()) {
+            return "Registration/registerEmpl";
+        }
+        employeeService.saveModelEmpl(e);
+        return "redirect:/employee/all";
+    }
+
+    @PostMapping("/registerByAdmin")
+    public String registerEmployeeByAdmin(@ModelAttribute("employee") @Valid RegisterEmpl e, BindingResult result) {
         e.setPassword(passwordEncoder.encode(e.getPassword()));
         if (userRepo.findByLogin(e.getLogin()) != null) {
             result.rejectValue("login", null, "Login already exists");

@@ -22,6 +22,7 @@ public class ApprovalServiceImpl implements ApprovalService {
         a.setOwnerApproval(true);
         approvalRepo.save(a);
         if (userService.checkIfComplete(courseId, userService.findByLogin(client).getId()) ){
+            System.out.println("Owner: " + userService.checkIfComplete(courseId, userService.findByLogin(client).getId()));
             userService.finishCourse(courseService.getById(courseId), client);
         }
     }
@@ -33,6 +34,7 @@ public class ApprovalServiceImpl implements ApprovalService {
         a.setClientApproval(true);
         approvalRepo.save(a);
         if (userService.checkIfComplete(courseId, userService.findByLogin(client).getId()) ){
+            System.out.println("Client: " + userService.checkIfComplete(courseId, userService.findByLogin(client).getId()));
             userService.finishCourse(courseService.getById(courseId), client);
         }
     }

@@ -32,7 +32,7 @@ public class CourseController {
     }
 
     @GetMapping
-    public String showRegistrationForm(Model model) {
+    public String showRegistrationForm() {
         return "Registration/registerCourse";
     }
     @PostMapping("/register")
@@ -42,7 +42,7 @@ public class CourseController {
         }
         u.setAuthor(userService.findByLogin(authentication.getName()));
         courseService.saveModel(u);
-        return "redirect:/user/profilePage";
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/all")

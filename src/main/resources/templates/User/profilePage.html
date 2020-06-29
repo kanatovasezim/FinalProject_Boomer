@@ -142,6 +142,7 @@
             <th>Author</th>
             <th>Category</th>
             <th>Language</th>
+            <th>Action</th>
             </thead>
             <tbody>
             <tr th:each="course : ${allCourses}">
@@ -153,6 +154,12 @@
                 <td th:text="${course.author.name}"></td>
                 <td th:text="${course.category}"></td>
                 <td th:text="${course.languageList}"></td>
+                <td>
+                    <form th:action="@{'/user/' + ${user.login} + '/sendRequest/' + ${course.id} }"
+                          th:method="post" onsubmit="return validateForm()">
+                        <button type="submit" name="action" value="save">Send Request</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>

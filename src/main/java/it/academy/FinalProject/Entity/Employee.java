@@ -31,9 +31,7 @@ public class Employee {
     @Column(name = "password", nullable = false)
     @NotNull
     String password;
-    @Column(name = "gender", nullable = false)
-    @Enumerated(EnumType.STRING)
-    Gender gender;
+    
 
     @Column(name = "name", nullable = false)
     String name;

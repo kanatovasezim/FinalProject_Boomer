@@ -95,7 +95,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#allCourses">
+                        <a href="/user/profile">
                             <i class="fas fa-chart-bar"></i>All Courses</a>
                     </li>
                     <li>
@@ -135,7 +135,7 @@
                 <td th:text="${u.course.name}"></td>
                 <td th:text="${u.users.name}"></td>
                 <td>
-                    <form th:action="@{'/user/' + ${login} + '/approveRequest/' + ${u.course.id} + '/' + ${u.users.login}}"
+                    <form th:action="@{'/user/' + ${user.login} + '/approveRequest/' + ${u.course.id} + '/' + ${u.users.login}}"
                           th:method="post" onsubmit="return validateForm()">
                         <button type="submit" name="action" value="save">Approve Request</button>
                     </form>

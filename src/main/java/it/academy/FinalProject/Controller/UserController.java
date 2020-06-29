@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping
-    public String showRegistrationForm(Model model) {
+    public String showRegistrationForm() {
         return "Registration/register";
     }
 
@@ -51,19 +51,17 @@ public class UserController {
 
     @GetMapping("/all")
     public String getAllUsers(Model model, Authentication authentication) {
-        model.addAttribute("allUsers", userService.findAllByRole("ROLE_USER"));
+        model.addAttribute("allUsers", userService.findAllByRole("User"));
         model.addAttribute("admin", userService.findByLogin(authentication.getName()));
         return "User/user";
     }
 
-    @GetMapping("/profilePage")
+    @GetMapping("/profile")
     public String userIndex(Model model, Authentication authentication) {
         model.addAttribute("allCourses", courseService.getAll());
         model.addAttribute("user", userService.findByLogin(authentication.getName()));
         return "User/profilePage";
     }
-
-
 
     @GetMapping("/{login}")
     public User getByLogin(@PathVariable("login") String login) {
@@ -76,22 +74,22 @@ public class UserController {
         return "redirect:/user/all";
     }
 
-    @PostMapping("/update/{login}")
-    public String updateUser(@PathVariable("login") String login, @RequestBody User u){
-        if (userService.getAll().contains(userService.findByLogin(login))){
-            User user = userService.findByLogin(login);
-            String encodedPassword  = passwordEncoder.encode(u.getPassword());
-            user.setId(u.getId());
-            user.setPassword(encodedPassword);
-            user.setLogin(u.getLogin());
-            user.setIsActive(u.getIsActive());
-            user.setCreatedDate(u.getCreatedDate());
-            user.setBalance(u.getBalance());
-            user.setEmail(u.getEmail());
-            userService.save(user);
-        }
-        return "redirect:/User/userList";
-    }
+//    @PostMapping("/update/{login}")
+//    public String updateUser(@PathVariable("login") String login, @RequestBody User u){
+//        if (userService.getAll().contains(userService.findByLogin(login))){
+//            User user = userService.findByLogin(login);
+//            String encodedPassword  = passwordEncoder.encode(u.getPassword());
+//            user.setId(u.getId());
+//            user.setPassword(encodedPassword);
+//            user.setLogin(u.getLogin());
+//            user.setIsActive(u.getIsActive());
+//            user.setCreatedDate(u.getCreatedDate());
+//            user.setBalance(u.getBalance());
+//            user.setEmail(u.getEmail());
+//            userService.save(user);
+//        }
+//        return "redirect:/User/userList";
+//    }
 
     @PostMapping("/{login}/offerCourse/{id}")
     public void offerCourse(@PathVariable("id") Long courseId, @PathVariable("login") String login) {
@@ -101,25 +99,25 @@ public class UserController {
     @PostMapping("/{login}/approveRequest/{id}/{client}")
     public String approveRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login, @PathVariable("client") String client) {
         userService.approveRequest(courseService.getById(courseId), login, client);
-        return "redirect:/user/profilePage";
+        return "redirect:/user/profile";
     }
 
     @PostMapping("/{login}/sendRequest/{id}")
     public String sendRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login) {
         userService.sendRequest(courseService.getById(courseId), login);
-        return "redirect:/user/profilePage";
+        return "redirect:/user/profile";
     }
 
     @PostMapping("/{login}/removeRequest/{id}")
     public String removeRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login) {
         userService.removeRequest(courseService.getById(courseId), login);
-        return "redirect:/user/profilePage";
+        return "redirect:/user/profile";
     }
 
     @PostMapping("/{login}/finishCourse/{id}")
     public String finishCourse(@PathVariable("id") Long courseId, @PathVariable("login") String login) {
         userService.finishCourse(courseService.getById(courseId), login);
-        return "redirect:/user/profilePage";
+        return "redirect:/user/profile";
     }
 
 

@@ -21,6 +21,7 @@ public class MainController {
         return "index";
     }
 
+
     @GetMapping("/admin")
     public String admin(Model model,  Authentication authentication) {
         model.addAttribute("employee", employeeService.getAll());

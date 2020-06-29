@@ -84,7 +84,6 @@
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Courses</a></li>
                 <li><a href="#team">Team</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -156,7 +155,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <h3 class="subscribe-title">Reach us for donation</h3>
-                    <p class="subscribe-text">Through your donation you are helping a child to make his dream come
+                    <p class="subscribe-text">By donating you are helping a child to make his dream come
                         true</p>
                 </div>
                 <div class="col-md-4 subscribe-btn-container">
@@ -165,81 +164,6 @@
             </div>
         </div>
     </section><!-- End Subscrbe Section -->
-
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio">
-        <div class="container wow fadeInUp">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="section-title">Portfolio</h3>
-                    <div class="section-title-divider"></div>
-                    <p class="section-description">Those are some courses you might be interested in</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12 d-flex justify-content-center">
-                    <ul id="portfolio-flters">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-app">Business</li>
-                        <li data-filter=".filter-card">Music</li>
-                        <li data-filter=".filter-web">Media</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row portfolio-container">
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <img src="img/p1.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Business Research</h4>
-                        <p>Business</p>
-                        <a href="img/p1.jpg" data-gall="portfolioGallery"
-                           class="venobox preview-link" title="App 1"><i class="fa fa-plus"></i></a>
-                        <a href="Imperial/portfolio-details.html" class="details-link" title="More Details"><i
-                                class="fa fa-link fa-flip-horizontal"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <img src="img/p2.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Statistics</h4>
-                        <p>Business</p>
-                        <a href="img/p2.jpg" data-gall="portfolioGallery"
-                           class="venobox preview-link" title="Web 3"><i class="fa fa-plus"></i></a>
-                        <a href="Imperial/portfolio-details.html" class="details-link" title="More Details"><i
-                                class="fa fa-link fa-flip-horizontal"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <img src="img/p3.jpeg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Music</h4>
-                        <p>Music</p>
-                        <a href="img/p3.jpeg" data-gall="portfolioGallery"
-                           class="venobox preview-link" title="App 2"><i class="fa fa-plus"></i></a>
-                        <a href="Imperial/portfolio-details.html" class="details-link" title="More Details"><i
-                                class="fa fa-link fa-flip-horizontal"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <img src="img/p4.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Music</h4>
-                        <p>Music</p>
-                        <a href="img/p4.jpg" data-gall="portfolioGallery"
-                           class="venobox preview-link" title="Card 2"><i class="fa fa-plus"></i></a>
-                        <a href="Imperial/portfolio-details.html" class="details-link" title="More Details"><i
-                                class="fa fa-link fa-flip-horizontal"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><!-- End Portfolio Section -->
 
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials">
@@ -303,6 +227,7 @@
                     <div class="member">
                         <div class="pic"><img src="img/logo.png" height="150" width="150" alt=""></div>
                         <h4 th:text="${user.name}"></h4>
+                        <h5 th:text="${user.role.normalRoleName.toUpperCase()}"></h5>
                         <span th:text="${user.email}"></span>
                         <div class="social">
                             <a href=""><i class="fa fa-twitter"></i></a>
@@ -335,7 +260,7 @@
 
                         <div>
                             <i class="fa fa-envelope"></i>
-                            <p>boomer@gmail.com</p>
+                            <p>boomer.platform@gmail.com</p>
                         </div>
 
                         <div>

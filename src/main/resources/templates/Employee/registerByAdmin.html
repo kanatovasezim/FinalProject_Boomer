@@ -71,7 +71,7 @@
                     <label for="role" class="control-label">Role</label>
                     <select id="role" class="form-control" th:field="*{role}">
                         <option th:each="role : ${T(it.academy.FinalProject.Enum.Role).values()}"
-                                th:value="${role}" th:text="${role}"></option>
+                                th:value="${role}" th:text="${role.normalName}"></option>
                     </select>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('role')}"

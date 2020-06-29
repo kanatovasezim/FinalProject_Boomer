@@ -24,7 +24,12 @@ public class Role {
     it.academy.FinalProject.Enum.Role roleName;
 
     public String getRoleName(){
-        return ""+roleName;
+        return "" + roleName;
     }
+
+    public String getNormalRoleName(){
+        return roleName != null ? roleName.getNormalName() : null;
+    }
+
 
 }

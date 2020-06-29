@@ -1,7 +1,9 @@
 package it.academy.FinalProject.Controller;
+import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.User;
 import it.academy.FinalProject.Model.RegisterUser;
 import it.academy.FinalProject.Repository.UserRepo;
+import it.academy.FinalProject.Service.ApprovalService;
 import it.academy.FinalProject.Service.CourseService;
 import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -22,9 +25,9 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserRepo userRepo;
-    @Autowired
     private CourseService courseService;
+    @Autowired
+    private ApprovalService approvalService;
 
     @ModelAttribute("user")
     public RegisterUser newUser() {
@@ -39,7 +42,7 @@ public class UserController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") @Valid RegisterUser u, BindingResult result) {
         u.setPassword(passwordEncoder.encode(u.getPassword()));
-        if (userRepo.findByLogin(u.getLogin()) != null) {
+        if (userService.findByLogin(u.getLogin()) != null) {
             result.rejectValue("login", null, "Login already exists");
         }
         if (result.hasErrors()) {
@@ -58,7 +61,10 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showNotificationPage(Model model, Authentication authentication) {
+        List<Course> courseList = courseService.findOfferingCourses(authentication.getName());
         model.addAttribute("user", userService.findByLogin(authentication.getName()));
+        model.addAttribute("approval", approvalService.findApprovalsByClient(authentication.getName()));
+        model.addAttribute("notif", courseService.getRequestingUsers(courseList));
         return "User/notifications";
     }
     @GetMapping("/allCourses")

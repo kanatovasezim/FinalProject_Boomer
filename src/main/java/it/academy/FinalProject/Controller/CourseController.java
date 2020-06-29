@@ -22,8 +22,6 @@ public class CourseController {
     @Autowired
     CourseService courseService;
     @Autowired
-    CourseRepo courseRepo;
-    @Autowired
     UserService userService;
 
     @ModelAttribute("course")
@@ -64,7 +62,7 @@ public class CourseController {
     }
     @GetMapping("/requesting")
     public String getRequestingUsers(Model model, Authentication authentication){
-        List<Course> courseList = courseRepo.findOfferingCourses(userService.findByLogin(authentication.getName()).getId());
+        List<Course> courseList = courseService.findOfferingCourses(authentication.getName());
         model.addAttribute("requestingCourseUser", courseService.getRequestingUsers(courseList));
         model.addAttribute("user", userService.findByLogin(authentication.getName()));
         return "Course/requestingCourses";

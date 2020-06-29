@@ -147,6 +147,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void removeRequest(Course course, String login) {
         User user = userRepo.findByLogin(login);
+        user.getRequestedCourses().remove(course);
+        save(user);
         CourseUserStatus c = courseUserStatusRepo.findByCourseAndUser(user.getId(), course.getId());
         c.setCourseStatus(CourseStatus.AVAILABLE);
         courseUserStatusRepo.save(c);

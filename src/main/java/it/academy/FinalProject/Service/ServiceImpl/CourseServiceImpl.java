@@ -51,6 +51,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<Course> findOfferingCourses(String login) {
+        return courseRepo.findOfferingCourses(userRepo.findByLogin(login).getId());
+    }
+
+    @Override
     public List<CourseUsers> getRequestingUsers(List<Course> courses) {
         List<Long> ids = courses.stream().map(Course::getId).collect(Collectors.toList());
         List<CourseUsers> courseUsersList = new ArrayList<>();
@@ -90,6 +95,7 @@ public class CourseServiceImpl implements CourseService {
         List<Course> courseList = new ArrayList<>();
         for (Long l : list) {
             Course c = courseRepo.findById(l).get();
+            System.err.println(c);
             courseList.add(c);
         }
         return courseList;

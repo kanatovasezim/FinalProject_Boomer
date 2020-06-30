@@ -6,5 +6,6 @@ public enum CourseStatus {
     REQUESTED,
     UNAVAILABLE,
     DEACTIVATED,
-    COMPLETED
+    COMPLETED,
+    REJECTED
 }

@@ -105,8 +105,10 @@ public class CourseController {
     public void deleteByName(@PathVariable("name") String name){
         courseService.deleteByName(name);
     }
-    @PostMapping("/delete/{id}")
-    public void deleteById(@PathVariable("id") Long id){
-        courseService.delete(id);
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable("id") Long courseId) {
+        userService.finishCourseByAdmin(courseService.getById(courseId));
+        courseService.delete(courseId);
+        return "/course/owning";
     }
 }

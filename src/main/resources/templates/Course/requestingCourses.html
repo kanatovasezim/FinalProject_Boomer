@@ -143,6 +143,10 @@
                           th:method="post" onsubmit="return validateForm()">
                         <button type="submit" name="action" value="save">Approve Request</button>
                     </form>
+                    <form th:action="@{'/user/' + ${user.login} + '/rejectRequest/' + ${u.course.id} + '/' + ${u.users.login}}"
+                          th:method="post" onsubmit="return validateForm()">
+                        <button type="submit" name="action" value="save">Reject Request</button>
+                    </form>
                 </td>
             </tr>
             </tbody>

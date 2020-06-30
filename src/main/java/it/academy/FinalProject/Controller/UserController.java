@@ -58,9 +58,6 @@ public class UserController {
         model.addAttribute("admin", userService.findByLogin(authentication.getName()));
         return "User/user";
     }
-
-
-
     @GetMapping("/profile")
     public String showNotificationPage(Model model, Authentication authentication) {
         List<Course> courseList = courseService.findOfferingCourses(authentication.getName());
@@ -88,23 +85,6 @@ public class UserController {
         return "redirect:/user/all";
     }
 
-//    @PostMapping("/update/{login}")
-//    public String updateUser(@PathVariable("login") String login, @RequestBody User u){
-//        if (userService.getAll().contains(userService.findByLogin(login))){
-//            User user = userService.findByLogin(login);
-//            String encodedPassword  = passwordEncoder.encode(u.getPassword());
-//            user.setId(u.getId());
-//            user.setPassword(encodedPassword);
-//            user.setLogin(u.getLogin());
-//            user.setIsActive(u.getIsActive());
-//            user.setCreatedDate(u.getCreatedDate());
-//            user.setBalance(u.getBalance());
-//            user.setEmail(u.getEmail());
-//            userService.save(user);
-//        }
-//        return "redirect:/User/userList";
-//    }
-
     @PostMapping("/{login}/offerCourse/{id}")
     public void offerCourse(@PathVariable("id") Long courseId, @PathVariable("login") String login) {
         userService.offerCourse(courseService.getById(courseId));
@@ -113,6 +93,11 @@ public class UserController {
     @PostMapping("/{login}/approveRequest/{id}/{client}")
     public String approveRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login, @PathVariable("client") String client) {
         userService.approveRequest(courseService.getById(courseId), login, client);
+        return "redirect:/user/profile";
+    }
+    @PostMapping("/{login}/rejectRequest/{id}/{client}")
+    public String rejectRequest(@PathVariable("id") Long courseId, @PathVariable("login") String login, @PathVariable("client") String client) {
+        userService.rejectRequest(courseService.getById(courseId), login, client);
         return "redirect:/user/profile";
     }
 

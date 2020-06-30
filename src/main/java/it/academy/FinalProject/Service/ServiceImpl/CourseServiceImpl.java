@@ -1,5 +1,6 @@
 package it.academy.FinalProject.Service.ServiceImpl;
 
+import it.academy.FinalProject.Entity.Approval;
 import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.CourseUserStatus;
 import it.academy.FinalProject.Model.CourseUsers;
@@ -130,6 +131,12 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void delete(Long id) {
+        List<Approval> a = approvalRepo.findAllByCourse(getById(id));
+        for (Approval ap: a ) {
+            ap.getClient().getCourseGet().remove(getById(id));
+            ap.getClient().getRequestedCourses().remove(getById(id));
+            approvalRepo.delete(ap);
+        }
         courseRepo.deleteById(id);
     }
 

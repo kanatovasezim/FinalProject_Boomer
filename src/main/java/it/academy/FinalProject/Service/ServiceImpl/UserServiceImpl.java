@@ -134,6 +134,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void finishCourseByAdmin(Course course) {
+        List<Approval> approvalList = approvalRepo.findAllByCourse(course);
+        for (Approval a : approvalList) {
+            if (a.getClientApproval() && !a.getOwnerApproval()){
+                User u = a.getClient();
+                u.setBalance(u.getBalance() + a.getDepositCost());
+                userRepo.save(u);
+                CourseUserStatus cu = courseUserStatusRepo.findByCourseAndUser(u.getId(), course.getId());
+                cu.setCourseStatus(CourseStatus.DEACTIVATED);
+                courseUserStatusRepo.save(cu);
+            }
+            a.setApprovalStatus(ApprovalStatus.REJECTED);
+            approvalRepo.save(a);
+        }
+    }
+
+    @Override
     public void sendRequest(Course course, String login) {
         User user = userRepo.findByLogin(login);
         if (course.getFreePlaces() != 0 && !user.getRequestedCourses().contains(course)
@@ -187,13 +204,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long findCourses(Long id) {
-        return userRepo.findCourses(id);
+    public void rejectRequest(Course course, String owner, String client) {
+        CourseUserStatus c = courseUserStatusRepo.findByCourseAndUser(userRepo.findByLogin(client).getId(), course.getId());
+        c.setCourseStatus(CourseStatus.REJECTED);
+        courseUserStatusRepo.save(c);
     }
 
     @Override
-    public User findByEmail(String login) {
-        return userRepo.findByEmail(login);
+    public Long findCourses(Long id) {
+        return userRepo.findCourses(id);
     }
 
     @Override
@@ -281,7 +300,7 @@ public class UserServiceImpl implements UserService {
             Date fromDate = cal.getTime();
             Integer size = userRepo.findAllByCreatedDateLessThanEqualAndCreatedDateGreaterThanEqual(toDate, fromDate).size();
             if (size > 0) {
-                size = size- employeeService.getAll().size() - 1;
+                size = size - employeeService.getAll().size() - 1;
                 System.err.println("entered");
             }
             listOfCount.addFirst(size);

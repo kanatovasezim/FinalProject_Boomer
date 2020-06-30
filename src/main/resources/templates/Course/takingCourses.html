@@ -154,7 +154,7 @@
                     <form th:action="@{ '/approve/' +${user.login} + '/clientApproveCourse/' + ${course.id} }"
                           th:method="post"
                           onsubmit="return validateForm()">
-                        <button type="submit" name="action" value="save">Approve</button>
+                        <button type="submit" name="action" value="save">Approve to complete </button>
                     </form>
                 </td>
             </tr>
@@ -226,7 +226,7 @@
 <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script>
     function validateForm() {
-        alert("Request sent successfully");
+        alert("Approval sent");
         return true;
     }
 </script>

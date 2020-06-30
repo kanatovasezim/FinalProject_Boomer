@@ -140,11 +140,11 @@
                 <td th:text="${u.users.name}"></td>
                 <td>
                     <form th:action="@{'/user/' + ${user.login} + '/approveRequest/' + ${u.course.id} + '/' + ${u.users.login}}"
-                          th:method="post" onsubmit="return validateForm()">
+                          th:method="post" onsubmit="return validateApproveForm()">
                         <button type="submit" name="action" value="save">Approve Request</button>
                     </form>
                     <form th:action="@{'/user/' + ${user.login} + '/rejectRequest/' + ${u.course.id} + '/' + ${u.users.login}}"
-                          th:method="post" onsubmit="return validateForm()">
+                          th:method="post" onsubmit="return validateRejectForm()">
                         <button type="submit" name="action" value="save">Reject Request</button>
                     </form>
                 </td>
@@ -215,8 +215,12 @@
 <script type="text/javascript" th:src="@{/js/main1.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script>
-    function validateForm() {
-        alert("Request sent successfully");
+    function validateApproveForm() {
+        alert("Successfully approved");
+        return true;
+    }
+    function validateRejectForm() {
+        alert("Successfully rejected");
         return true;
     }
 </script>

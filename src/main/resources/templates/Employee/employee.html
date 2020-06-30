@@ -157,7 +157,7 @@
                                         <td th:text="${e.role.normalRoleName}"></td>
                                         <td th:text="${e.createdDate}"></td>
                                         <td><a th:href="@{'/employee/edit/' + ${e.login}}"><i class="fa fa-edit"></i></a>
-                                            <a th:href="@{'/employee/delete/' + ${e.login}}"> <i class="fa fa-trash"></i> </a>
+                                            <a onsubmit="return validateDeleteForm()" th:href="@{'/employee/delete/' + ${e.login}}"> <i class="fa fa-trash"></i> </a>
                                         </td>
                                     </tr>
 
@@ -232,6 +232,12 @@
 <script type="text/javascript" th:src="@{/js/main1.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script>
+    function validateDeleteForm() {
+        alert("Employee Deleted Successfully");
+        return true;
+    }
+</script>
 </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 package it.academy.FinalProject.Model;
+
 import it.academy.FinalProject.Entity.User;
 import it.academy.FinalProject.Enum.Category;
 import it.academy.FinalProject.Enum.CourseStatus;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter
@@ -23,6 +25,7 @@ public class RegisterCourse {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @NotEmpty
+    @Size(min = 3)
     String name;
     @NotEmpty
     User author;

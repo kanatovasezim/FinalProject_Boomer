@@ -1,16 +1,14 @@
 package it.academy.FinalProject.Service;
 
 import it.academy.FinalProject.Entity.Course;
-import it.academy.FinalProject.Entity.User;
-import it.academy.FinalProject.Enum.CourseStatus;
 import it.academy.FinalProject.Model.CourseUsers;
 import it.academy.FinalProject.Model.RegisterCourse;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface CourseService {
     List<Course> getAll();
+    List<Course> getAllOther(String name);
     Course getById(Long id);
     Course save(Course Course);
     void delete(Long id);
@@ -23,4 +21,5 @@ public interface CourseService {
     List<CourseUsers> getOfferingCourses(String login);
     List<Course> getCompletedCourses(String login);
     List<Course> findOfferingCourses(String login);
+//    List<Course> findByCategory(RegisterCategory category);
 }

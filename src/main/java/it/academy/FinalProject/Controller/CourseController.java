@@ -1,9 +1,6 @@
 package it.academy.FinalProject.Controller;
-
 import it.academy.FinalProject.Entity.Course;
-import it.academy.FinalProject.Model.CourseUsers;
 import it.academy.FinalProject.Model.RegisterCourse;
-import it.academy.FinalProject.Repository.CourseRepo;
 import it.academy.FinalProject.Service.CourseService;
 import it.academy.FinalProject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +26,24 @@ public class CourseController {
         return new RegisterCourse();
     }
 
+//    @ModelAttribute("category")
+//    public RegisterCategory newCategory() {
+//        return new RegisterCategory();
+//    }
+//
+//    @PostMapping("/search")
+//    public String searchText(@ModelAttribute @Valid RegisterCategory category, Model model, Authentication authentication){
+//        System.out.println(category);
+//        model.addAttribute("allCourses", courseService.findByCategory(category));
+//        model.addAttribute("user", userService.findByLogin(authentication.getName()));
+//        return "Course/selectedCoursesByCategory";
+//    }
+
     @GetMapping
     public String showRegistrationForm() {
         return "Registration/registerCourse";
     }
+
     @PostMapping("/register")
     public String registerCourse(@ModelAttribute("course") @Valid RegisterCourse u, BindingResult result, Authentication authentication) {
         if (result.hasErrors()) {
@@ -44,9 +55,10 @@ public class CourseController {
     }
 
     @GetMapping("/all")
-    public String getAllCourses(Model model){
-        model.addAttribute("allCourses", courseService.getAll());
-        return "Course/courseList";
+    public String getAllCourses(Model model, Authentication authentication){
+        model.addAttribute("allCourses", courseService.getAllOther(authentication.getName()));
+        model.addAttribute("user", userService.findByLogin(authentication.getName()));
+        return "Course/allCourses";
     }
     @GetMapping("/taking")
     public String getTakingCourses(Model model, Authentication authentication){
@@ -79,12 +91,22 @@ public class CourseController {
         model.addAttribute("user", userService.findByLogin(authentication.getName()));
         return "Course/completedCourses";
     }
+    @GetMapping("/owning")
+    public String getOwningCourses(Model model, Authentication authentication){
+        model.addAttribute("owningCourses", courseService.findOfferingCourses(authentication.getName()));
+        model.addAttribute("user", userService.findByLogin(authentication.getName()));
+        return "Course/owningCourses";
+    }
     @GetMapping("/{name}")
     public Course getByName(@PathVariable("name") String name){
         return  courseService.findByName(name);
     }
-    @PostMapping("/{name}")
-    public void delete(@PathVariable("name") String name){
+    @PostMapping("/delete/{name}")
+    public void deleteByName(@PathVariable("name") String name){
         courseService.deleteByName(name);
+    }
+    @PostMapping("/delete/{id}")
+    public void deleteById(@PathVariable("id") Long id){
+        courseService.delete(id);
     }
 }

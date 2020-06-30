@@ -82,8 +82,7 @@
                      th:classappend="${#fields.hasErrors('languageList')}? 'has-error':''">
                     <label for="languageList" class="control-label">Language</label>
                     <select id="languageList" class="form-control" th:field="*{languageList}" multiple="multiple">
-                        <option th:each="language : ${T(it.academy.FinalProject.Enum.Language).values()}"
-                                th:value="${language}" th:text="${language}"></option>
+                        <option th:each="language : ${T(it.academy.FinalProject.Enum.Language).values()}" th:value="${language}" th:text="${language}"></option>
                     </select>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('cost')}"

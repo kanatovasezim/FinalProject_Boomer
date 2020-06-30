@@ -96,8 +96,12 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/user/allCourses">
+                        <a href="/course/all">
                             All Courses</a>
+                    </li>
+                    <li>
+                        <a href="/course/owning">
+                            Owning Courses</a>
                     </li>
                     <li>
                         <a href="/course/taking">
@@ -128,6 +132,15 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
+                        <form class="form-header" th:action="@{/course/search}" th:object="${category}"  method="post">
+                            <select id="category" name="search"   class="au-input au-input--xl" >
+                                <option th:each="category : ${category}"
+                                        th:value="${category}" th:text="${category}"></option>
+                            </select>
+                            <button class="au-btn--submit" type="submit">
+                                <i class="zmdi zmdi-search"></i>
+                            </button>
+                        </form>
                         <div class="header-button">
                             <div class="noti-wrap">
                                 <div class="noti__item js-item-menu">

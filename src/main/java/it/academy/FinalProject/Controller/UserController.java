@@ -1,8 +1,8 @@
 package it.academy.FinalProject.Controller;
 import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.User;
+import it.academy.FinalProject.Enum.Category;
 import it.academy.FinalProject.Model.RegisterUser;
-import it.academy.FinalProject.Repository.UserRepo;
 import it.academy.FinalProject.Service.ApprovalService;
 import it.academy.FinalProject.Service.CourseService;
 import it.academy.FinalProject.Service.UserService;
@@ -59,9 +59,12 @@ public class UserController {
         return "User/user";
     }
 
+
+
     @GetMapping("/profile")
     public String showNotificationPage(Model model, Authentication authentication) {
         List<Course> courseList = courseService.findOfferingCourses(authentication.getName());
+        model.addAttribute("category", Category.values());
         model.addAttribute("user", userService.findByLogin(authentication.getName()));
         model.addAttribute("approval", approvalService.findApprovalsByClient(authentication.getName()));
         model.addAttribute("notif", courseService.getRequestingUsers(courseList));

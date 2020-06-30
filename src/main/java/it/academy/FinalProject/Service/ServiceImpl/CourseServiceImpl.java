@@ -1,4 +1,5 @@
 package it.academy.FinalProject.Service.ServiceImpl;
+
 import it.academy.FinalProject.Entity.Course;
 import it.academy.FinalProject.Entity.CourseUserStatus;
 import it.academy.FinalProject.Model.CourseUsers;
@@ -32,6 +33,22 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<Course> getAll() {
         return courseRepo.findAll();
+    }
+
+    @Override
+    public List<Course> getAllOther(String name) {
+        List<Course> owningCourses = findOfferingCourses(name);
+        System.out.println(owningCourses);
+        List<Course> courseList = courseRepo.findAll();
+        System.out.println(courseList);
+//        for (Course c : courseList) {
+//            for (Course co : owningCourses) {
+//                if (c.getId().equals(co.getId())){
+//                    courseList.remove(c);
+//                }
+//            }
+//        }
+        return courseList;
     }
 
     @Override
@@ -145,4 +162,16 @@ public class CourseServiceImpl implements CourseService {
         courseRepo.save(course);
         return course;
     }
+
+//    @Override
+//    public List<Course> findByCategory(RegisterCategory category) {
+//        System.err.println("" + category);
+//        List<Long> list = courseRepo.findAllByCategory("" + category);
+//        System.out.println(list);
+//        List<Course> courseList = new ArrayList<>();
+//        for (Long l : list) {
+//            courseList.add(getById(l));
+//        }
+//        return courseList;
+//    }
 }

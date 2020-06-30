@@ -27,8 +27,8 @@ public class LoginController {
             return "redirect:/admin";
         } else if(httpServletRequest.isUserInRole("USER")) {
             return "redirect:/user/profile";
-        } else if(httpServletRequest.isUserInRole("EMPLOYEE")){
-            return "Employee/employeeProfilePage";
+        } else if(httpServletRequest.isUserInRole("PUBLISHER")){
+            return "redirect:/post/profile";
         } else {
             return "Registration/login";
         }

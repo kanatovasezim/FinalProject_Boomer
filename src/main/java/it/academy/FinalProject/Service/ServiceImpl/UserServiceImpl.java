@@ -244,7 +244,7 @@ public class UserServiceImpl implements UserService {
                 .filter(principal -> principal instanceof UserDetails)
                 .map(UserDetails.class::cast)
                 .collect(Collectors.toList());
-        return allPrincipals.size() - 1;
+        return allPrincipals.size() - 1 - getLoggedInEmployees();
     }
 
     @Override

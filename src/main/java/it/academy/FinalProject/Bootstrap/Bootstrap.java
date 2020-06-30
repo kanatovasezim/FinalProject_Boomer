@@ -74,6 +74,18 @@ public class Bootstrap implements CommandLineRunner {
                 .build();
         userRepo.save(adm);
 
+        User pub = User.builder()
+                .login("Publisher")
+                .password(passwordEncoder.encode("123"))
+                .isActive(true)
+                .name("Meerim")
+                .gender(Gender.FEMALE)
+                .role(publisher)
+                .email("publisher@gmail.com")
+                .build();
+        userRepo.save(pub);
+
+
 
         User u = User.builder()
                 .login("Sezim")

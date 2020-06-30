@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="refresh" content="30">
     <link href="img/logo.png" rel="icon">
     <link href="img/logo.png" rel="apple-touch-icon">
     <title>Boomer</title>
@@ -77,12 +78,12 @@
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
                     <li class="active has-sub">
-                        <h5 class="js-arrow" th:text="${admin.name}" href="#">
+                        <h5 class="js-arrow" th:text="${user.name}" href="#">
                             <i class="fa fa-user-circle" aria-hidden="true"></i>
                         </h5>
                         <ul class="list-unstyled navbar__sub-list js-sub-list">
                             <li>
-                                <a href="#" th:text="${admin.email}"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                                <a href="#" th:text="${user.email}"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i>Update profile</a>
@@ -94,24 +95,12 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/employee/all">
-                            <i class="fas fa-table"></i>Employees</a>
+                        <a href="/post/all">
+                            <i class="fas fa-table"></i>All posts</a>
                     </li>
                     <li>
-                        <a href="/user/all">
-                            <i class="fas fa-table"></i>Users</a>
-                    </li>
-                    <li>
-                        <a href="/donation/all">
-                            <i class="fas fa-table"></i>Donations</a>
-                    </li>
-                    <li>
-                        <a href="/mail/employee">
-                            <i class="far fa-check-square"></i>Mail employee</a>
-                    </li>
-                    <li>
-                        <a href="/mail/user">
-                            <i class="far fa-check-square"></i>Mail user</a>
+                        <a href="/post">
+                            <i class="fas fa-table"></i>Register post</a>
                     </li>
                 </ul>
             </nav>
@@ -125,44 +114,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="overview-wrap">
-                                <h2 class="title-1">Send Mail to User</h2>
+                                <h2 class="title-1">Posts</h2>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <form  th:action="@{/mail/sendMailUser}" th:object="${mail}" method="post">
-                            <div class="form-group"
-                                 th:classappend="${#fields.hasErrors('to')}? 'has-error':''">
-                                <label for="to" class="control-label">Recipient</label>
-                                <select id="to" class="form-control" th:field="*{to}" multiple="multiple">
-                                    <option th:each="e : ${userList}"
-                                            th:value="${e.email}" th:text="${e.name}"></option></select>
-                                <p class="error-message"
-                                   th:each="error: ${#fields.errors('to')}"
-                                   th:text="${error}">Validation error</p>
-                            </div>
-                            <div class="form-group"
-                                 th:classappend="${#fields.hasErrors('subject')}? 'has-error':''">
-                                <label for="subject" class="control-label">Subject</label> <input
-                                    id="subject" class="form-control" th:field="*{subject}"/>
-                                <p class="error-message"
-                                   th:each="error : ${#fields.errors('subject')}"
-                                   th:text="${error}">Validation error</p>
-                            </div>
-                            <div class="form-group"
-                                 th:classappend="${#fields.hasErrors('message')}? 'has-error':''">
-                                <label for="message" class="control-label">Message</label> <textarea
-                                    id="message" class="form-control" th:field="*{message}"/>
-                                <p class="error-message"
-                                   th:each="error : ${#fields.errors('message')}"
-                                   th:text="${error}">Validation error</p>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" onsubmit="return validateForm()" class="btn btn-success">Send</button>
-                            </div>
-                        </form>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -218,7 +173,8 @@
 <script type="text/javascript" th:src="@{/vendor/slick/slick.min.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/wow/wow.min.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/animsition/animsition.min.js}"></script>
-<script type="text/javascript" th:src="@{/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/counter-up/jquery.waypoints.min.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/counter-up/jquery.counterup.min.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/circle-progress/circle-progress.min.js}"></script>
@@ -228,12 +184,6 @@
 <script type="text/javascript" th:src="@{/js/main1.js}"></script>
 <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-<script>
-    function validateForm() {
-        alert("Message sent successfully");
-        return true;
-    }
-</script>
 </div>
 </body>
 </html>

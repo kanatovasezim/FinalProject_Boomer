@@ -132,15 +132,15 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
-                        <form class="form-header" th:action="@{/course/search}" th:object="${category}"  method="post">
-                            <select id="category" name="search"   class="au-input au-input--xl" >
-                                <option th:each="category : ${category}"
-                                        th:value="${category}" th:text="${category}"></option>
-                            </select>
-                            <button class="au-btn--submit" type="submit">
-                                <i class="zmdi zmdi-search"></i>
-                            </button>
-                        </form>
+<!--                        <form class="form-header" th:action="@{/course/search}" th:object="${category}"  method="post">-->
+<!--                            <select id="category" name="search"   class="au-input au-input&#45;&#45;xl" >-->
+<!--                                <option th:each="category : ${category}"-->
+<!--                                        th:value="${category}" th:text="${category}"></option>-->
+<!--                            </select>-->
+<!--                            <button class="au-btn&#45;&#45;submit" type="submit">-->
+<!--                                <i class="zmdi zmdi-search"></i>-->
+<!--                            </button>-->
+<!--                        </form>-->
                         <div class="header-button">
                             <div class="noti-wrap">
                                 <div class="noti__item js-item-menu">
@@ -196,10 +196,10 @@
             <div class="col-6 col-md">
                 <h5>Opportunities</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">All</a></li>
-                    <li><a class="text-muted" href="#">Free courses</a></li>
-                    <li><a class="text-muted" href="#">Internships</a></li>
-                    <li><a class="text-muted" href="#">Courses</a></li>
+                    <li><a class="text-muted" href="/post/all">All</a></li>
+                    <li><a class="text-muted" href="/post/all">Free courses</a></li>
+                    <li><a class="text-muted" href="/post/all">Internships</a></li>
+                    <li><a class="text-muted" href="/post/all">Courses</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">

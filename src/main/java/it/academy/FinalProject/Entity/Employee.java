@@ -36,7 +36,7 @@ public class Employee {
     @Column(name = "name", nullable = false)
     String name;
 
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)
     Gender gender;
 
@@ -49,7 +49,7 @@ public class Employee {
     @CreationTimestamp
     LocalDateTime createdDate;
 
-    @ManyToOne()
-    @JoinColumn(name="role_id")
+    @ManyToOne
+    @JoinColumn(name="role_id", nullable = false)
     Role role;
 }

@@ -26,15 +26,15 @@ public class Approval {
     @Column(name = "clientApproval", nullable = false)
     Boolean clientApproval;
 
-    @Column(name = "depositCost")
+    @Column(name = "depositCost", nullable = false)
     Integer depositCost;
 
     @ManyToOne
-    @JoinColumn(name = "client")
+    @JoinColumn(name = "client", nullable = false)
     User client;
 
     @ManyToOne
-    @JoinColumn(name = "course")
+    @JoinColumn(name = "course", nullable = false)
     Course course;
 
     @Column(name = "approvalStatus")

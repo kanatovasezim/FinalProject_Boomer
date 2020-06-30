@@ -1,8 +1,10 @@
 package it.academy.FinalProject.Model;
+
 import it.academy.FinalProject.Entity.Role;
 import it.academy.FinalProject.Enum.Gender;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -28,8 +30,10 @@ public class RegisterEmpl {
     @NotEmpty
     String email;
     @Enumerated(EnumType.STRING)
+    @NotEmpty
     Gender gender;
     @Enumerated(EnumType.STRING)
+    @NotEmpty
     String role;
     @CreationTimestamp
     LocalDateTime createdDate;
